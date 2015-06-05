@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingBottom="16dp" tools:context=".ThermostatActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Target temperature"
+        android:id="@+id/targetTempText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/bIncrTemp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="21 &#x2103;"
+        android:textSize="30sp"
+        android:id="@+id/targetTemp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/bDecrTemp" />
+
+    <SeekBar
+        android:layout_width="261dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:max="30"
+        android:indeterminate="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Current temperature"
+        android:id="@+id/currTempText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="21 &#x2103;"
+        android:textSize="30sp"
+        android:id="@+id/currTemp" />
+
+    <Button
+        style="@style/button"
+        android:layout_height="wrap_content"
+        android:text="Week Overview"
+        android:id="@+id/bWeekOverview" />
+
+</LinearLayout>

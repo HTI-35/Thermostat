@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DemoThermostat</string>
+
+    <string name="hello_world">Hello world!  Anne</string>
+    <string name="hello_world2">twee</string>
+    <string name="action_settings">Settings</string>
+</resources>
