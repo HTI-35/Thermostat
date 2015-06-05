@@ -2,6 +2,8 @@ package nl.tue.demothermostat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 
 public class ThermostatActivity extends Activity {
 
-    int vTemp = 21;
+    int vTemp = 21;//target temperature
     TextView targetTemp;
     SeekBar seekBar;
 
@@ -21,16 +23,32 @@ public class ThermostatActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thermostat);
-        Button bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
-        Button bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
+        final Button bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
+        final Button bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
         Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
         targetTemp = (TextView)findViewById(R.id.targetTemp);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
-        seekBar.setProgress(vTemp);
+        seekBar.setProgress(vTemp - 5);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText(progress + " \u0026");
+                targetTemp.setText( (progress + 5) + " \u0026");
+                vTemp = progress + 5;
+                if (vTemp == 30) { //graying out buttons and reenabling them
+                    bIncrTemp.setClickable(false);
+                    bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+                    bDecrTemp.setClickable(true);
+                    bDecrTemp.getBackground().setColorFilter(null);
+                } else if (vTemp == 5) {
+                    bDecrTemp.setClickable(false);
+                    bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+                    bIncrTemp.setClickable(true);
+                } else {
+                    bDecrTemp.setClickable(true);
+                    bDecrTemp.getBackground().setColorFilter(null);
+                    bIncrTemp.setClickable(true);
+                    bIncrTemp.getBackground().setColorFilter(null);
+                }
             }
 
             @Override
@@ -46,18 +64,52 @@ public class ThermostatActivity extends Activity {
 
         bIncrTemp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                vTemp++;
-                targetTemp.setText(vTemp + " \u2103");
-                seekBar.setProgress(vTemp);
+            public void onClick(View v) {//increase temperature via button
+                if (vTemp <= 30) {
+                    vTemp++;
+                    targetTemp.setText(vTemp + " \u2103");
+                    seekBar.setProgress(vTemp - 5);
+                    if (vTemp == 30) { //graying out buttons and reenabling them
+                        bIncrTemp.setClickable(false);
+                        bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+                        bDecrTemp.setClickable(true);
+                        bDecrTemp.getBackground().setColorFilter(null);
+                    } else if (vTemp == 5) {
+                        bDecrTemp.setClickable(false);
+                        bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+                        bIncrTemp.setClickable(true);
+                    } else {
+                        bDecrTemp.setClickable(true);
+                        bDecrTemp.getBackground().setColorFilter(null);
+                        bIncrTemp.setClickable(true);
+                        bIncrTemp.getBackground().setColorFilter(null);
+                    }
+                }
             }
         });
         bDecrTemp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                vTemp--;
-                targetTemp.setText(vTemp+" \u2103");
-                seekBar.setProgress(vTemp);
+            public void onClick(View v) {//decrease temperature via button
+                if (vTemp >= 5){
+                    vTemp--;
+                    targetTemp.setText(vTemp + " \u2103");
+                    seekBar.setProgress(vTemp - 5);
+                    if (vTemp == 30) { //graying out buttons and reenabling them
+                        bIncrTemp.setClickable(false);
+                        bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+                        bDecrTemp.setClickable(true);
+                        bDecrTemp.getBackground().setColorFilter(null);
+                    } else if (vTemp == 5) {
+                        bDecrTemp.setClickable(false);
+                        bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+                        bIncrTemp.setClickable(true);
+                    } else {
+                        bDecrTemp.setClickable(true);
+                        bDecrTemp.getBackground().setColorFilter(null);
+                        bIncrTemp.setClickable(true);
+                        bIncrTemp.getBackground().setColorFilter(null);
+                    }
+                }
             }
         });
         bWeekOverview.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +120,7 @@ public class ThermostatActivity extends Activity {
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
