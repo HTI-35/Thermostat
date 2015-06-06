@@ -32,8 +32,6 @@ public class ThermostatActivity extends Activity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-<<<<<<< HEAD
-=======
                 targetTemp.setText( (progress + 5) + " \u0026");
                 vTemp = progress + 5;
                 if (vTemp == 30) { //graying out buttons and reenabling them
@@ -51,7 +49,6 @@ public class ThermostatActivity extends Activity {
                     bIncrTemp.setClickable(true);
                     bIncrTemp.getBackground().setColorFilter(null);
                 }
->>>>>>> origin/master
             }
 
             @Override
