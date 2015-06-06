@@ -20,6 +20,34 @@
             android:name=".WeekOverview"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".Monday"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Tuesday"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Wednesday"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Thursday"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Friday"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Saturday"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Sunday"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
