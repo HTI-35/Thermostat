@@ -30,7 +30,7 @@ public class ThermostatActivity extends Activity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText(progress + " \u0026");
+                targetTemp.setText(progress + 5 + " \u0026");
             }
 
             @Override
