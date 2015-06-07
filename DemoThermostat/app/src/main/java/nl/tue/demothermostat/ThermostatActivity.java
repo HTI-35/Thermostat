@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 public class ThermostatActivity extends Activity {
 
-    double vTemp;
+    double vTemp; //current temperature
     TextView targetTemp, currentTemp;
     SeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
@@ -61,7 +61,7 @@ public class ThermostatActivity extends Activity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText( (progress + 5) + " \u0026");
+                targetTemp.setText( (progress + 5) + "\u2013");
                 vTemp = progress + 5;
                 setInputLimits();
                 putCurrentTemperature();

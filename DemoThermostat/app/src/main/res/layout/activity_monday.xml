@@ -11,13 +11,11 @@
         android:text="Monday"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:id="@+id/mondayTitle"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/mondayTitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Day switch"
         android:id="@+id/mondayDay" />
@@ -36,7 +34,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Night switch"
-        android:layout_gravity="center_horizontal"
         android:id="@+id/mondayNight" />
 
     <EditText
@@ -45,7 +42,6 @@
         android:inputType="time"
         android:ems="10"
         android:id="@+id/setMondayNight"
-        android:layout_gravity="center_horizontal"
         android:text="00:00" />
 
     <Button
