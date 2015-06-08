@@ -24,8 +24,12 @@ public class Monday extends Day {
     TextView mondaySwitch3;
     TextView mondaySwitch4;
     TextView mondaySwitch5;
+    TextView dayTempText;
+    TextView nightTempText;
     EditText mondayDayTime;
     EditText mondayNightTime;
+    double dayTemp; //day temperature
+    double nightTemp; //night temperature
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +40,35 @@ public class Monday extends Day {
         bMondayAdd = (Button)findViewById(R.id.bMondayAdd);
         bMondayRemoveAll = (Button)findViewById(R.id.bMondayRemoveAll);
         bMondayChange = (Button)findViewById(R.id.bMondayChange);
+        dayTempText = (TextView)findViewById(R.id.dayTemp);
+        nightTempText = (TextView)findViewById(R.id.nightTemp);
+
         mondaySwitch1 = (TextView)findViewById(R.id.mondaySwitch1);
         mondaySwitch2 = (TextView)findViewById(R.id.mondaySwitch2);
         mondaySwitch3 = (TextView)findViewById(R.id.mondaySwitch3);
         mondaySwitch4 = (TextView)findViewById(R.id.mondaySwitch4);
         mondaySwitch5 = (TextView)findViewById(R.id.mondaySwitch5);
+
         mondayDayTime = (EditText)findViewById(R.id.mondayDayTime);
         mondayNightTime = (EditText)findViewById(R.id.mondayNightTime);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //todo: display day & night temperature, THIS IS NOT WORKING :((((
+                    dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
+                    dayTempText.setText(dayTemp + " \u2103");
+                    nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
+                    nightTempText.setText(nightTemp +  " \u2103");
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+
         //todo: timer to get day temp & night temp continuously from server
-        // so that when you change it & then go back it will display the right values
+        //once i can get it to display in the first place that is...
 
         new Thread(new Runnable() {
             @Override

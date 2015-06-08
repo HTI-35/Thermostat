@@ -42,9 +42,9 @@ public class DayNight extends Activity {
                 try {
                     //day & night temperature
                     dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
-                    dayTempText.setText("" + dayTemp);
+                    dayTempText.setText(dayTemp + " \u2103");
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
-                    nightTempText.setText("" + nightTemp);
+                    nightTempText.setText(nightTemp + " \u2103");
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
