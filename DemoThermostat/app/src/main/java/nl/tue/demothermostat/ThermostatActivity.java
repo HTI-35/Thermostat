@@ -46,8 +46,8 @@ public class ThermostatActivity extends Activity {
                 try {
                     //target temperature
                     vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
-                    targetTemp.setText("" + vTemp);
-                    currentTemp.setText("" + vTemp);
+                    targetTemp.setText("" + vTemp + " \u2103");
+                    currentTemp.setText("" + vTemp + " \u2103");
                     seekBar.setProgress((int) Math.floor(vTemp - 5.0));
                     System.out.println("vTemp1:" + HeatingSystem.get("currentTemperature"));
                 } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ThermostatActivity extends Activity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText( (progress + 5) + "\u2013");
+                targetTemp.setText( (progress + 5) + " \u2103");
                 vTemp = progress + 5;
                 setInputLimits();
                 putCurrentTemperature();

@@ -51,6 +51,10 @@
             android:name=".Sunday"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".DayNight"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
