@@ -15,13 +15,16 @@ import android.widget.TextView;
 //webserver
 import org.thermostatapp.util.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.ConnectException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class ThermostatActivity extends Activity {
 
-    double vTemp; //current temperature
+    double vTemp, cTemp; //current temperature
     TextView targetTemp, currentTemp;
     SeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
@@ -40,12 +43,15 @@ public class ThermostatActivity extends Activity {
         currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
 
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     //target temperature
                     vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
+                    System.out.println("tt: " + HeatingSystem.get("targetTemperature"));
+                    System.out.println("tt: ");
                     targetTemp.setText("" + vTemp + " \u2103");
                     currentTemp.setText("" + vTemp + " \u2103");
                     seekBar.setProgress((int) Math.floor(vTemp - 5.0));
@@ -55,6 +61,40 @@ public class ThermostatActivity extends Activity {
                 }
             }
         }).start();
+
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        cTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
+                        Double targetBuffer =  Double.parseDouble(HeatingSystem.get("targettemperature"));
+                        System.out.println("qqq vtemp: " + vTemp);
+                        System.out.println("qqq targetBuffer: " + targetBuffer);
+                        if (targetBuffer != vTemp){
+                            vTemp = targetBuffer;
+                            seekBar.setProgress((int) Math.floor(vTemp - 5.0));
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                targetTemp.setText("" + vTemp + " \u2103");
+                                currentTemp.setText("" + cTemp + " \u2103");
+                            }
+                        });
+                    }
+                } catch (InterruptedException e){
+
+                } catch (ConnectException e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        };
+
+        t.start();
+
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 

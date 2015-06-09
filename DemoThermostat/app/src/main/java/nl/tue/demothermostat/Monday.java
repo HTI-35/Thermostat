@@ -26,8 +26,8 @@ public class Monday extends Day {
     TextView mondaySwitch5;
     TextView dayTempText;
     TextView nightTempText;
-    EditText mondayDayTime;
-    EditText mondayNightTime;
+    TextView mondayDayTemp;
+    TextView mondayNightTemp;
     double dayTemp; //day temperature
     double nightTemp; //night temperature
 
@@ -49,18 +49,17 @@ public class Monday extends Day {
         mondaySwitch4 = (TextView)findViewById(R.id.mondaySwitch4);
         mondaySwitch5 = (TextView)findViewById(R.id.mondaySwitch5);
 
-        mondayDayTime = (EditText)findViewById(R.id.mondayDayTime);
-        mondayNightTime = (EditText)findViewById(R.id.mondayNightTime);
+        mondayDayTemp = (TextView)findViewById(R.id.mondayDayTemp);
+        mondayNightTemp = (TextView)findViewById(R.id.mondayNightTemp);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    //todo: display day & night temperature, THIS IS NOT WORKING :((((
                     dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
-                    dayTempText.setText(dayTemp + " \u2103");
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
-                    nightTempText.setText(nightTemp +  " \u2103");
+                    mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
+                    mondayNightTemp.setText("NightTemperature: " + nightTemp +  " \u2103");
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
@@ -102,5 +101,27 @@ public class Monday extends Day {
             }
         });
 
+    }
+
+    public void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
+                    nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
+                            mondayNightTemp.setText("NightTemperature: " + nightTemp +  " \u2103");
+                        }
+                    });
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
     }
 }

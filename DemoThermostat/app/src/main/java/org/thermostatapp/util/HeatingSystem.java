@@ -163,9 +163,9 @@ public class HeatingSystem {
         String link = "";
         boolean match = false;
         String[] valid_names = { "day", "time", "currentTemperature",
-                "dayTemperature", "nightTemperature", "weekProgramState" };
+                "dayTemperature", "nightTemperature", "weekProgramState", "targetTemperature" };
         String[] tag_names = { "current_day", "time", "current_temperature",
-                "day_temperature", "night_temperature", "week_program_state" };
+                "day_temperature", "night_temperature", "week_program_state", "target_temperature" };
         int i;
         for (i = 0; i < valid_names.length; i++) {
             if (attribute_name.equalsIgnoreCase(valid_names[i])) {
