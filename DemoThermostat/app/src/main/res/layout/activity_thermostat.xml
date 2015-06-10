@@ -17,35 +17,86 @@
         android:layout_centerHorizontal="true" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/desiredText"
-        android:layout_alignEnd="@+id/desiredText"
-        android:layout_alignStart="@+id/currTemp">
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/bIncrTemp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/currentTempText"
+        android:layout_alignRight="@+id/bWeekOverview"
+        android:layout_alignEnd="@+id/bWeekOverview">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21 \u00B0C"
-        android:textSize="30sp"
-        android:id="@+id/targetTemp"
-        android:layout_below="@+id/bIncrTemp"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Desired"
+            android:id="@+id/desiredText"
+            android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:id="@+id/bDecrTemp"
-        android:layout_below="@+id/targetTemp"
-        android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/desiredText"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempButtonsLO">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:id="@+id/bIncrTemp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="21 \u2103"
+                    android:textSize="30sp"
+                    android:id="@+id/targetTemp"
+                    android:layout_below="@+id/bIncrTemp"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:id="@+id/bDecrTemp"
+                    android:layout_below="@+id/targetTemp"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+            <nl.tue.demothermostat.VerticalSeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tempSeekbar"
+                android:layout_toRightOf="@id/tempButtonsLO"
+                android:layout_alignTop="@id/tempButtonsLO"
+                android:layout_alignBottom="@id/tempButtonsLO"
+                android:max="25"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="30 \u2103"
+                android:id="@+id/maxTText"
+                android:layout_toRightOf="@id/tempSeekbar"
+                android:layout_alignTop="@id/tempSeekbar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="5 \u2103"
+                android:id="@+id/minTText"
+                android:layout_toRightOf="@id/tempSeekbar"
+                android:layout_alignBottom="@id/tempSeekbar"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -66,23 +117,14 @@
         android:textSize="30sp"
         android:id="@+id/currTemp"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/currentTempText" />
+        android:layout_alignRight="@+id/currentTempText" />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Week Overview"
         android:id="@+id/bWeekOverview"
-        android:layout_above="@+id/currTemp"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Desired"
-        android:id="@+id/desiredText"
-        android:layout_below="@+id/currentTempText"
-        android:layout_alignEnd="@+id/seekBar" />
+        android:layout_below="@+id/seekBar"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

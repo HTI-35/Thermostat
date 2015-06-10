@@ -17,7 +17,7 @@ public class ThermostatActivity extends Activity {
 
     int vTemp = 21;//target temperature
     TextView targetTemp;
-    SeekBar seekBar;
+    VerticalSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,12 @@ public class ThermostatActivity extends Activity {
         final Button bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
         Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
         targetTemp = (TextView)findViewById(R.id.targetTemp);
-        seekBar = (SeekBar)findViewById(R.id.seekBar);
+        seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
         seekBar.setProgress(vTemp - 5);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText( (progress + 5) + " \u0026");
+                targetTemp.setText( (progress + 5) + " \u2103");
                 vTemp = progress + 5;
                 if (vTemp == 30) { //graying out buttons and reenabling them
                     bIncrTemp.setClickable(false);
