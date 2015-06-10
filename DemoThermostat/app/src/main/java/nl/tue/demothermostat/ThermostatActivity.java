@@ -12,43 +12,99 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+//webserver
+import org.thermostatapp.util.*;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.ConnectException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class ThermostatActivity extends Activity {
 
-    int vTemp = 21;//target temperature
-    TextView targetTemp;
+    double vTemp, cTemp; //current temperature
+    TextView targetTemp, currentTemp;
     SeekBar seekBar;
+    Button bIncrTemp, bDecrTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thermostat);
-        final Button bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
-        final Button bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
+
+        bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
+        bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
         Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
+
+        HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
         targetTemp = (TextView)findViewById(R.id.targetTemp);
+        currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
-        seekBar.setProgress(vTemp - 5);
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //target temperature
+                    vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
+                    System.out.println("tt: " + HeatingSystem.get("targetTemperature"));
+                    System.out.println("tt: ");
+                    targetTemp.setText("" + vTemp + " \u2103");
+                    currentTemp.setText("" + vTemp + " \u2103");
+                    seekBar.setProgress((int) Math.floor(vTemp - 5.0));
+                    System.out.println("vTemp1:" + HeatingSystem.get("currentTemperature"));
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        cTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
+                        Double targetBuffer =  Double.parseDouble(HeatingSystem.get("targettemperature"));
+                        System.out.println("qqq vtemp: " + vTemp);
+                        System.out.println("qqq targetBuffer: " + targetBuffer);
+                        if (targetBuffer != vTemp){
+                            vTemp = targetBuffer;
+                            seekBar.setProgress((int) Math.floor(vTemp - 5.0));
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                targetTemp.setText("" + vTemp + " \u2103");
+                                currentTemp.setText("" + cTemp + " \u2103");
+                            }
+                        });
+                    }
+                } catch (InterruptedException e){
+
+                } catch (ConnectException e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        };
+
+        t.start();
+
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText( (progress + 5) + " \u0026");
+                targetTemp.setText( (progress + 5) + " \u2103");
                 vTemp = progress + 5;
-                if (vTemp == 30) { //graying out buttons and reenabling them
-                    bIncrTemp.setClickable(false);
-                    bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
-                    bDecrTemp.setClickable(true);
-                    bDecrTemp.getBackground().setColorFilter(null);
-                } else if (vTemp == 5) {
-                    bDecrTemp.setClickable(false);
-                    bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
-                    bIncrTemp.setClickable(true);
-                } else {
-                    bDecrTemp.setClickable(true);
-                    bDecrTemp.getBackground().setColorFilter(null);
-                    bIncrTemp.setClickable(true);
-                    bIncrTemp.getBackground().setColorFilter(null);
-                }
+                setInputLimits();
+                putCurrentTemperature();
             }
 
             @Override
@@ -66,50 +122,24 @@ public class ThermostatActivity extends Activity {
             @Override
             public void onClick(View v) {//increase temperature via button
                 if (vTemp <= 30) {
-                    vTemp++;
+                    vTemp+=1;
                     targetTemp.setText(vTemp + " \u2103");
-                    seekBar.setProgress(vTemp - 5);
-                    if (vTemp == 30) { //graying out buttons and reenabling them
-                        bIncrTemp.setClickable(false);
-                        bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
-                        bDecrTemp.setClickable(true);
-                        bDecrTemp.getBackground().setColorFilter(null);
-                    } else if (vTemp == 5) {
-                        bDecrTemp.setClickable(false);
-                        bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
-                        bIncrTemp.setClickable(true);
-                    } else {
-                        bDecrTemp.setClickable(true);
-                        bDecrTemp.getBackground().setColorFilter(null);
-                        bIncrTemp.setClickable(true);
-                        bIncrTemp.getBackground().setColorFilter(null);
-                    }
+                    seekBar.setProgress((int)(Math.floor(vTemp - 5.0)));
+                   setInputLimits();
                 }
+                putCurrentTemperature();
             }
         });
         bDecrTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//decrease temperature via button
                 if (vTemp >= 5){
-                    vTemp--;
+                    vTemp -= 1;
                     targetTemp.setText(vTemp + " \u2103");
-                    seekBar.setProgress(vTemp - 5);
-                    if (vTemp == 30) { //graying out buttons and reenabling them
-                        bIncrTemp.setClickable(false);
-                        bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
-                        bDecrTemp.setClickable(true);
-                        bDecrTemp.getBackground().setColorFilter(null);
-                    } else if (vTemp == 5) {
-                        bDecrTemp.setClickable(false);
-                        bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
-                        bIncrTemp.setClickable(true);
-                    } else {
-                        bDecrTemp.setClickable(true);
-                        bDecrTemp.getBackground().setColorFilter(null);
-                        bIncrTemp.setClickable(true);
-                        bIncrTemp.getBackground().setColorFilter(null);
-                    }
+                    seekBar.setProgress((int)(Math.floor(vTemp - 5)));
+                    setInputLimits();
                 }
+                putCurrentTemperature();
             }
         });
         bWeekOverview.setOnClickListener(new View.OnClickListener() {
@@ -142,5 +172,36 @@ public class ThermostatActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void putCurrentTemperature(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HeatingSystem.put("currentTemperature", "" + vTemp);
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+    }
+
+    public void setInputLimits(){
+        if (vTemp == 30) { //graying out buttons and reenabling them
+            bIncrTemp.setClickable(false);
+            bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+            bDecrTemp.setClickable(true);
+            bDecrTemp.getBackground().setColorFilter(null);
+        } else if (vTemp == 5) {
+            bDecrTemp.setClickable(false);
+            bDecrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
+            bIncrTemp.setClickable(true);
+        } else {
+            bDecrTemp.setClickable(true);
+            bDecrTemp.getBackground().setColorFilter(null);
+            bIncrTemp.setClickable(true);
+            bIncrTemp.getBackground().setColorFilter(null);
+        }
     }
 }

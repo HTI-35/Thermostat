@@ -25,3 +25,7 @@ proguard/
 
 # Log Files
 *.log
+DemoThermostat/app/src/main/res/layout/activity_monday.xml
+DemoThermostat/app/src/main/res/layout/activity_monday.xml
+DemoThermostat/app/src/main/java/nl/tue/demothermostat/ThermostatActivity.java
+DemoThermostat/.idea/gradle.xml
