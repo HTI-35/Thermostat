@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,78 +11,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Current temperature"
-        android:id="@+id/currentTempText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:text="Target temperature"
+        android:id="@+id/targetTempText" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/desiredText"
-        android:layout_alignEnd="@+id/desiredText"
-        android:layout_alignStart="@+id/currTemp">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"
-        android:id="@+id/bIncrTemp"
-        android:layout_centerHorizontal="true"/>
+        android:id="@+id/bIncrTemp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21 \u00B0C"
+        android:text="21 &#x2103;"
         android:textSize="30sp"
-        android:id="@+id/targetTemp"
-        android:layout_below="@+id/bIncrTemp"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/targetTemp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-"
-        android:id="@+id/bDecrTemp"
-        android:layout_below="@+id/targetTemp"
-        android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
+        android:id="@+id/bDecrTemp" />
 
     <SeekBar
         android:layout_width="261dp"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:max="25"
-        android:indeterminate="false"
-        android:layout_above="@+id/currTemp"
-        android:layout_centerHorizontal="true" />
+        android:max="30"
+        android:indeterminate="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21 \u00B0C"
+        android:text="Current temperature"
+        android:id="@+id/currTempText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="21 &#x2103;"
         android:textSize="30sp"
-        android:id="@+id/currTemp"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/currentTempText" />
+        android:id="@+id/currTemp" />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Week Overview"
-        android:id="@+id/bWeekOverview"
-        android:layout_above="@+id/currTemp"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/bWeekOverview" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Desired"
-        android:id="@+id/desiredText"
-        android:layout_below="@+id/currentTempText"
-        android:layout_alignEnd="@+id/seekBar" />
-
-</RelativeLayout>
+</LinearLayout>
