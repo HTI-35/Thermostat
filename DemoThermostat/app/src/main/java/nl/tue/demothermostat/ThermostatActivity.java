@@ -24,7 +24,7 @@ import java.util.TimerTask;
 
 public class ThermostatActivity extends Activity {
 
-    double vTemp, cTemp; //current temperature
+    double vTemp, cTemp; //target temperature * 10, current temperature
     TextView targetTemp, currentTemp;
     SeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
@@ -49,10 +49,10 @@ public class ThermostatActivity extends Activity {
             public void run() {
                 try {
                     //target temperature
-                    vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
+                    vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature")); // It's supposed to be getting currentTemperature
                     System.out.println("tt: " + HeatingSystem.get("targetTemperature"));
                     System.out.println("tt: ");
-                    targetTemp.setText("" + vTemp + " \u2103");
+                    updateTargetTemp();
                     currentTemp.setText("" + vTemp + " \u2103");
                     seekBar.setProgress((int) Math.floor(vTemp - 5.0));
                     System.out.println("vTemp1:" + HeatingSystem.get("currentTemperature"));
@@ -77,10 +77,10 @@ public class ThermostatActivity extends Activity {
                             vTemp = targetBuffer;
                             seekBar.setProgress((int) Math.floor(vTemp - 5.0));
                         }
+                        updateTargetTemp();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                targetTemp.setText("" + vTemp + " \u2103");
                                 currentTemp.setText("" + cTemp + " \u2103");
                             }
                         });
@@ -101,8 +101,8 @@ public class ThermostatActivity extends Activity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                targetTemp.setText( (progress + 5) + " \u2103");
                 vTemp = progress + 5;
+                updateTargetTemp();
                 setInputLimits();
                 putCurrentTemperature();
             }
@@ -122,8 +122,8 @@ public class ThermostatActivity extends Activity {
             @Override
             public void onClick(View v) {//increase temperature via button
                 if (vTemp <= 30) {
-                    vTemp+=1;
-                    targetTemp.setText(vTemp + " \u2103");
+                    vTemp+=0.1;
+                    updateTargetTemp();
                     seekBar.setProgress((int)(Math.floor(vTemp - 5.0)));
                     setInputLimits();
                 }
@@ -134,9 +134,9 @@ public class ThermostatActivity extends Activity {
             @Override
             public void onClick(View v) {//decrease temperature via button
                 if (vTemp >= 5){
-                    vTemp -= 1;
-                    targetTemp.setText(vTemp + " \u2103");
-                    seekBar.setProgress((int)(Math.floor(vTemp - 5)));
+                    vTemp -= 0.1;
+                    updateTargetTemp();
+                    seekBar.setProgress((int)(Math.floor(vTemp - 5.0)));
                     setInputLimits();
                 }
                 putCurrentTemperature();
@@ -185,6 +185,18 @@ public class ThermostatActivity extends Activity {
                 }
             }
         }).start();
+    }
+
+    void updateTargetTemp(){
+        vTemp *= 10;
+        Math.round(vTemp);
+        vTemp /= 10;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                targetTemp.setText(vTemp + " \u2103");
+            }
+        });
     }
 
     public void setInputLimits(){

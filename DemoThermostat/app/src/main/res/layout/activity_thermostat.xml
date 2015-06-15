@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21 &#x2103;"
+        android:text="@string/target_temp"
         android:textSize="30sp"
         android:id="@+id/targetTemp" />
 
@@ -38,7 +38,7 @@
         android:layout_width="261dp"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:max="30"
+        android:max="25"
         android:indeterminate="false" />
 
     <TextView

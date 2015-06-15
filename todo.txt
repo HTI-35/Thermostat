@@ -12,6 +12,7 @@ once that is done:
 
 copy Monday activity & code to all other days and modify appropriately
 add Back buttons if we want this?
+tap and hold incr decr button to increase decrease by whole numbers
 make it look pretty
 rename the app
 make it installable on Android

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">DemoThermostat</string>
+    <string name="app_name">Thermostat</string>
 
-    <string name="hello_world">Hello world!  Anne</string>
-    <string name="hello_world2">twee</string>
+    <string name="target_temp">21.0 \u2103</string>
+
     <string name="action_settings">Settings</string>
 </resources>
