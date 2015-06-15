@@ -139,35 +139,42 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Switch 1"
+        android:text=""
+        android:id="@+id/mondaySwitch0"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
         android:id="@+id/mondaySwitch1"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Switch 2"
+        android:text=""
         android:id="@+id/mondaySwitch2" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Switch 3"
+        android:text=""
         android:id="@+id/mondaySwitch3"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Switch 4"
+        android:text=""
         android:id="@+id/mondaySwitch4"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Switch 5"
+        android:text=""
         android:id="@+id/mondaySwitch5"/>
 
 

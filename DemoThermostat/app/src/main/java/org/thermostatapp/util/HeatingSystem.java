@@ -23,6 +23,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Xml;
 
+import nl.tue.demothermostat.Day;
+
 public class HeatingSystem {
 
     public static String BASE_ADDRESS = "";
@@ -78,6 +80,8 @@ public class HeatingSystem {
                     }
                 }
             }
+            //copy ArrayList switches to own ArrayList which is accessible outside this method
+            Day.ownSwitches = switches;
             return program;
         } catch (MalformedURLException e) {
             e.printStackTrace();

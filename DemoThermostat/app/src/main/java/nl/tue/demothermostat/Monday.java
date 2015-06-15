@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.thermostatapp.util.*;
+
+import java.util.ArrayList;
+
 /**
  * Created by Anne on 05/06/2015.
  */
@@ -20,6 +23,7 @@ public class Monday extends Day {
     Button bMondayAdd;
     Button bMondayRemoveAll;
     Button bMondayChange;
+    TextView mondaySwitch0;
     TextView mondaySwitch1;
     TextView mondaySwitch2;
     TextView mondaySwitch3;
@@ -46,6 +50,7 @@ public class Monday extends Day {
         dayTempText = (TextView)findViewById(R.id.dayTemp);
         nightTempText = (TextView)findViewById(R.id.nightTemp);
 
+        mondaySwitch0 = (TextView)findViewById(R.id.mondaySwitch0);
         mondaySwitch1 = (TextView)findViewById(R.id.mondaySwitch1);
         mondaySwitch2 = (TextView)findViewById(R.id.mondaySwitch2);
         mondaySwitch3 = (TextView)findViewById(R.id.mondaySwitch3);
@@ -82,15 +87,16 @@ public class Monday extends Day {
 
                     mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
                     mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
-                    //Showing weekprogram
+                    //get week program from server
                     wkProgram = HeatingSystem.getWeekProgram();
+                    //go through switches array
+                    //if the switch is turned on, then print the switch to console
+                    displaySwitches();
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
             }
         }).start();
-
-        //todo: timer to get day temp & night temp continuously from server
 
         new Thread(new Runnable() {
             @Override
@@ -186,5 +192,36 @@ public class Monday extends Day {
                 }
             }
         }).start();
+    }
+
+    public void displaySwitches() {
+        for (int i=0; i<Day.ownSwitches.size(); i++) {
+            //print switches to console if they're in ON state
+            if (Day.ownSwitches.get(i).getState()) {
+                System.out.println("switch: " +
+                                Day.ownSwitches.get(i).getType() + " " +
+                                Day.ownSwitches.get(i).getTime()
+                );
+            }
+        }
+        /*
+        day and night switches must be set at the same time (not only day or only night)
+        so if index 1 is set to on, then 2 must also be set to on, so they can be displayed simultaneously
+        the index 0 is the 00:00 switch to night which does not belong in such a pair
+        so we put it separately. there should be 10 switches though and 1 EXTRA for 00:00 to night???
+        but in the server XML there are only 10 switches for each day. how to fix this????????
+        */
+        if(Day.ownSwitches.get(0).getState())
+        mondaySwitch0.setText("Standard) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime());
+        if(Day.ownSwitches.get(1).getState())
+        mondaySwitch1.setText("1) " + Day.ownSwitches.get(1).getType() + ": " + Day.ownSwitches.get(1).getTime() + ", " + Day.ownSwitches.get(2).getType() + ": " + Day.ownSwitches.get(2).getTime());
+        if(Day.ownSwitches.get(3).getState())
+        mondaySwitch2.setText("2) " + Day.ownSwitches.get(3).getType() + ": " + Day.ownSwitches.get(3).getTime() + ", " + Day.ownSwitches.get(4).getType() + ": " + Day.ownSwitches.get(4).getTime());
+        if(Day.ownSwitches.get(5).getState())
+        mondaySwitch3.setText("3) " + Day.ownSwitches.get(5).getType() + ": " + Day.ownSwitches.get(5).getTime() + ", " + Day.ownSwitches.get(6).getType() + ": " + Day.ownSwitches.get(5).getTime());
+        if(Day.ownSwitches.get(7).getState())
+        mondaySwitch4.setText("4) " + Day.ownSwitches.get(7).getType() + ": " + Day.ownSwitches.get(7).getTime() + ", " + Day.ownSwitches.get(8).getType() + ": " + Day.ownSwitches.get(7).getTime());
+        if(Day.ownSwitches.get(9).getState())
+        mondaySwitch5.setText("5) " + Day.ownSwitches.get(9).getType() + ": " + Day.ownSwitches.get(9).getTime());
     }
 }
