@@ -1,0 +1,24 @@
+to do:
+
+0.1 increments for setting temperatures
+reading switches for a specific day
+removing single switches (probably by just setting it to OFF state)
+remove all switches (by setting them all to OFF state)
+adding switches (by taking one that is set to OFF and changing that)
+permanently override temperature functionality (week program state OFF / ON)
+
+
+once that is done:
+
+copy Monday activity & code to all other days and modify appropriately
+add Back buttons if we want this?
+make it look pretty
+rename the app
+
+
+already done:
+
+create all activities & connect them
+read current & target temperature from server in real time
+change target temperature
+change day & night temperature functionality
