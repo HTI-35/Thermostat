@@ -125,7 +125,7 @@ public class ThermostatActivity extends Activity {
                     vTemp+=1;
                     targetTemp.setText(vTemp + " \u2103");
                     seekBar.setProgress((int)(Math.floor(vTemp - 5.0)));
-                   setInputLimits();
+                    setInputLimits();
                 }
                 putCurrentTemperature();
             }

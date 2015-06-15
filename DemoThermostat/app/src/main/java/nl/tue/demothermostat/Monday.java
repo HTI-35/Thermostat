@@ -3,6 +3,7 @@ package nl.tue.demothermostat;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class Monday extends Day {
     TextView nightTempText;
     TextView mondayDayTemp;
     TextView mondayNightTemp;
-    EditText daySwitchText, nightSwitchText;
+    EditText daySwitchHrs, daySwitchMins, nightSwitchHrs, nightSwitchMins;
     double dayTemp; //day temperature
     double nightTemp; //night temperature
 
@@ -54,8 +55,23 @@ public class Monday extends Day {
         mondayDayTemp = (TextView)findViewById(R.id.mondayDayTemp);
         mondayNightTemp = (TextView)findViewById(R.id.mondayNightTemp);
 
-        daySwitchText = (EditText)findViewById(R.id.mondayDayTime);
-        nightSwitchText = (EditText)findViewById(R.id.mondayNightTime);
+        daySwitchHrs = (EditText)findViewById(R.id.mondayDayTimeHrs);
+        daySwitchMins = (EditText)findViewById(R.id.mondayDayTimeMins);
+        nightSwitchHrs = (EditText)findViewById(R.id.mondayNightTimeMins);
+        nightSwitchMins = (EditText)findViewById(R.id.mondayDayTimeMins);
+
+        //set input filters on switches
+        int maxLength = 2;
+        daySwitchHrs.setFilters(new InputFilter[]{new InputFilterMinMax("00", "24"), new InputFilter.LengthFilter(maxLength)});
+        nightSwitchMins.setFilters(new InputFilter[]{new InputFilterMinMax("00", "59"), new InputFilter.LengthFilter(maxLength)});
+        nightSwitchHrs.setFilters(new InputFilter[]{new InputFilterMinMax("00", "24"), new InputFilter.LengthFilter(maxLength)});
+        nightSwitchMins.setFilters(new InputFilter[]{new InputFilterMinMax("00", "59"), new InputFilter.LengthFilter(maxLength)});
+        //make sure cursor is on the right side of the edittext when user presses 'next'
+        //doesn't work for nightSwitchHrs for some reason.
+        daySwitchHrs.setSelection(2);
+        daySwitchMins.setSelection(2);
+        nightSwitchHrs.setSelection(2);
+        nightSwitchMins.setSelection(2);
 
         new Thread(new Runnable() {
             @Override
@@ -65,7 +81,7 @@ public class Monday extends Day {
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
 
                     mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                    mondayNightTemp.setText("NightTemperature: " + nightTemp +  " \u2103");
+                    mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
                     //Showing weekprogram
                     wkProgram = HeatingSystem.getWeekProgram();
                 } catch (Exception e) {
@@ -75,7 +91,6 @@ public class Monday extends Day {
         }).start();
 
         //todo: timer to get day temp & night temp continuously from server
-        //once i can get it to display in the first place that is...
 
         new Thread(new Runnable() {
             @Override
@@ -163,7 +178,7 @@ public class Monday extends Day {
                         @Override
                         public void run() {
                             mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                            mondayNightTemp.setText("NightTemperature: " + nightTemp +  " \u2103");
+                            mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
                         }
                     });
                 } catch (Exception e) {
