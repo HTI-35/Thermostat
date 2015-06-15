@@ -14,6 +14,12 @@ copy Monday activity & code to all other days and modify appropriately
 add Back buttons if we want this?
 make it look pretty
 rename the app
+make it installable on Android
+implement undo buttons (yeah i don't think we have time for that)
+WRITE DOCUMENTATION: 
+	- readme with simple installation instructions
+	- instruction manual, use screenshots
+	- help documentation (not the same as instruction manual)
 
 
 already done:
@@ -22,3 +28,12 @@ create all activities & connect them
 read current & target temperature from server in real time
 change target temperature
 change day & night temperature functionality
+write brainstorm report
+
+
+to submit:
+
+brainstorm report (PDF)
+source & binary code for Android
+readme with simple installation instructions
+documentation (instruction manual + help)
