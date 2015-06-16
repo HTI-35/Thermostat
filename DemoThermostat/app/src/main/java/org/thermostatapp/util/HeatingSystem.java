@@ -80,8 +80,6 @@ public class HeatingSystem {
                     }
                 }
             }
-            //copy ArrayList switches to own ArrayList which is accessible outside this method
-            Day.ownSwitches = switches;
             return program;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -101,7 +99,7 @@ public class HeatingSystem {
         return null;
     }
 
-    /**
+   /**
      * Returns the switches for a particular day
      * @param parser
      * @return

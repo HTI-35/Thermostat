@@ -1,10 +1,9 @@
 to do:
 
-(A) reading switches for a specific day
-(M) removing single switches (probably by just setting it to OFF state)
-remove all switches (by setting them all to OFF state)
+(M started) removing single switches (probably by just setting it to OFF state)
+(J started) remove all switches (by setting them all to OFF state)
+(A started) permanently override temperature functionality (week program state OFF / ON)
 adding switches (by taking one that is set to OFF and changing that)
-permanently override temperature functionality (week program state OFF / ON)
 
 
 once that is done:
@@ -24,12 +23,13 @@ WRITE DOCUMENTATION:
 
 already done:
 
-create all activities & connect them
-read current & target temperature from server in real time
-change target temperature
-change day & night temperature functionality
-write brainstorm report
+(A) create all activities & connect them
+(J) read current & target temperature from server in real time
+(J) change target temperature
+(A) change day & night temperature functionality
+(A) write brainstorm report
 (A & M) 0.1 increments for setting temperatures
+(A) reading switches for a specific day
 
 
 to submit:

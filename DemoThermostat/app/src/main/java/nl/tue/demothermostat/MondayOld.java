@@ -15,7 +15,7 @@ import org.thermostatapp.util.WeekProgram;
  * Created by Anne on 05/06/2015.
  */
 public class MondayOld extends Day {
-
+/*
 
     WeekProgram wkProgram;
     Button bMondayAdd;
@@ -208,7 +208,7 @@ public class MondayOld extends Day {
         the index 0 is the 00:00 switch to night which does not belong in such a pair
         so we put it separately. there should be 10 switches though and 1 EXTRA for 00:00 to night???
         but in the server XML there are only 10 switches for each day. how to fix this????????
-        */
+        *//*
         if(Day.ownSwitches.get(0).getState())
         mondaySwitch0.setText("Standard) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime());
         if(Day.ownSwitches.get(1).getState())
@@ -222,4 +222,5 @@ public class MondayOld extends Day {
         if(Day.ownSwitches.get(9).getState())
         mondaySwitch5.setText("5) " + Day.ownSwitches.get(9).getType() + ": " + Day.ownSwitches.get(9).getTime());
     }
+    */
 }

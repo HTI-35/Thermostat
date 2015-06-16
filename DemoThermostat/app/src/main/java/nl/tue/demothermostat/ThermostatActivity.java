@@ -147,20 +147,24 @@ public class ThermostatActivity extends Activity {
             }
         });
 
+        /* This is not working... fatal exception...
         vacationMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                                    @Override
-                                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                        System.out.println("This is working yay");
-                                                        if (!HeatingSystem.getVacationMode()) {
-                                                            try {
-                                                                HeatingSystem.put("weekProgramState", "on");
-                                                            } catch (InvalidInputValueException e) {
-                                                                e.printStackTrace();
-                                                            }
-                                                        }
-                                                    }
-                                                }
+               @Override
+               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   System.out.println("This is working yay");
+                   System.out.println("Vacation: this is working yay");
+                   if (!HeatingSystem.getVacationMode()) {
+                       HeatingSystem.put("weekProgramState", "on");
+                       System.out.println("Vacation: week program is enabled");
+                       disableWeekProgram();
+                   } else if (HeatingSystem.getVacationMode()) {
+                       System.out.println("Vacation: week program is disabled");
+                       enableWeekProgram();
+                   }
+               }
+           }
         );
+        */
 
     }
 
@@ -185,6 +189,34 @@ public class ThermostatActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void disableWeekProgram(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Vacation: trying to set program to OFF");
+                    HeatingSystem.put("weekProgramState", "off");
+                    System.out.println("Vacation: set program to OFF");
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+    }
+
+    void enableWeekProgram(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HeatingSystem.put("weekProgramState", "on");
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
     }
 
     void putCurrentTemperature(){

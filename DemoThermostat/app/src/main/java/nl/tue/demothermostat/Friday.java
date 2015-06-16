@@ -8,7 +8,7 @@ import org.thermostatapp.util.HeatingSystem;
  * Created by Anne on 05/06/2015.
  */
 public class Friday extends Day {
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         day = "Friday";
@@ -49,7 +49,7 @@ public class Friday extends Day {
         the index 0 is the 00:00 switch to night which does not belong in such a pair
         so we put it separately. there should be 10 switches though and 1 EXTRA for 00:00 to night???
         but in the server XML there are only 10 switches for each day. how to fix this????????
-        */
+        *//*
         if(Day.ownSwitches.get(0).getState())
             switch0.setText("Standard) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime());
         if(Day.ownSwitches.get(1).getState())
@@ -63,4 +63,5 @@ public class Friday extends Day {
         if(Day.ownSwitches.get(9).getState())
             switch5.setText("5) " + Day.ownSwitches.get(9).getType() + ": " + Day.ownSwitches.get(9).getTime());
     }
+    */
 }
