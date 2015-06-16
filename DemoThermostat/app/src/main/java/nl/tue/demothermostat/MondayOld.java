@@ -1,6 +1,5 @@
 package nl.tue.demothermostat;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -10,38 +9,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.thermostatapp.util.HeatingSystem;
-import org.thermostatapp.util.Switch;
 import org.thermostatapp.util.WeekProgram;
-
-import java.util.ArrayList;
 
 /**
  * Created by Anne on 05/06/2015.
  */
-public class Day extends Activity {
+public class MondayOld extends Day {
 
-    public static ArrayList<Switch> ownSwitches;
+
     WeekProgram wkProgram;
-    Button bAdd;
-    Button bRemoveAll;
-    Button bChange;
-    TextView switch0;
-    TextView switch1;
-    TextView switch2;
-    TextView switch3;
-    TextView switch4;
-    TextView switch5;
+    Button bMondayAdd;
+    Button bMondayRemoveAll;
+    Button bMondayChange;
+    TextView mondaySwitch0;
+    TextView mondaySwitch1;
+    TextView mondaySwitch2;
+    TextView mondaySwitch3;
+    TextView mondaySwitch4;
+    TextView mondaySwitch5;
     TextView dayTempText;
     TextView nightTempText;
-    TextView DayTemp;
-    TextView NightTemp;
-    TextView title;
+    TextView mondayDayTemp;
+    TextView mondayNightTemp;
     EditText daySwitchHrs, daySwitchMins, nightSwitchHrs, nightSwitchMins;
     double dayTemp; //day temperature
     double nightTemp; //night temperature
-
-    String day;
-    int dayNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +42,21 @@ public class Day extends Activity {
         HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
         HeatingSystem.WEEK_PROGRAM_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35/weekprogram";
 
-        bAdd = (Button)findViewById(R.id.bMondayAdd);
-        bRemoveAll = (Button)findViewById(R.id.bMondayRemoveAll);
-        bChange = (Button)findViewById(R.id.bMondayChange);
+        bMondayAdd = (Button)findViewById(R.id.bMondayAdd);
+        bMondayRemoveAll = (Button)findViewById(R.id.bMondayRemoveAll);
+        bMondayChange = (Button)findViewById(R.id.bMondayChange);
         dayTempText = (TextView)findViewById(R.id.dayTemp);
         nightTempText = (TextView)findViewById(R.id.nightTemp);
-        title = (TextView)findViewById(R.id.mondayTitle);
 
-        switch0 = (TextView)findViewById(R.id.mondaySwitch0);
-        switch1 = (TextView)findViewById(R.id.mondaySwitch1);
-        switch2 = (TextView)findViewById(R.id.mondaySwitch2);
-        switch3 = (TextView)findViewById(R.id.mondaySwitch3);
-        switch4 = (TextView)findViewById(R.id.mondaySwitch4);
-        switch5 = (TextView)findViewById(R.id.mondaySwitch5);
+        mondaySwitch0 = (TextView)findViewById(R.id.mondaySwitch0);
+        mondaySwitch1 = (TextView)findViewById(R.id.mondaySwitch1);
+        mondaySwitch2 = (TextView)findViewById(R.id.mondaySwitch2);
+        mondaySwitch3 = (TextView)findViewById(R.id.mondaySwitch3);
+        mondaySwitch4 = (TextView)findViewById(R.id.mondaySwitch4);
+        mondaySwitch5 = (TextView)findViewById(R.id.mondaySwitch5);
 
-        DayTemp = (TextView)findViewById(R.id.mondayDayTemp);
-        NightTemp = (TextView)findViewById(R.id.mondayNightTemp);
+        mondayDayTemp = (TextView)findViewById(R.id.mondayDayTemp);
+        mondayNightTemp = (TextView)findViewById(R.id.mondayNightTemp);
 
         daySwitchHrs = (EditText)findViewById(R.id.mondayDayTimeHrs);
         daySwitchMins = (EditText)findViewById(R.id.mondayDayTimeMins);
@@ -92,8 +83,8 @@ public class Day extends Activity {
                     dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
 
-                    DayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                    NightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
+                    mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
+                    mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
                     //get week program from server
                     wkProgram = HeatingSystem.getWeekProgram();
                     //go through switches array
@@ -105,26 +96,39 @@ public class Day extends Activity {
             }
         }).start();
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //todo: get the switch times from the server...
+                    //mondaySwitch1.setText("day: " + dayswitch + ", night: " + nightswitch);
+                    //etc?
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+
         //todo: somehow translate text from EditText mondayDayTime & mondayNightTime to ints
         // by removing the colons so we can use them in AddSwitch method
 
-        bRemoveAll.setOnClickListener(new View.OnClickListener() {
+        bMondayRemoveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
-                    for (int i = 0;i< wkProgram.get_nr_switches_active(dayNumber); i++){
-                        wkProgram.RemoveFirstSwitch(day);
+                    for (int i = 0;i< wkProgram.get_nr_switches_active(1); i++){
+                        wkProgram.RemoveFirstSwitch("monday");
                     }
                     HeatingSystem.setWeekProgram(wkProgram);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            switch1.setText("");
-                            switch2.setText("");
-                            switch3.setText("");
-                            switch4.setText("");
-                            switch5.setText("");
+                            mondaySwitch1.setText("");
+                            mondaySwitch2.setText("");
+                            mondaySwitch3.setText("");
+                            mondaySwitch4.setText("");
+                            mondaySwitch5.setText("");
                         }
                     });
                 } catch (Exception e) {
@@ -135,7 +139,7 @@ public class Day extends Activity {
             }
         });
 
-        bAdd.setOnClickListener(new View.OnClickListener() {
+        bMondayAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // todo: add the switch from the input fields to switch list
@@ -144,7 +148,7 @@ public class Day extends Activity {
                 // I think if you set the type to day, the start_time is the time of the day switch
                 // and the end_time is the time of the night switch, but i'm not sure
                 try {
-                    int nrSwitches = wkProgram.get_nr_switches_active(dayNumber);
+                    int nrSwitches = wkProgram.get_nr_switches_active(1);
                     if (nrSwitches < 5) {
                         //wkProgram.addSwitch(TODO,TODO,"day","monday");
                     }
@@ -154,10 +158,10 @@ public class Day extends Activity {
                     System.err.println("Error from getdata " + e);
                 }
 
-            }
+                }
         });
 
-        bChange.setOnClickListener(new View.OnClickListener() {
+        bMondayChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(v.getContext(), DayNight.class));
@@ -165,7 +169,6 @@ public class Day extends Activity {
         });
 
     }
-
 
     public void onResume() {
         super.onResume();
@@ -178,8 +181,8 @@ public class Day extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            DayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                            NightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
+                            mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
+                            mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
                         }
                     });
                 } catch (Exception e) {
@@ -207,17 +210,16 @@ public class Day extends Activity {
         but in the server XML there are only 10 switches for each day. how to fix this????????
         */
         if(Day.ownSwitches.get(0).getState())
-            switch0.setText("Standard) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime());
+        mondaySwitch0.setText("Standard) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime());
         if(Day.ownSwitches.get(1).getState())
-            switch1.setText("1) " + Day.ownSwitches.get(1).getType() + ": " + Day.ownSwitches.get(1).getTime() + ", " + Day.ownSwitches.get(2).getType() + ": " + Day.ownSwitches.get(2).getTime());
+        mondaySwitch1.setText("1) " + Day.ownSwitches.get(1).getType() + ": " + Day.ownSwitches.get(1).getTime() + ", " + Day.ownSwitches.get(2).getType() + ": " + Day.ownSwitches.get(2).getTime());
         if(Day.ownSwitches.get(3).getState())
-            switch2.setText("2) " + Day.ownSwitches.get(3).getType() + ": " + Day.ownSwitches.get(3).getTime() + ", " + Day.ownSwitches.get(4).getType() + ": " + Day.ownSwitches.get(4).getTime());
+        mondaySwitch2.setText("2) " + Day.ownSwitches.get(3).getType() + ": " + Day.ownSwitches.get(3).getTime() + ", " + Day.ownSwitches.get(4).getType() + ": " + Day.ownSwitches.get(4).getTime());
         if(Day.ownSwitches.get(5).getState())
-            switch3.setText("3) " + Day.ownSwitches.get(5).getType() + ": " + Day.ownSwitches.get(5).getTime() + ", " + Day.ownSwitches.get(6).getType() + ": " + Day.ownSwitches.get(5).getTime());
+        mondaySwitch3.setText("3) " + Day.ownSwitches.get(5).getType() + ": " + Day.ownSwitches.get(5).getTime() + ", " + Day.ownSwitches.get(6).getType() + ": " + Day.ownSwitches.get(5).getTime());
         if(Day.ownSwitches.get(7).getState())
-            switch4.setText("4) " + Day.ownSwitches.get(7).getType() + ": " + Day.ownSwitches.get(7).getTime() + ", " + Day.ownSwitches.get(8).getType() + ": " + Day.ownSwitches.get(7).getTime());
+        mondaySwitch4.setText("4) " + Day.ownSwitches.get(7).getType() + ": " + Day.ownSwitches.get(7).getTime() + ", " + Day.ownSwitches.get(8).getType() + ": " + Day.ownSwitches.get(7).getTime());
         if(Day.ownSwitches.get(9).getState())
-            switch5.setText("5) " + Day.ownSwitches.get(9).getType() + ": " + Day.ownSwitches.get(9).getTime());
+        mondaySwitch5.setText("5) " + Day.ownSwitches.get(9).getType() + ": " + Day.ownSwitches.get(9).getTime());
     }
 }
-

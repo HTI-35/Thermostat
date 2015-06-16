@@ -9,6 +9,8 @@ public class Thursday extends Day {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thursday);
+        day = "Thursday";
+        dayNumber = 4;
+        title.setText(day);
     }
 }
