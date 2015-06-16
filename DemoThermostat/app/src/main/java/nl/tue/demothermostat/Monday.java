@@ -53,15 +53,15 @@ public class Monday extends Day {
                 );
             }
         }*/
-        if(Day.ownSwitches.get(1).getState())
-            switch1.setText("1) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime() + ", " + Day.ownSwitches.get(1).getType() + ": " + Day.ownSwitches.get(1).getTime());
-        if(Day.ownSwitches.get(3).getState())
-            switch2.setText("2) " + Day.ownSwitches.get(2).getType() + ": " + Day.ownSwitches.get(2).getTime() + ", " + Day.ownSwitches.get(3).getType() + ": " + Day.ownSwitches.get(3).getTime());
-        if(Day.ownSwitches.get(5).getState())
-            switch3.setText("3) " + Day.ownSwitches.get(4).getType() + ": " + Day.ownSwitches.get(4).getTime() + ", " + Day.ownSwitches.get(5).getType() + ": " + Day.ownSwitches.get(5).getTime());
-        if(Day.ownSwitches.get(7).getState())
-            switch4.setText("4) " + Day.ownSwitches.get(6).getType() + ": " + Day.ownSwitches.get(6).getTime() + ", " + Day.ownSwitches.get(7).getType() + ": " + Day.ownSwitches.get(7).getTime());
-        if(Day.ownSwitches.get(9).getState())
-            switch5.setText("5) " + Day.ownSwitches.get(8).getType() + ": " + Day.ownSwitches.get(8).getTime() + ", " + Day.ownSwitches.get(9).getType() + ": " + Day.ownSwitches.get(9).getTime());
+        if(this.ownSwitches.get(0).getState())
+            switch1.setText("1) " + this.ownSwitches.get(0).getType() + ": " + this.ownSwitches.get(0).getTime() + ", " + this.ownSwitches.get(1).getType() + ": " + this.ownSwitches.get(1).getTime());
+        if(this.ownSwitches.get(2).getState())
+            switch2.setText("2) " + this.ownSwitches.get(2).getType() + ": " + this.ownSwitches.get(2).getTime() + ", " + this.ownSwitches.get(3).getType() + ": " + this.ownSwitches.get(3).getTime());
+        if(this.ownSwitches.get(4).getState())
+            switch3.setText("3) " + this.ownSwitches.get(4).getType() + ": " + this.ownSwitches.get(4).getTime() + ", " + this.ownSwitches.get(5).getType() + ": " + this.ownSwitches.get(5).getTime());
+        if(this.ownSwitches.get(6).getState())
+            switch4.setText("4) " + this.ownSwitches.get(6).getType() + ": " + this.ownSwitches.get(6).getTime() + ", " + this.ownSwitches.get(7).getType() + ": " + this.ownSwitches.get(7).getTime());
+        if(this.ownSwitches.get(8).getState())
+            switch5.setText("5) " + this.ownSwitches.get(8).getType() + ": " + this.ownSwitches.get(8).getTime() + ", " + this.ownSwitches.get(9).getType() + ": " + this.ownSwitches.get(9).getTime());
     }
 }

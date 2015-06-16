@@ -149,11 +149,12 @@ public class ThermostatActivity extends Activity {
 
         /* This is not working... fatal exception...
         vacationMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-<<<<<<< HEAD
                @Override
                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   System.out.println("This is working yay");
                    System.out.println("Vacation: this is working yay");
                    if (!HeatingSystem.getVacationMode()) {
+                       HeatingSystem.put("weekProgramState", "on");
                        System.out.println("Vacation: week program is enabled");
                        disableWeekProgram();
                    } else if (HeatingSystem.getVacationMode()) {
@@ -162,20 +163,6 @@ public class ThermostatActivity extends Activity {
                    }
                }
            }
-=======
-                                                    @Override
-                                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                        System.out.println("This is working yay");
-                                                        if (!HeatingSystem.getVacationMode()) {
-                                                            try {
-                                                                HeatingSystem.put("weekProgramState", "on");
-                                                            } catch (InvalidInputValueException e) {
-                                                                e.printStackTrace();
-                                                            }
-                                                        }
-                                                    }
-                                                }
->>>>>>> origin/master
         );
         */
 

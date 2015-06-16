@@ -20,8 +20,17 @@ import java.util.ArrayList;
  */
 public class Day extends Activity {
 
-    public static ArrayList<Switch> ownSwitches;
+    //declare arraylists with switches for each day
+    public ArrayList<Switch> mondaySwitches;
+    public ArrayList<Switch> tuesdaySwitches;
+    public ArrayList<Switch> wednesdaySwitches;
+    public ArrayList<Switch> thursdaySwitches;
+    public ArrayList<Switch> fridaySwitches;
+    public ArrayList<Switch> saturdaySwitches;
+    public ArrayList<Switch> sundaySwitches;
+    //declare week program
     WeekProgram wkProgram;
+    //declare layout
     Button bAdd;
     Button bRemoveAll;
     Button bChange;
@@ -37,9 +46,10 @@ public class Day extends Activity {
     TextView NightTemp;
     TextView title;
     EditText daySwitchHrs, daySwitchMins, nightSwitchHrs, nightSwitchMins;
-    double dayTemp; //day temperature
-    double nightTemp; //night temperature
-
+    //declare day and night temperature
+    double dayTemp;
+    double nightTemp;
+    //declare day and daynumber to be initialized in subclasses
     String day;
     int dayNumber;
 
@@ -78,8 +88,7 @@ public class Day extends Activity {
         nightSwitchMins.setFilters(new InputFilter[]{new InputFilterMinMax("00", "59"), new InputFilter.LengthFilter(maxLength)});
         nightSwitchHrs.setFilters(new InputFilter[]{new InputFilterMinMax("00", "24"), new InputFilter.LengthFilter(maxLength)});
         nightSwitchMins.setFilters(new InputFilter[]{new InputFilterMinMax("00", "59"), new InputFilter.LengthFilter(maxLength)});
-        //make sure cursor is on the right side of the edittext when user presses 'next'
-        //doesn't work for nightSwitchHrs for some reason.
+        //put cursor is on right side of input field when user presses 'next' (doesn't work for nightSwitchHrs for some reason)
         daySwitchHrs.setSelection(2);
         daySwitchMins.setSelection(2);
         nightSwitchHrs.setSelection(2);
@@ -91,11 +100,17 @@ public class Day extends Activity {
                 try {
                     dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
-
                     DayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
                     NightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
-                    //get week program from server
+                    //get week program from server & initialize switches arraylists
                     wkProgram = HeatingSystem.getWeekProgram();
+                    mondaySwitches = wkProgram.getDay("Monday");
+                    tuesdaySwitches = wkProgram.getDay("Tuesday");
+                    wednesdaySwitches = wkProgram.getDay("Wednesday");
+                    thursdaySwitches = wkProgram.getDay("Thursday");
+                    fridaySwitches = wkProgram.getDay("Friday");
+                    saturdaySwitches = wkProgram.getDay("Saturday");
+                    sundaySwitches = wkProgram.getDay("Sunday");
                     //go through switches array
                     //if the switch is turned on, then print the switch to console
                 } catch (Exception e) {
