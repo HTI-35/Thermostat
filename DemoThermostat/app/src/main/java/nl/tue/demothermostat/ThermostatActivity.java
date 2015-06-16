@@ -71,8 +71,7 @@ public class ThermostatActivity extends Activity {
                         Thread.sleep(1000);
                         cTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
                         Double targetBuffer =  Double.parseDouble(HeatingSystem.get("targettemperature"));
-                        System.out.println("qqq vtemp: " + vTemp);
-                        System.out.println("qqq targetBuffer: " + targetBuffer);
+
                         if (targetBuffer != vTemp){
                             vTemp = targetBuffer;
                             seekBar.setProgress((int) Math.floor(vTemp - 5.0));
