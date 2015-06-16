@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.TextView;
+import android.widget.*;
 
 //webserver
 import org.thermostatapp.util.*;
+import org.thermostatapp.util.Switch;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -25,9 +24,11 @@ import java.util.TimerTask;
 public class ThermostatActivity extends Activity {
 
     double vTemp, cTemp; //target temperature * 10, current temperature
+    boolean wkProgramEnabled;
     TextView targetTemp, currentTemp;
     SeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
+    CheckBox vacationMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class ThermostatActivity extends Activity {
         bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
         bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
         Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
+        vacationMode = (CheckBox)findViewById(R.id.vacationMode);
 
         HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
         targetTemp = (TextView)findViewById(R.id.targetTemp);
@@ -71,6 +73,7 @@ public class ThermostatActivity extends Activity {
                         Thread.sleep(1000);
                         cTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
                         Double targetBuffer =  Double.parseDouble(HeatingSystem.get("targettemperature"));
+                        wkProgramEnabled = HeatingSystem.getVacationMode();
 
                         if (targetBuffer != vTemp){
                             vTemp = targetBuffer;
@@ -94,10 +97,7 @@ public class ThermostatActivity extends Activity {
 
         t.start();
 
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 vTemp = progress + 5;
@@ -108,12 +108,10 @@ public class ThermostatActivity extends Activity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -121,9 +119,9 @@ public class ThermostatActivity extends Activity {
             @Override
             public void onClick(View v) {//increase temperature via button
                 if (vTemp <= 30) {
-                    vTemp+=0.1;
+                    vTemp += 0.1;
                     updateTargetTemp();
-                    seekBar.setProgress((int)(Math.floor(vTemp - 5.0)));
+                    seekBar.setProgress((int) (Math.floor(vTemp - 5.0)));
                     setInputLimits();
                 }
                 putCurrentTemperature();
@@ -148,6 +146,18 @@ public class ThermostatActivity extends Activity {
                 startActivity(toWeekOverview);
             }
         });
+
+        vacationMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+               @Override
+               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   System.out.println("This is working yay");
+                   if (!HeatingSystem.getVacationMode()) {
+                       HeatingSystem.put("weekProgramState", "on");
+                   }
+               }
+           }
+        );
+
     }
 
 
@@ -173,7 +183,7 @@ public class ThermostatActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void putCurrentTemperature(){
+    void putCurrentTemperature(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -187,19 +197,19 @@ public class ThermostatActivity extends Activity {
     }
 
     void updateTargetTemp(){
-        vTemp *= 10;
-        Math.round(vTemp);
-        vTemp /= 10;
+        vTemp = Math.round(vTemp*10);
+        vTemp = vTemp/10;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("temp in method is: "+vTemp);
                 targetTemp.setText(vTemp + " \u2103");
             }
         });
     }
 
     public void setInputLimits(){
-        if (vTemp == 30) { //graying out buttons and reenabling them
+        if (vTemp == 30) { //graying out buttons and re-enabling them
             bIncrTemp.setClickable(false);
             bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
             bDecrTemp.setClickable(true);

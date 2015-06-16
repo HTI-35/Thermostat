@@ -55,8 +55,8 @@ public class DayNight extends Activity {
             @Override
             public void onClick(View v) { //increase day temp
                 if (dayTemp <= 30) {
-                    dayTemp+=1;
-                    dayTempText.setText(dayTemp + " \u2103");
+                    dayTemp += 0.1;
+                    setDayTemp();
                     setInputLimits();
                 }
                 putDayTemperature();
@@ -67,8 +67,8 @@ public class DayNight extends Activity {
             @Override
             public void onClick(View v) { //decrease day temp
                 if (dayTemp >= 5) {
-                    dayTemp-=1;
-                    dayTempText.setText(dayTemp + " \u2103");
+                    dayTemp -= 0.1;
+                    setDayTemp();
                     setInputLimits();
                 }
                 putDayTemperature();
@@ -79,8 +79,8 @@ public class DayNight extends Activity {
             @Override
             public void onClick(View v) { //increase night temp
                 if (nightTemp <= 30) {
-                    nightTemp += 1;
-                    nightTempText.setText(nightTemp + " \u2103");
+                    nightTemp += 0.1;
+                    setNightTemp();
                     setInputLimits();
                 }
                 putNightTemperature();
@@ -91,14 +91,26 @@ public class DayNight extends Activity {
             @Override
             public void onClick(View v) { //decrease night temp
                 if (nightTemp >= 5) {
-                    nightTemp -= 1;
-                    nightTempText.setText(nightTemp + " \u2103");
+                    nightTemp -= 0.1;
+                    setNightTemp();
                     setInputLimits();
                 }
                 putNightTemperature();
             }
         });
 
+    }
+
+    public void setDayTemp() {
+        dayTemp = Math.round(dayTemp*10);
+        dayTemp = dayTemp/10;
+        dayTempText.setText(dayTemp + " \u2103");
+    }
+
+    public void setNightTemp() {
+        nightTemp = Math.round(nightTemp*10);
+        nightTemp = nightTemp/10;
+        nightTempText.setText(nightTemp + " \u2103");
     }
 
     public void putDayTemperature(){

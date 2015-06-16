@@ -62,4 +62,13 @@
         android:text="Week Overview"
         android:id="@+id/bWeekOverview" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Vacation Mode"
+        android:id="@+id/vacationMode" />
+
+
 </LinearLayout>
