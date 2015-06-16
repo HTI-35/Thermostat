@@ -20,10 +20,13 @@ import java.util.ArrayList;
  */
 public class Day extends Activity {
 
+    final int nSwitches = 5; //number of switches
+
     public static ArrayList<Switch> ownSwitches;
     WeekProgram wkProgram;
     Button bAdd;
     Button bRemoveAll;
+    Button bRemove;
     Button bChange;
     TextView switch0;
     TextView switch1;
@@ -31,6 +34,7 @@ public class Day extends Activity {
     TextView switch3;
     TextView switch4;
     TextView switch5;
+    Button[] bRemoveSwitches = new Button[5]; // remove buttons
     TextView dayTempText;
     TextView nightTempText;
     TextView DayTemp;
@@ -40,7 +44,7 @@ public class Day extends Activity {
     double dayTemp; //day temperature
     double nightTemp; //night temperature
 
-    String day;
+    String day = "Monday";
     int dayNumber;
 
     @Override
@@ -63,6 +67,11 @@ public class Day extends Activity {
         switch3 = (TextView)findViewById(R.id.mondaySwitch3);
         switch4 = (TextView)findViewById(R.id.mondaySwitch4);
         switch5 = (TextView)findViewById(R.id.mondaySwitch5);
+        bRemoveSwitches[0] = (Button)findViewById(R.id.bMondayRemoveSwitch1);
+        bRemoveSwitches[1] = (Button)findViewById(R.id.bMondayRemoveSwitch2);
+        bRemoveSwitches[2] = (Button)findViewById(R.id.bMondayRemoveSwitch3);
+        bRemoveSwitches[3] = (Button)findViewById(R.id.bMondayRemoveSwitch4);
+        bRemoveSwitches[4] = (Button)findViewById(R.id.bMondayRemoveSwitch5);
 
         DayTemp = (TextView)findViewById(R.id.mondayDayTemp);
         NightTemp = (TextView)findViewById(R.id.mondayNightTemp);
@@ -133,6 +142,18 @@ public class Day extends Activity {
 
             }
         });
+
+        for(int i = 0; i < nSwitches; i++){
+            final int j = i; // because of inner class nonsense
+            bRemoveSwitches[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("i: "+j);
+                    System.out.println("Day: "+day);
+                    wkProgram.RemoveSwitch(j, day);
+                }
+            });
+        }
 
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
