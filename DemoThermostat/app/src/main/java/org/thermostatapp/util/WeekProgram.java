@@ -78,6 +78,10 @@ public class WeekProgram {
 
     }
 
+    public ArrayList<Switch> getDay(String day) {
+        return this.data.get(day);
+    }
+
     public void set_switches_active(int i, int nr) {
         this.nr_switches_active[i] = nr;
     }
