@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Thermostat</string>
 
-    <string name="target_temp">21.0 \u2103</string>
-
     <string name="action_settings">Settings</string>
 </resources>
