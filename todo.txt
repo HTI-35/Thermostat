@@ -1,6 +1,6 @@
 to do:
 
-(A) 0.1 increments for setting temperatures
+(A & M) 0.1 increments for setting temperatures
 (J) reading switches for a specific day
 removing single switches (probably by just setting it to OFF state)
 remove all switches (by setting them all to OFF state)
