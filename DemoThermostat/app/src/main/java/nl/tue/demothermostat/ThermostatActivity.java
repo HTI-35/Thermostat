@@ -23,7 +23,7 @@ import java.util.TimerTask;
 
 public class ThermostatActivity extends Activity {
 
-    double vTemp, cTemp; //target temperature * 10, current temperature
+    double vTemp, cTemp; //target temperature, current temperature
     boolean wkProgramEnabled;
     TextView targetTemp, currentTemp;
     SeekBar seekBar;
@@ -55,8 +55,8 @@ public class ThermostatActivity extends Activity {
                     System.out.println("tt: " + HeatingSystem.get("targetTemperature"));
                     System.out.println("tt: ");
                     updateTargetTemp();
-                    currentTemp.setText("" + vTemp + " \u2103");
-                    seekBar.setProgress((int) Math.floor(vTemp - 5.0));
+                    currentTemp.setText(vTemp + " \u2103");
+                    seekBar.setProgress((int) (vTemp * 10 - 50));
                     System.out.println("vTemp1:" + HeatingSystem.get("currentTemperature"));
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
@@ -77,7 +77,7 @@ public class ThermostatActivity extends Activity {
 
                         if (targetBuffer != vTemp){
                             vTemp = targetBuffer;
-                            seekBar.setProgress((int) Math.floor(vTemp - 5.0));
+                            seekBar.setProgress((int) (vTemp * 10 - 50));
                         }
                         updateTargetTemp();
                         runOnUiThread(new Runnable() {
@@ -100,7 +100,7 @@ public class ThermostatActivity extends Activity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                vTemp = progress + 5;
+                vTemp = (progress + 50)/10.0;
                 updateTargetTemp();
                 setInputLimits();
                 putCurrentTemperature();
@@ -121,7 +121,7 @@ public class ThermostatActivity extends Activity {
                 if (vTemp <= 30) {
                     vTemp += 0.1;
                     updateTargetTemp();
-                    seekBar.setProgress((int) (Math.floor(vTemp - 5.0)));
+                    seekBar.setProgress((int) (vTemp * 10 - 50));
                     setInputLimits();
                 }
                 putCurrentTemperature();
@@ -133,7 +133,7 @@ public class ThermostatActivity extends Activity {
                 if (vTemp >= 5){
                     vTemp -= 0.1;
                     updateTargetTemp();
-                    seekBar.setProgress((int)(Math.floor(vTemp - 5.0)));
+                    seekBar.setProgress((int)(vTemp * 10 - 50));
                     setInputLimits();
                 }
                 putCurrentTemperature();
@@ -149,6 +149,7 @@ public class ThermostatActivity extends Activity {
 
         /* This is not working... fatal exception...
         vacationMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+<<<<<<< HEAD
                @Override
                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                    System.out.println("Vacation: this is working yay");
@@ -161,6 +162,20 @@ public class ThermostatActivity extends Activity {
                    }
                }
            }
+=======
+                                                    @Override
+                                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                        System.out.println("This is working yay");
+                                                        if (!HeatingSystem.getVacationMode()) {
+                                                            try {
+                                                                HeatingSystem.put("weekProgramState", "on");
+                                                            } catch (InvalidInputValueException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+                                                    }
+                                                }
+>>>>>>> origin/master
         );
         */
 
