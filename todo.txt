@@ -1,8 +1,7 @@
 to do:
 
-(A & M) 0.1 increments for setting temperatures
-(J) reading switches for a specific day
-removing single switches (probably by just setting it to OFF state)
+(A) reading switches for a specific day
+(M) removing single switches (probably by just setting it to OFF state)
 remove all switches (by setting them all to OFF state)
 adding switches (by taking one that is set to OFF and changing that)
 permanently override temperature functionality (week program state OFF / ON)
@@ -30,6 +29,7 @@ read current & target temperature from server in real time
 change target temperature
 change day & night temperature functionality
 write brainstorm report
+(A & M) 0.1 increments for setting temperatures
 
 
 to submit:
