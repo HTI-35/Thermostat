@@ -92,8 +92,8 @@ public class Day extends Activity {
 
         daySwitchHrs = (EditText)findViewById(R.id.mondayDayTimeHrs);
         daySwitchMins = (EditText)findViewById(R.id.mondayDayTimeMins);
-        nightSwitchHrs = (EditText)findViewById(R.id.mondayNightTimeMins);
-        nightSwitchMins = (EditText)findViewById(R.id.mondayDayTimeMins);
+        nightSwitchHrs = (EditText)findViewById(R.id.mondayNightTimeHrs);
+        nightSwitchMins = (EditText)findViewById(R.id.mondayNightTimeMins);
 
         //set input filters on switches
         int maxLength = 2;

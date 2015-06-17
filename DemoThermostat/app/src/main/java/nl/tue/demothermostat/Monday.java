@@ -85,7 +85,25 @@ public class Monday extends Day {
                 }
                 */
                 System.out.println("add test: You've clicked the add button.");
-                setSwitch(day, "11:11", "22:22");
+
+                String[] times = new String[4];
+                times[0] = daySwitchHrs.getText().toString();
+                times[1] = daySwitchMins.getText().toString();
+                times[2] = nightSwitchHrs.getText().toString();
+                times[3] = nightSwitchMins.getText().toString();
+                //make sure all input fields have 2 digit format even if user inputs fewer digits
+                for(int i=0; i<times.length; i++) {
+                    if (times[i].length() == 0) {
+                        times[i] = "00";
+                    } else if (times[i].length() == 1) {
+                        times[i] = "0" + times[i];
+                    }
+                }
+                //concatenate strings to create a hh:mm format
+                String daySwitchTime = times[0] + ":" + times[1];
+                String nightSwitchTime = times[2] + ":" + times[3];
+                //add switches
+                setSwitch(day, daySwitchTime, nightSwitchTime);
             }
         });
 
@@ -94,22 +112,22 @@ public class Monday extends Day {
 
     /* Add a day and a night switch to the array for a specified day */
     public void setSwitch(String day, String dayTime, String nightTime) {
-        System.out.println("add test: you're in the setSwitch method");
+        //System.out.println("add test: you're in the setSwitch method");
         for (int i=0; i<5; i++) {
-            System.out.println("add test: you're in the for loop");
+            //System.out.println("add test: you're in the for loop");
             if (!wkProgram.data.get(day).get(2*i).getState()) { //if one switch pair of the day is off
-                System.out.println("add test: an OFF pair has been found");
-                wkProgram.data.get(day).remove(2 * i); //remove day switch
+                //System.out.println("add test: an OFF pair has been found");
+                wkProgram.data.get(day).remove(2*i); //remove day switch
                 wkProgram.data.get(day).remove(2*i+1); //remove night switch
-                System.out.println("add test: two switches have been removed");
+                //System.out.println("add test: two switches have been removed");
                 wkProgram.data.get(day).add(new Switch("day", true, dayTime)); //add day switch
                 wkProgram.data.get(day).add(new Switch("night", true, nightTime)); //add day switch
-                System.out.println("add test: two switches have been added");
+                //System.out.println("add test: two switches have been added");
                 i=5;
             }
         }
         if (wkProgram.data.get(day).get(8).getState()) {
-            System.out.println("add test: all switches are enabled, no more can be added");
+            //System.out.println("add test: all switches are enabled, no more can be added");
         }
         //HeatingSystem.setWeekProgram(wkProgram);
         //connection error in HeatingSystem.get.("weekProgramState")
