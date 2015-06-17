@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.thermostatapp.util.CorruptWeekProgramException;
 import org.thermostatapp.util.HeatingSystem;
 import org.thermostatapp.util.Switch;
 import org.thermostatapp.util.WeekProgram;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 
 /**
@@ -174,6 +176,7 @@ public class Day extends Activity {
                 public void onClick(View v) {
                     System.out.println("i: " + j);
                     System.out.println("Day: " + day);
+
                     try {
                         //wkProgram.RemoveSwitch((2*j)-1,day); todo: correct indexes
                         //wkProgram.RemoveSwitch((2*j)-2,day); todo: correct indexes
@@ -206,6 +209,13 @@ public class Day extends Activity {
                     } catch (Exception e) {
                         System.err.println("Error from getdatas " + e);
                     }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            wkProgram.RemoveSwitch(j, day);
+                            HeatingSystem.setWeekProgram(wkProgram);
+                        }
+                    }).start();
                 }
             });
         }
@@ -241,7 +251,21 @@ public class Day extends Activity {
             }
         }).start();
     }
-
-
+//
+//    void updateSwitches() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    wkProgram = HeatingSystem.getWeekProgram();
+//                } catch (ConnectException e) {
+//                    e.printStackTrace();
+//                } catch (CorruptWeekProgramException e) {
+//                    e.printStackTrace();
+//                }
+//                Monday.displaySwitches();
+//            }
+//        })
+//    }
 }
 
