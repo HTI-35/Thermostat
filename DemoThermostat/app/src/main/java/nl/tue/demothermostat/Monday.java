@@ -33,7 +33,12 @@ public class Monday extends Day {
             public void run() {
                 try {
                     wkProgram = HeatingSystem.getWeekProgram();
-                    displaySwitches();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            displaySwitches();
+                        }
+                    });
                     for (int i = 0;i< 10; i++){
                         System.out.println("InitSwitch " + i + ":" + wkProgram.getDay(day).get(i).getText());
                     }
@@ -67,45 +72,30 @@ public class Monday extends Day {
     }
 
     public void displaySwitches() {
-        /*for (int i=0; i<Day.ownSwitches.size(); i++) {
-            //print switches to console if they're in ON state
-            if (Day.ownSwitches.get(i).getState()) {
-                System.out.println("switch: " +
-                                Day.ownSwitches.get(i).getType() + " " +
-                                Day.ownSwitches.get(i).getTime()
-                );
-            }
-        }*/
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ownSwitches = mondaySwitches;
-                if (Day.ownSwitches.get(1).getState()) {
-                    switch1.setText("1) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime() + ", " + Day.ownSwitches.get(1).getType() + ": "
-                            + Day.ownSwitches.get(1).getTime());
-                    bRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
-                }
-                if (Day.ownSwitches.get(3).getState()) {
-                    switch2.setText("2) " + Day.ownSwitches.get(2).getType() + ": " + Day.ownSwitches.get(2).getTime() + ", " + Day.ownSwitches.get(3).getType() + ": "
-                            + Day.ownSwitches.get(3).getTime());
-                    bRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
-                }
-                if (Day.ownSwitches.get(5).getState()) {
-                    switch3.setText("3) " + Day.ownSwitches.get(4).getType() + ": " + Day.ownSwitches.get(4).getTime() + ", " + Day.ownSwitches.get(5).getType() + ": "
-                            + Day.ownSwitches.get(5).getTime());
-                    bRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
-                }
-                if (Day.ownSwitches.get(7).getState()) {
-                    switch4.setText("4) " + Day.ownSwitches.get(6).getType() + ": " + Day.ownSwitches.get(6).getTime() + ", " + Day.ownSwitches.get(7).getType() + ": "
-                            + Day.ownSwitches.get(7).getTime());
-                    bRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
-                }
-                if (Day.ownSwitches.get(9).getState()) {
-                    switch5.setText("5) " + Day.ownSwitches.get(8).getType() + ": " + Day.ownSwitches.get(8).getTime() + ", " + Day.ownSwitches.get(9).getType() + ": "
-                            + Day.ownSwitches.get(9).getTime());
-                    bRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear
-                }
-            }
-        });
+        if (this.mondaySwitches.get(0).getState()) {
+            switch1.setText("1) " + this.mondaySwitches.get(0).getType() + ": " + this.mondaySwitches.get(0).getTime() + ", " + this.mondaySwitches.get(1).getType() + ": "
+                    + this.mondaySwitches.get(1).getTime() + " ");
+            bRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
+        }
+        if (this.mondaySwitches.get(2).getState()) {
+            switch2.setText("2) " + this.mondaySwitches.get(2).getType() + ": " + this.mondaySwitches.get(2).getTime() + ", " + this.mondaySwitches.get(3).getType() + ": "
+                    + this.mondaySwitches.get(3).getTime() + " ");
+            bRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
+        }
+        if (this.mondaySwitches.get(4).getState()) {
+            switch3.setText("3) " + this.mondaySwitches.get(4).getType() + ": " + this.mondaySwitches.get(4).getTime() + ", " + this.mondaySwitches.get(5).getType() + ": "
+                    + this.mondaySwitches.get(5).getTime() + " ");
+            bRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
+        }
+        if (this.mondaySwitches.get(6).getState()) {
+            switch3.setText("4) " + this.mondaySwitches.get(6).getType() + ": " + this.mondaySwitches.get(6).getTime() + ", " + this.mondaySwitches.get(7).getType() + ": "
+                    + this.mondaySwitches.get(7).getTime() + " ");
+            bRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
+        }
+        if (this.mondaySwitches.get(8).getState()) {
+            switch3.setText("5) " + this.mondaySwitches.get(8).getType() + ": " + this.mondaySwitches.get(8).getTime() + ", " + this.mondaySwitches.get(9).getType() + ": "
+                    + this.mondaySwitches.get(9).getTime() + " ");
+            bRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear
+        }
     }
 }
