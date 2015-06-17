@@ -64,7 +64,7 @@ public class ThermostatActivity extends Activity {
             }
         }).start();
 
-        Thread t = new Thread() {
+        new Thread() {
 
             @Override
             public void run() {
@@ -93,9 +93,9 @@ public class ThermostatActivity extends Activity {
                     System.err.println("Error from getdata " + e);
                 }
             }
-        };
+        }.start();
 
-        t.start();
+
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

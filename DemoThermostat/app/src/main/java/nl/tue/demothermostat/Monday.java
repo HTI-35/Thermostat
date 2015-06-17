@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.thermostatapp.util.*;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +39,26 @@ public class Monday extends Day {
                 }
             }
         }).start();
+
+        new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(500);
+                        wkProgram = HeatingSystem.getWeekProgram();
+                        displaySwitches();
+                    }
+                } catch (InterruptedException e){
+
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }.start();
+
+
     }
 
     public void displaySwitches() {
@@ -53,27 +74,28 @@ public class Monday extends Day {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(Day.ownSwitches.get(1).getState()) {
+                ownSwitches = mondaySwitches;
+                if (Day.ownSwitches.get(1).getState()) {
                     switch1.setText("1) " + Day.ownSwitches.get(0).getType() + ": " + Day.ownSwitches.get(0).getTime() + ", " + Day.ownSwitches.get(1).getType() + ": "
                             + Day.ownSwitches.get(1).getTime());
                     bRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
                 }
-                if(Day.ownSwitches.get(3).getState()) {
+                if (Day.ownSwitches.get(3).getState()) {
                     switch2.setText("2) " + Day.ownSwitches.get(2).getType() + ": " + Day.ownSwitches.get(2).getTime() + ", " + Day.ownSwitches.get(3).getType() + ": "
                             + Day.ownSwitches.get(3).getTime());
                     bRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
                 }
-                if(Day.ownSwitches.get(5).getState()) {
+                if (Day.ownSwitches.get(5).getState()) {
                     switch3.setText("3) " + Day.ownSwitches.get(4).getType() + ": " + Day.ownSwitches.get(4).getTime() + ", " + Day.ownSwitches.get(5).getType() + ": "
                             + Day.ownSwitches.get(5).getTime());
                     bRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
                 }
-                if(Day.ownSwitches.get(7).getState()) {
+                if (Day.ownSwitches.get(7).getState()) {
                     switch4.setText("4) " + Day.ownSwitches.get(6).getType() + ": " + Day.ownSwitches.get(6).getTime() + ", " + Day.ownSwitches.get(7).getType() + ": "
                             + Day.ownSwitches.get(7).getTime());
                     bRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
                 }
-                if(Day.ownSwitches.get(9).getState()) {
+                if (Day.ownSwitches.get(9).getState()) {
                     switch5.setText("5) " + Day.ownSwitches.get(8).getType() + ": " + Day.ownSwitches.get(8).getTime() + ", " + Day.ownSwitches.get(9).getType() + ": "
                             + Day.ownSwitches.get(9).getTime());
                     bRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear

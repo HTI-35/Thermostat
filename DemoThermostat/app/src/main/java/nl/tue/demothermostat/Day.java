@@ -2,6 +2,7 @@ package nl.tue.demothermostat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.View;
@@ -13,6 +14,7 @@ import org.thermostatapp.util.HeatingSystem;
 import org.thermostatapp.util.Switch;
 import org.thermostatapp.util.WeekProgram;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -164,9 +166,39 @@ public class Day extends Activity {
             bRemoveSwitches[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("i: "+j);
-                    System.out.println("Day: "+day);
-                    wkProgram.RemoveSwitch(j, day);
+                    System.out.println("i: " + j);
+                    System.out.println("Day: " + day);
+                    try {
+                        //wkProgram.RemoveSwitch(j,day);
+                        bRemoveSwitches[j].setVisibility(View.INVISIBLE);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (j) {
+                                    case 0:
+                                        switch1.setText("");
+                                        break;
+                                    case 1:
+                                        switch2.setText("");
+                                        break;
+                                    case 2:
+                                        switch3.setText("");
+                                        break;
+                                    case 3:
+                                        switch4.setText("");
+                                        break;
+                                    case 4:
+                                        switch5.setText("");
+                                    default:
+                                        System.out.println("Error: No such switch");
+                                        break;
+                                }
+                            }
+                        });
+                        //HeatingSystem.setWeekProgram(wkProgram);
+                    } catch (Exception e) {
+                        System.err.println("Error from getdatas " + e);
+                    }
                 }
             });
         }
