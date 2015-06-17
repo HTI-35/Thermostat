@@ -68,8 +68,53 @@ public class Monday extends Day {
             }
         }.start();
 
+        bAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // todo: add the switch from the input fields to switch list
+                /* try {
+                    int nrSwitches = wkProgram.get_nr_switches_active(dayNumber);
+                    if (nrSwitches < 5) {
+                        System.out.println("")
+                        //wkProgram.addSwitch(TODO,TODO,"day","monday");
+                    }
+                    HeatingSystem.setWeekProgram(wkProgram);
+                    //todo:get switches from server and set textfields
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+                */
+                System.out.println("add test: You've clicked the add button.");
+                setSwitch(day, "11:11", "22:22");
+            }
+        });
+
 
     }
+
+    /* Add a day and a night switch to the array for a specified day */
+    public void setSwitch(String day, String dayTime, String nightTime) {
+        System.out.println("add test: you're in the setSwitch method");
+        for (int i=0; i<5; i++) {
+            System.out.println("add test: you're in the for loop");
+            if (!wkProgram.data.get(day).get(2*i).getState()) { //if one switch pair of the day is off
+                System.out.println("add test: an OFF pair has been found");
+                wkProgram.data.get(day).remove(2 * i); //remove day switch
+                wkProgram.data.get(day).remove(2*i+1); //remove night switch
+                System.out.println("add test: two switches have been removed");
+                wkProgram.data.get(day).add(new Switch("day", true, dayTime)); //add day switch
+                wkProgram.data.get(day).add(new Switch("night", true, nightTime)); //add day switch
+                System.out.println("add test: two switches have been added");
+                i=5;
+            }
+        }
+        if (wkProgram.data.get(day).get(8).getState()) {
+            System.out.println("add test: all switches are enabled, no more can be added");
+        }
+        //HeatingSystem.setWeekProgram(wkProgram);
+        //connection error in HeatingSystem.get.("weekProgramState")
+    }
+
 
     public void displaySwitches() {
         if (this.mondaySwitches.get(0).getState()) {

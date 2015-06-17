@@ -11,7 +11,7 @@ import java.util.Map;
 public class WeekProgram {
     /* Switches are stored in a hashmap, mapping every day to its
     corresponding set of switches */
-    Map<String, ArrayList<Switch>> data = new HashMap<String, ArrayList<Switch>>();
+    public Map<String, ArrayList<Switch>> data = new HashMap<String, ArrayList<Switch>>();
     private int[] nr_switches_active;
     public static String[] valid_days = { "Monday", "Tuesday", "Wednesday",
             "Thursday", "Friday", "Saturday", "Sunday" };

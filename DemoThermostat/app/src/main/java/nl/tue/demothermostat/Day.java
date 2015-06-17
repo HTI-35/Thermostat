@@ -210,28 +210,6 @@ public class Day extends Activity {
             });
         }
 
-        bAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo: add the switch from the input fields to switch list
-                // using WeekProgram.AddSwitch(int start_time, int end_time, String type, String day)
-                // but idk how we should have both a start and end time for a single type (night/day)
-                // I think if you set the type to day, the start_time is the time of the day switch
-                // and the end_time is the time of the night switch, but i'm not sure
-                try {
-                    int nrSwitches = wkProgram.get_nr_switches_active(dayNumber);
-                    if (nrSwitches < 5) {
-                        //wkProgram.addSwitch(TODO,TODO,"day","monday");
-                    }
-                    HeatingSystem.setWeekProgram(wkProgram);
-                    //todo:get switches from server and set textfields
-                } catch (Exception e) {
-                    System.err.println("Error from getdata " + e);
-                }
-
-            }
-        });
-
         bChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
