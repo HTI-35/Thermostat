@@ -34,6 +34,9 @@ public class Monday extends Day {
                 try {
                     wkProgram = HeatingSystem.getWeekProgram();
                     displaySwitches();
+                    for (int i = 0;i< 10; i++){
+                        System.out.println("InitSwitch " + i + ":" + wkProgram.getDay(day).get(i).getText());
+                    }
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
@@ -41,14 +44,16 @@ public class Monday extends Day {
         }).start();
 
         new Thread() {
-
             @Override
             public void run() {
                 try {
                     while (!isInterrupted()) {
                         Thread.sleep(500);
-                        wkProgram = HeatingSystem.getWeekProgram();
+                        //wkProgram = HeatingSystem.getWeekProgram();
                         displaySwitches();
+                        for (int i = 0;i< 10; i++){
+                            System.out.println("MondayS " + i + ":" + wkProgram.getDay(day).get(i).getText());
+                        }
                     }
                 } catch (InterruptedException e){
 

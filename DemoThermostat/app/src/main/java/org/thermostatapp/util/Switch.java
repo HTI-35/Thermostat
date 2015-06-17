@@ -149,4 +149,7 @@ public class Switch {
         return (new Switch(this.type, this.state, this.time, this.time_int,
                 this.dur));
     }
+    public String getText(){
+        return "Type: " + getType() + " State: " + getState() + " Time: " + getTime();
+    }
 }

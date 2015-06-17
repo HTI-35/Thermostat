@@ -151,14 +151,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
         android:id="@+id/mondaySwitch1"/>
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/mondaySwitch1"
-        android:layout_alignBaseline="@id/mondaySwitch1"
+        android:layout_alignTop="@id/mondaySwitch1"
         android:visibility="invisible"
         android:text="Remove"
-        android:id="@+id/bMondayRemoveSwitch1"/>
+        android:id="@+id/bMondayRemoveSwitch1"
+        android:background="@mipmap/trash" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -166,14 +167,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
         android:id="@+id/mondaySwitch2" />
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/mondaySwitch2"
-        android:layout_alignBaseline="@id/mondaySwitch2"
+        android:layout_alignTop="@id/mondaySwitch2"
         android:visibility="invisible"
         android:text="Remove"
-        android:id="@+id/bMondayRemoveSwitch2"/>
+        android:id="@+id/bMondayRemoveSwitch2"
+        android:background="@mipmap/trash" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -181,14 +183,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
         android:id="@+id/mondaySwitch3"/>
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/mondaySwitch3"
-        android:layout_alignBaseline="@id/mondaySwitch3"
+        android:layout_alignTop="@id/mondaySwitch3"
         android:visibility="invisible"
         android:text="Remove"
-        android:id="@+id/bMondayRemoveSwitch3"/>
+        android:id="@+id/bMondayRemoveSwitch3"
+        android:background="@mipmap/trash" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -196,14 +199,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
         android:id="@+id/mondaySwitch4"/>
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/mondaySwitch4"
-        android:layout_alignBaseline="@id/mondaySwitch4"
+        android:layout_alignTop="@id/mondaySwitch4"
         android:visibility="invisible"
         android:text="Remove"
-        android:id="@+id/bMondayRemoveSwitch4"/>
+        android:id="@+id/bMondayRemoveSwitch4"
+        android:background="@mipmap/trash" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -211,14 +215,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
         android:id="@+id/mondaySwitch5"/>
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/mondaySwitch5"
-        android:layout_alignBaseline="@id/mondaySwitch5"
+        android:layout_alignTop="@id/mondaySwitch5"
         android:visibility="invisible"
         android:text="Remove"
-        android:id="@+id/bMondayRemoveSwitch5"/>
+        android:id="@+id/bMondayRemoveSwitch5"
+        android:background="@mipmap/trash" />
 </RelativeLayout>
 
     <LinearLayout

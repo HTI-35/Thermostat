@@ -8,6 +8,7 @@ import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.thermostatapp.util.HeatingSystem;
@@ -46,7 +47,7 @@ public class Day extends Activity {
     TextView switch3;
     TextView switch4;
     TextView switch5;
-    Button[] bRemoveSwitches = new Button[5]; // remove buttons
+    ImageButton[] bRemoveSwitches = new ImageButton[5]; // remove buttons
     TextView dayTempText;
     TextView nightTempText;
     TextView DayTemp;
@@ -80,11 +81,11 @@ public class Day extends Activity {
         switch3 = (TextView)findViewById(R.id.mondaySwitch3);
         switch4 = (TextView)findViewById(R.id.mondaySwitch4);
         switch5 = (TextView)findViewById(R.id.mondaySwitch5);
-        bRemoveSwitches[0] = (Button)findViewById(R.id.bMondayRemoveSwitch1);
-        bRemoveSwitches[1] = (Button)findViewById(R.id.bMondayRemoveSwitch2);
-        bRemoveSwitches[2] = (Button)findViewById(R.id.bMondayRemoveSwitch3);
-        bRemoveSwitches[3] = (Button)findViewById(R.id.bMondayRemoveSwitch4);
-        bRemoveSwitches[4] = (Button)findViewById(R.id.bMondayRemoveSwitch5);
+        bRemoveSwitches[0] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch1);
+        bRemoveSwitches[1] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch2);
+        bRemoveSwitches[2] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch3);
+        bRemoveSwitches[3] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch4);
+        bRemoveSwitches[4] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch5);
 
         DayTemp = (TextView)findViewById(R.id.mondayDayTemp);
         NightTemp = (TextView)findViewById(R.id.mondayNightTemp);
@@ -139,10 +140,15 @@ public class Day extends Activity {
             public void onClick(View v) {
 
                 try {
-                    for (int i = 0;i< wkProgram.get_nr_switches_active(dayNumber); i++){
-                        wkProgram.RemoveFirstSwitch(day);
+                    for (int i = 9;i>= 0; i--){
+                        wkProgram.RemoveSwitch(i, day);
+                        System.out.println("switch " + i + ":" + wkProgram.getDay(day).get(i).getText());
                     }
-                    HeatingSystem.setWeekProgram(wkProgram);
+                    for (int i = 0;i<5; i++){
+                        bRemoveSwitches[i].setVisibility(View.INVISIBLE);
+                    }
+
+                    //HeatingSystem.setWeekProgram(wkProgram);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -169,7 +175,8 @@ public class Day extends Activity {
                     System.out.println("i: " + j);
                     System.out.println("Day: " + day);
                     try {
-                        //wkProgram.RemoveSwitch(j,day);
+                        //wkProgram.RemoveSwitch((2*j)-1,day); todo: correct indexes
+                        //wkProgram.RemoveSwitch((2*j)-2,day); todo: correct indexes
                         bRemoveSwitches[j].setVisibility(View.INVISIBLE);
                         runOnUiThread(new Runnable() {
                             @Override

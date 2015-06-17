@@ -31,6 +31,7 @@ public class HeatingSystem {
     public static String WEEK_PROGRAM_ADDRESS = "";
     private final static int TIME_OUT = 10000; // in milliseconds.
 
+
     /**
      * Retrieving weekProgram
      * @return
