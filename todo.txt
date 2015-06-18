@@ -1,9 +1,10 @@
 to do:
 
-(M started) removing single switches (probably by just setting it to OFF state)
 (J started) remove all switches (by setting them all to OFF state)
 (A started) permanently override temperature functionality (week program state OFF / ON)
+(A started) updating switches on interface
 adding switches (by taking one that is set to OFF and changing that)
+(M started) transfering interface from other branch to master
 
 
 once that is done:
@@ -30,6 +31,7 @@ already done:
 (A) write brainstorm report
 (A & M) 0.1 increments for setting temperatures
 (A) reading switches for a specific day
+(M) removing single switches on server (probably by just setting it to OFF state)
 
 
 to submit:
