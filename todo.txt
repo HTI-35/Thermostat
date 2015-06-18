@@ -1,10 +1,10 @@
 to do:
 
-(J started) remove all switches (by setting them all to OFF state)
-(A started) permanently override temperature functionality (week program state OFF / ON)
-(A started) updating switches on interface
-adding switches (by taking one that is set to OFF and changing that)
-(M started) transfering interface from other branch to master
+(M started) transferring interface from other branch to master.
+Vacation Mode: add "(Week Program Enabled)"/"(Week Program Disabled)" to Week Overview button / add "Disables Week Program" explanation to Vacation Mode checkbox.
+Adding switches: fix that a newly added switch cannot overlap with another switch.
+Updating switches: make sure displaySwitches() works correctly after adding/removing a switch, it doesn't work for some reason. (This should fix randomly appearing bin icons too.)
+Removing switches: fix this, it does not always work correctly, don't know why.
 
 
 once that is done:
@@ -24,14 +24,17 @@ WRITE DOCUMENTATION:
 
 already done:
 
-(A) create all activities & connect them
-(J) read current & target temperature from server in real time
-(J) change target temperature
-(A) change day & night temperature functionality
-(A) write brainstorm report
-(A & M) 0.1 increments for setting temperatures
-(A) reading switches for a specific day
-(M) removing single switches on server (probably by just setting it to OFF state)
+(A) 	write brainstorm report
+(A) 	create all activities & connect them
+(J) 	read current & target temperature from server & in real time
+(J) 	change target temperature
+(A) 	change day & night temperature functionality
+(A & M)	0.1 increments for setting temperatures
+(A) 	reading switches for a specific day
+(J)		vacation mode functionality
+(M & A)	removing single switches on server (probably by just setting it to OFF state)
+(A) 	adding switches (by taking one that is set to OFF and changing that)
+(J & A)	remove all switches (by setting all to OFF state)
 
 
 to submit:

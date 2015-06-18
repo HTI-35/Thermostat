@@ -248,17 +248,13 @@ public class WeekProgram {
         set_durations();
     }
 
+    /* Remove switches. This sort of works. Not always though. */
     public void RemoveSwitch(int i, String day) {
-        for (int j = i; j < data.get(day).size() - 1; j++) {
-            data.get(day).set(j, data.get(day).get(j + 1));
+        for (int j = i; j < data.get(day).size() - 2; j++) {
+            data.get(day).set(j, data.get(day).get(j + 2));
         }
-        if (data.get(day).get(data.get(day).size() - 2).getType()
-                .equalsIgnoreCase("day"))
-            data.get(day).set(data.get(day).size() - 1,
-                    new Switch("night", false, "23:00"));
-        else
-            data.get(day).set(data.get(day).size() - 1,
-                    new Switch("day", false, "23:00"));
+        data.get(day).set(data.get(day).size() - 2, new Switch("day", false, "23:59"));
+        data.get(day).set(data.get(day).size() - 1, new Switch("night", false, "23:59"));
         check_duplicates(data.get(day));
         set_durations();
     }
