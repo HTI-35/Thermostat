@@ -56,12 +56,29 @@ public class ThermostatActivity extends Activity {
                     System.out.println("tt: ");
                     updateTargetTemp();
                     if (HeatingSystem.get("weekProgramState").equals("off")) {
-                        vacationMode.setChecked(false);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                vacationMode.setChecked(false);
+                            }
+                        });
+
                     } else {
-                        vacationMode.setChecked(true);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                vacationMode.setChecked(true);
+                            }
+                        });
+
                     }
-                    currentTemp.setText(vTemp + " \u2103");
-                    seekBar.setProgress((int) (vTemp * 10 - 50));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            currentTemp.setText(vTemp + " \u2103");
+                            seekBar.setProgress((int) (vTemp * 10 - 50));
+                        }
+                    });
                     System.out.println("vTemp1:" + HeatingSystem.get("currentTemperature"));
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
@@ -82,7 +99,12 @@ public class ThermostatActivity extends Activity {
 
                         if (targetBuffer != vTemp){
                             vTemp = targetBuffer;
-                            seekBar.setProgress((int) (vTemp * 10 - 50));
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    seekBar.setProgress((int) (vTemp * 10 - 50));
+                                }
+                            });
                         }
                         updateTargetTemp();
                         if (checkvacation) {
@@ -112,9 +134,11 @@ public class ThermostatActivity extends Activity {
                         });
                     }
                 } catch (InterruptedException e){
-
+                    System.err.println("Error from getdata " + e);
+                    e.printStackTrace();
                 } catch (ConnectException e) {
                     System.err.println("Error from getdata " + e);
+                    e.printStackTrace();
                 }
             }
         }.start();
@@ -217,6 +241,7 @@ public class ThermostatActivity extends Activity {
                     System.out.println("Vacation: set program to OFF");
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -232,6 +257,7 @@ public class ThermostatActivity extends Activity {
                     System.out.println("Vacation: set program to ON");
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -245,6 +271,7 @@ public class ThermostatActivity extends Activity {
                     HeatingSystem.put("currentTemperature", "" + vTemp);
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
+                    e.printStackTrace();
                 }
             }
         }).start();

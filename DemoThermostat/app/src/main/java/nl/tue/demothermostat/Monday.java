@@ -75,6 +75,7 @@ public class Monday extends Day {
             public void run() {
                 try {
                     wkProgram = HeatingSystem.getWeekProgram();
+                    mondaySwitches = wkProgram.getDay("Monday");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -96,8 +97,14 @@ public class Monday extends Day {
                 try {
                     while (!isInterrupted()) {
                         Thread.sleep(500);
-                        //wkProgram = HeatingSystem.getWeekProgram();
-                        displaySwitches();
+                        wkProgram = HeatingSystem.getWeekProgram();
+                        mondaySwitches = wkProgram.getDay("Monday");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                displaySwitches();
+                            }
+                        });
                         for (int i = 0;i< 10; i++){
                             System.out.println("MondayS " + i + ":" + wkProgram.getDay(day).get(i).getText());
                         }
@@ -149,7 +156,12 @@ public class Monday extends Day {
                             mondaySwitches = wkProgram.getDay("Monday");
                             // Display switches again (doesn't really work yet)
                             // todo: fix this so it updates the switches properly
-                            displaySwitches();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    displaySwitches();
+                                }
+                            });
                         } catch (Exception e) {
                             System.out.println("Error in getdata: " + e);
                         }
@@ -263,7 +275,12 @@ public class Monday extends Day {
                                 wkProgram = HeatingSystem.getWeekProgram();
                                 mondaySwitches = wkProgram.getDay("Monday");
                                 // Display switches again (doesn't really work yet)
-                                //displaySwitches();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        displaySwitches();
+                                    }
+                                });
                             } catch (Exception e) {
                                 System.out.println("Error in getdata: " + e);
                             }
@@ -312,30 +329,54 @@ public class Monday extends Day {
 
     /* Display the switches on the screen */
     public void displaySwitches() {
-        if (this.mondaySwitches.get(0).getState()) {
-            mondaySwitch1.setText("1) " + this.mondaySwitches.get(0).getType() + ": " + this.mondaySwitches.get(0).getTime() + ", " + this.mondaySwitches.get(1).getType() + ": "
-                    + this.mondaySwitches.get(1).getTime() + " ");
-            bMondayRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
-        }
-        if (this.mondaySwitches.get(2).getState()) {
-            mondaySwitch2.setText("2) " + this.mondaySwitches.get(2).getType() + ": " + this.mondaySwitches.get(2).getTime() + ", " + this.mondaySwitches.get(3).getType() + ": "
-                    + this.mondaySwitches.get(3).getTime() + " ");
-            bMondayRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
-        }
-        if (this.mondaySwitches.get(4).getState()) {
-            mondaySwitch3.setText("3) " + this.mondaySwitches.get(4).getType() + ": " + this.mondaySwitches.get(4).getTime() + ", " + this.mondaySwitches.get(5).getType() + ": "
-                    + this.mondaySwitches.get(5).getTime() + " ");
-            bMondayRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
-        }
-        if (this.mondaySwitches.get(6).getState()) {
-            mondaySwitch3.setText("4) " + this.mondaySwitches.get(6).getType() + ": " + this.mondaySwitches.get(6).getTime() + ", " + this.mondaySwitches.get(7).getType() + ": "
-                    + this.mondaySwitches.get(7).getTime() + " ");
-            bMondayRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
-        }
-        if (this.mondaySwitches.get(8).getState()) {
-            mondaySwitch3.setText("5) " + this.mondaySwitches.get(8).getType() + ": " + this.mondaySwitches.get(8).getTime() + ", " + this.mondaySwitches.get(9).getType() + ": "
-                    + this.mondaySwitches.get(9).getTime() + " ");
-            bMondayRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear
+        System.out.println("dS1: " + this.mondaySwitches.get(0).getState());
+        System.out.println("dS2: " + this.mondaySwitches.get(2).getState());
+        System.out.println("dS3: " + this.mondaySwitches.get(4).getState());
+        System.out.println("dS4: " + this.mondaySwitches.get(6).getState());
+        System.out.println("dS5: " + this.mondaySwitches.get(8).getState());
+        try {
+            if (this.mondaySwitches.get(0).getState()) {
+                mondaySwitch1.setText("1) " + this.mondaySwitches.get(0).getType() + ": " + this.mondaySwitches.get(0).getTime() + ", " + this.mondaySwitches.get(1).getType() + ": "
+                        + this.mondaySwitches.get(1).getTime() + " ");
+                bMondayRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
+            } else {
+                mondaySwitch1.setText("");
+                bMondayRemoveSwitches[0].setVisibility(View.INVISIBLE); // makes button appear
+            }
+            if (this.mondaySwitches.get(2).getState()) {
+                mondaySwitch2.setText("2) " + this.mondaySwitches.get(2).getType() + ": " + this.mondaySwitches.get(2).getTime() + ", " + this.mondaySwitches.get(3).getType() + ": "
+                        + this.mondaySwitches.get(3).getTime() + " ");
+                bMondayRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
+            } else {
+                mondaySwitch2.setText("");
+                bMondayRemoveSwitches[1].setVisibility(View.INVISIBLE); // makes button appear
+            }
+            if (this.mondaySwitches.get(4).getState()) {
+                mondaySwitch3.setText("3) " + this.mondaySwitches.get(4).getType() + ": " + this.mondaySwitches.get(4).getTime() + ", " + this.mondaySwitches.get(5).getType() + ": "
+                        + this.mondaySwitches.get(5).getTime() + " ");
+                bMondayRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
+            } else {
+                mondaySwitch3.setText("");
+                bMondayRemoveSwitches[2].setVisibility(View.INVISIBLE); // makes button appear
+            }
+            if (this.mondaySwitches.get(6).getState()) {
+                mondaySwitch4.setText("4) " + this.mondaySwitches.get(6).getType() + ": " + this.mondaySwitches.get(6).getTime() + ", " + this.mondaySwitches.get(7).getType() + ": "
+                        + this.mondaySwitches.get(7).getTime() + " ");
+                bMondayRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
+            } else {
+                mondaySwitch4.setText("");
+                bMondayRemoveSwitches[3].setVisibility(View.INVISIBLE); // makes button appear
+            }
+            if (this.mondaySwitches.get(8).getState()) {
+                mondaySwitch5.setText("5) " + this.mondaySwitches.get(8).getType() + ": " + this.mondaySwitches.get(8).getTime() + ", " + this.mondaySwitches.get(9).getType() + ": "
+                        + this.mondaySwitches.get(9).getTime() + " ");
+                bMondayRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear
+            } else {
+                mondaySwitch5.setText("");
+                bMondayRemoveSwitches[4].setVisibility(View.INVISIBLE); // makes button appear
+            }
+        } catch (Exception e) {
+            System.out.println("Error in getdata: " + e);
         }
     }
 }
