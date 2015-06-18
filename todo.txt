@@ -3,8 +3,8 @@ to do:
 (M started) transferring interface from other branch to master.
 Vacation Mode: add "(Week Program Enabled)"/"(Week Program Disabled)" to Week Overview button / add "Disables Week Program" explanation to Vacation Mode checkbox.
 Adding switches: fix that a newly added switch cannot overlap with another switch.
-Updating switches: make sure displaySwitches() works correctly after adding/removing a switch, it doesn't work for some reason. (This should fix randomly appearing bin icons too.)
-Removing switches: fix this, it does not always work correctly, don't know why.
+make switch input visible on all devices
+make switch text/trashcan larger
 
 
 once that is done:
@@ -43,3 +43,18 @@ brainstorm report (PDF)
 source & binary code for Android
 readme with simple installation instructions
 documentation (instruction manual + help)
+
+WHAT WORKS
+
+ThermostatActivity:
+-everything works, no errors
+
+WeekOverview
+-same
+
+Monday
+-switches are always displayed correctly
+-adding switches works
+-removing switches works
+-removing all switches works
+-changing day/night temp works
