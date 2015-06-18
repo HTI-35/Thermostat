@@ -26,7 +26,7 @@ public class ThermostatActivity extends Activity {
     double vTemp, cTemp; //target temperature, current temperature
     boolean wkProgramEnabled,checkvacation = true;
     TextView targetTemp, currentTemp;
-    SeekBar seekBar;
+    VerticalSeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
     CheckBox vacationMode;
 
@@ -43,7 +43,7 @@ public class ThermostatActivity extends Activity {
         HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
         targetTemp = (TextView)findViewById(R.id.targetTemp);
         currentTemp = (TextView)findViewById(R.id.currTemp);
-        seekBar = (SeekBar)findViewById(R.id.seekBar);
+        seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
 
 
         new Thread(new Runnable() {

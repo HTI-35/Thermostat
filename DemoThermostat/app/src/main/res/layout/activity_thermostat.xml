@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,56 +11,130 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Target temperature"
-        android:id="@+id/targetTempText" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/bIncrTemp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21 \u2103"
-        android:textSize="30sp"
-        android:id="@+id/targetTemp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:id="@+id/bDecrTemp" />
-
-    <SeekBar
-        android:layout_width="261dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:max="250"
-        android:indeterminate="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Current temperature"
-        android:id="@+id/currTempText" />
+        android:id="@+id/currentTempText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21 &#x2103;"
-        android:textSize="30sp"
-        android:id="@+id/currTemp" />
+        android:id="@+id/desiredLO"
+        android:layout_below="@+id/currentTempText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Desired"
+            android:id="@+id/desiredText"
+            android:layout_centerHorizontal="true"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/desiredText"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempButtonsLO">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:id="@+id/bIncrTemp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="21.0 \u2103"
+                    android:textSize="30sp"
+                    android:id="@+id/targetTemp"
+                    android:layout_below="@+id/bIncrTemp"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:id="@+id/bDecrTemp"
+                    android:layout_below="@+id/targetTemp"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+            <nl.tue.demothermostat.VerticalSeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tempSeekbar"
+                android:layout_toRightOf="@id/tempButtonsLO"
+                android:layout_alignTop="@id/tempButtonsLO"
+                android:layout_alignBottom="@id/tempButtonsLO"
+                android:max="250"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="30 \u2103"
+                android:id="@+id/maxTText"
+                android:layout_toRightOf="@id/tempSeekbar"
+                android:layout_alignTop="@id/tempSeekbar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="5 \u2103"
+                android:id="@+id/minTText"
+                android:layout_toRightOf="@id/tempSeekbar"
+                android:layout_alignBottom="@id/tempSeekbar"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/currentTempText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Indoor"
+            android:id="@+id/indoorText"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="21.0 \u2103"
+            android:textSize="30sp"
+            android:id="@+id/currTemp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/indoorText"/>
+
+    </RelativeLayout>
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Week Overview"
-        android:id="@+id/bWeekOverview" />
+        android:id="@+id/bWeekOverview"
+        android:layout_below="@+id/desiredLO"
+        android:layout_alignParentRight="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -68,7 +142,8 @@
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Vacation Mode"
-        android:id="@+id/vacationMode" />
+        android:id="@+id/vacationMode"
+        android:layout_below="@+id/bWeekOverview"
+        android:layout_centerHorizontal="true" />
 
-
-</LinearLayout>
+</RelativeLayout>
