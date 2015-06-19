@@ -1,8 +1,8 @@
 to do:
 
-(A started) Adding switches: fix that a newly added switch cannot overlap with another switch
 (Probably done) Make switch input visible on all devices
 (M?) Create vertical seekbars for day & night temperature
+
 
 once that is done:
 
@@ -34,6 +34,7 @@ already done:
 (J & A)	remove all switches (by setting all to OFF state)
 (M)		create & implement vertical seekbar
 (A)		add flame icon when heating is ON; add text to indicate if week program is disabled
+(A)		input validation for adding switches
 
 
 to submit:

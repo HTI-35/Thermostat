@@ -142,6 +142,47 @@ public class Monday extends Day {
                         times[i] = "0" + times[i];
                     }
                 }
+                // Make sure new switch has acceptable switch times
+                int newDay = Integer.parseInt(times[0] + times[1], 10);
+                int newNight = Integer.parseInt(times[2] + times[3], 10);
+                for(int i = 0; i<5; i++) {
+                    if(wkProgram.data.get(day).get(2*i).getState()) {
+                        // Convert active switch's time to int
+                        String tmpd = wkProgram.data.get(day).get(2*i).getTime();
+                        String tmpd2 = tmpd.substring(0,2) + tmpd.substring(3,5);
+                        String tmpn = wkProgram.data.get(day).get(2*i + 1).getTime();
+                        String tmpn2 = tmpn.substring(0,2) + tmpn.substring(3,5);
+                        int oldDay = Integer.parseInt(tmpd2, 10);
+                        int oldNight = Integer.parseInt(tmpn2, 10);
+                        System.out.println("compare test: new switch: "+newDay+" "+newNight+", active switch: "+oldDay+" "+oldNight);
+                        // Check if the new switch does not overlap with active switch
+                        if (newDay < oldDay && newNight < oldDay) {
+                            // The new switch is before the active switch.
+                        } else if (newDay > oldNight && newNight > oldNight) {
+                            // The new switch is after the active switch.
+                        } else {
+                            // The new switch overlaps with the active switch.
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast overlap = Toast.makeText(getApplicationContext(), "The switch was not added: a new switch can't overlap with an already active switch.", Toast.LENGTH_SHORT);
+                                    overlap.show();
+                                }
+                            });
+                        }
+                        // Check if the new night switch is after the new day switch
+                        if (!(newDay < newNight)) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: you can't set a night switch at a time when it's already night.", Toast.LENGTH_SHORT);
+                                    night.show();
+                                }
+                            });
+                        }
+                    }
+                }
+
                 // Concatenate strings to create a hh:mm format
                 daySwitchTime = times[0] + ":" + times[1];
                 nightSwitchTime = times[2] + ":" + times[3];
@@ -155,7 +196,6 @@ public class Monday extends Day {
                             wkProgram = HeatingSystem.getWeekProgram();
                             mondaySwitches = wkProgram.getDay("Monday");
                             // Display switches again (doesn't really work yet)
-                            // todo: fix this so it updates the switches properly
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
