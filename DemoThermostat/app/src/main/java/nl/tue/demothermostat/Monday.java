@@ -223,7 +223,6 @@ public class Monday extends Day {
                         wkProgram.data.get(day).set(2 * i + 1, new Switch("night", false, "23:59"));
                     }
                     displaySwitches();
-                    //Remove text for all switches and upload week program to server
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -272,25 +271,7 @@ public class Monday extends Day {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                switch (j) {
-                                    case 0:
-                                        mondaySwitch1.setText("");
-                                        break;
-                                    case 1:
-                                        mondaySwitch2.setText("");
-                                        break;
-                                    case 2:
-                                        mondaySwitch3.setText("");
-                                        break;
-                                    case 3:
-                                        mondaySwitch4.setText("");
-                                        break;
-                                    case 4:
-                                        mondaySwitch5.setText("");
-                                    default:
-                                        System.out.println("Error: No such switch");
-                                        break;
-                                }
+                                displaySwitches();
                             }
                         });
                     } catch (Exception e) {
