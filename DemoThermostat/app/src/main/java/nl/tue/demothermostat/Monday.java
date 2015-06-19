@@ -25,6 +25,7 @@ public class Monday extends Day {
 
     String daySwitchTime;
     String nightSwitchTime;
+    boolean allowed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +163,7 @@ public class Monday extends Day {
                             // The new switch is after the active switch.
                         } else {
                             // The new switch overlaps with the active switch.
+                            allowed = false;
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -172,10 +174,11 @@ public class Monday extends Day {
                         }
                         // Check if the new night switch is after the new day switch
                         if (!(newDay < newNight)) {
+                            allowed = false;
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: you can't set a night switch at a time when it's already night.", Toast.LENGTH_SHORT);
+                                    Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: the night switch must be later than the day switch.", Toast.LENGTH_SHORT);
                                     night.show();
                                 }
                             });
@@ -191,7 +194,9 @@ public class Monday extends Day {
                     @Override
                     public void run() {
                         try {
-                            setSwitch(day, daySwitchTime, nightSwitchTime);
+                            if(allowed) {
+                                setSwitch(day, daySwitchTime, nightSwitchTime);
+                            } allowed = true;
                             HeatingSystem.setWeekProgram(wkProgram);
                             wkProgram = HeatingSystem.getWeekProgram();
                             mondaySwitches = wkProgram.getDay("Monday");
