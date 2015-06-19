@@ -52,7 +52,6 @@ public class ThermostatActivity extends Activity {
         currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
 
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -181,6 +180,8 @@ public class ThermostatActivity extends Activity {
                     e.printStackTrace();
                 } catch (ConnectException e) {
                     System.err.println("Error from getdata " + e);
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
             }
