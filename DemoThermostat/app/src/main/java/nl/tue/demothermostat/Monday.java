@@ -83,9 +83,6 @@ public class Monday extends Day {
                             displaySwitches();
                         }
                     });
-                    for (int i = 0;i< 10; i++){
-                        System.out.println("InitSwitch " + i + ":" + wkProgram.getDay(day).get(i).getText());
-                    }
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
@@ -106,9 +103,6 @@ public class Monday extends Day {
                                 displaySwitches();
                             }
                         });
-                        for (int i = 0;i< 10; i++){
-                            System.out.println("MondayS " + i + ":" + wkProgram.getDay(day).get(i).getText());
-                        }
                     }
                 } catch (InterruptedException e){
 
@@ -155,7 +149,6 @@ public class Monday extends Day {
                         String tmpn2 = tmpn.substring(0,2) + tmpn.substring(3,5);
                         int oldDay = Integer.parseInt(tmpd2, 10);
                         int oldNight = Integer.parseInt(tmpn2, 10);
-                        System.out.println("compare test: new switch: "+newDay+" "+newNight+", active switch: "+oldDay+" "+oldNight);
                         // Check if the new switch does not overlap with active switch
                         if (newDay < oldDay && newNight < oldDay) {
                             // The new switch is before the active switch.
@@ -200,14 +193,14 @@ public class Monday extends Day {
                             HeatingSystem.setWeekProgram(wkProgram);
                             wkProgram = HeatingSystem.getWeekProgram();
                             mondaySwitches = wkProgram.getDay("Monday");
-                            // Display switches again (doesn't really work yet)
+                            // Display switches again
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     displaySwitches();
                                 }
                             });
-                        } catch (Exception e) {
+                        } catch (Exception e) { 
                             System.out.println("Error in getdata: " + e);
                         }
                     }
@@ -374,11 +367,6 @@ public class Monday extends Day {
 
     /* Display the switches on the screen */
     public void displaySwitches() {
-        System.out.println("dS1: " + this.mondaySwitches.get(0).getState());
-        System.out.println("dS2: " + this.mondaySwitches.get(2).getState());
-        System.out.println("dS3: " + this.mondaySwitches.get(4).getState());
-        System.out.println("dS4: " + this.mondaySwitches.get(6).getState());
-        System.out.println("dS5: " + this.mondaySwitches.get(8).getState());
         try {
             if (this.mondaySwitches.get(0).getState()) {
                 mondaySwitch1.setText("1) " + this.mondaySwitches.get(0).getType() + ": " + this.mondaySwitches.get(0).getTime() + ", " + this.mondaySwitches.get(1).getType() + ": "
