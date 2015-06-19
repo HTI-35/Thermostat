@@ -55,14 +55,15 @@
                     android:layout_centerHorizontal="true"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="93dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="21.0 \u2103"
-                    android:textSize="20sp"
+                    android:textSize="30sp"
                     android:id="@+id/targetTemp"
                     android:layout_below="@+id/bIncrTemp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"/>
 
                 <Button
                     android:layout_width="wrap_content"
