@@ -166,7 +166,7 @@ public class Wednesday extends Day {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast overlap = Toast.makeText(getApplicationContext(), "The switch was not added: a new switch can't overlap with an already active switch.", Toast.LENGTH_SHORT);
+                                    Toast overlap = Toast.makeText(getApplicationContext(), "The switch was not added: a new switch can't overlap with an already active switch.", Toast.LENGTH_LONG);
                                     overlap.show();
                                 }
                             });
@@ -179,7 +179,7 @@ public class Wednesday extends Day {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: the night switch must be later than the day switch.", Toast.LENGTH_SHORT);
+                            Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: the night switch must be later than the day switch.", Toast.LENGTH_LONG);
                             night.show();
                         }
                     });
@@ -316,7 +316,7 @@ public class Wednesday extends Day {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast maxSwitchesAdded = Toast.makeText(getApplicationContext(), "The switch was not added: you can't add more than 5 switches.", Toast.LENGTH_SHORT);
+                    Toast maxSwitchesAdded = Toast.makeText(getApplicationContext(), "The switch was not added: you can't add more than 5 switches.", Toast.LENGTH_LONG);
                     maxSwitchesAdded.show();
                 }
             });
@@ -332,7 +332,7 @@ public class Wednesday extends Day {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast maxSwitchesAdded = Toast.makeText(getApplicationContext(), "You've now added the maximum of 5 switches.", Toast.LENGTH_SHORT);
+                            Toast maxSwitchesAdded = Toast.makeText(getApplicationContext(), "You've now added the maximum of 5 switches.", Toast.LENGTH_LONG);
                             maxSwitchesAdded.show();
                         }
                     });

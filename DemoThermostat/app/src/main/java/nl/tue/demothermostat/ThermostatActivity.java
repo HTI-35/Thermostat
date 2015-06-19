@@ -12,13 +12,7 @@ import android.widget.*;
 
 //webserver
 import org.thermostatapp.util.*;
-import org.thermostatapp.util.Switch;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.ConnectException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class ThermostatActivity extends Activity {
