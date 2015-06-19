@@ -1,6 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:id="@+id/mondayLO">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingBottom="10dp"
+        android:text="Monday — Switches"
+        android:textColor="#4D94FF"
+        android:id="@+id/mondayTitle" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignRight="@+id/mondayNight"
+            android:text="Day switch (hh:mm): "
+            android:id="@+id/mondayDay" />
+        <EditText
+            android:maxEms="2"
+            android:minEms="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/mondayDay"
+            android:layout_toRightOf="@+id/mondayDay"
+            android:nextFocusDown="@+id/mondayDayTimeMins"
+            android:inputType="number"
+            android:ems="10"
+            android:maxLength="2"
+            android:text="00"
+            android:id="@+id/mondayDayTimeHrs" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/mondayDay"
+            android:layout_toRightOf="@+id/mondayDayTimeHrs"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=":"
+            android:id="@+id/mondayDayColon" />
+        <EditText
+            android:maxEms="2"
+            android:minEms="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/mondayDay"
+            android:layout_toRightOf="@+id/mondayDayColon"
+            android:nextFocusDown="@+id/mondayNightTimeHrs"
+            android:inputType="number"
+            android:ems="10"
+            android:maxLength="2"
+            android:text="00"
+            android:id="@+id/mondayDayTimeMins" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/mondayDay"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Night switch (hh:mm): "
+            android:id="@+id/mondayNight" />
+        <EditText
+            android:maxEms="2"
+            android:minEms="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/mondayNight"
+            android:layout_toRightOf="@+id/mondayNight"
+            android:nextFocusDown="@+id/mondayNightTimeMins"
+            android:inputType="number"
+            android:ems="10"
+            android:maxLength="2"
+            android:text="00"
+            android:id="@+id/mondayNightTimeHrs" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/mondayNight"
+            android:layout_toRightOf="@+id/mondayNightTimeHrs"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=":"
+            android:id="@+id/mondayNightColon" />
+        <EditText
+            android:maxEms="2"
+            android:minEms="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/mondayNight"
+            android:layout_toRightOf="@+id/mondayNightColon"
+            android:inputType="number"
+            android:ems="10"
+            android:maxLength="2"
+            android:text="00"
+            android:id="@+id/mondayNightTimeMins" />
+    </RelativeLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Add"
+        android:id="@+id/bMondayAdd" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="20dp"
+            android:layout_alignBaseline="@+id/bMondayRemoveAll"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Active switches (max. 5):"
+            android:id="@+id/mondaySwitches" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_toRightOf="@+id/mondaySwitches"
+            android:text="Remove All"
+            android:id="@+id/bMondayRemoveAll" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/mondaySwitch1"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mondaySwitch1"
+            android:layout_alignTop="@id/mondaySwitch1"
+            android:visibility="invisible"
+            android:text="Remove"
+            android:id="@+id/bMondayRemoveSwitch1"
+            android:background="@mipmap/trashcan" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mondaySwitch1"
+            android:layout_marginTop="2dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/mondaySwitch2" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mondaySwitch2"
+            android:layout_alignTop="@id/mondaySwitch2"
+            android:visibility="invisible"
+            android:text="Remove"
+            android:id="@+id/bMondayRemoveSwitch2"
+            android:background="@mipmap/trashcan" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mondaySwitch2"
+            android:layout_marginTop="2dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/mondaySwitch3"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mondaySwitch3"
+            android:layout_alignTop="@id/mondaySwitch3"
+            android:visibility="invisible"
+            android:text="Remove"
+            android:id="@+id/bMondayRemoveSwitch3"
+            android:background="@mipmap/trashcan" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mondaySwitch3"
+            android:layout_marginTop="2dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/mondaySwitch4"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mondaySwitch4"
+            android:layout_alignTop="@id/mondaySwitch4"
+            android:visibility="invisible"
+            android:text="Remove"
+            android:id="@+id/bMondayRemoveSwitch4"
+            android:background="@mipmap/trashcan" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mondaySwitch4"
+            android:layout_marginTop="2dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/mondaySwitch5"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mondaySwitch5"
+            android:layout_alignTop="@id/mondaySwitch5"
+            android:visibility="invisible"
+            android:text="Remove"
+            android:id="@+id/bMondayRemoveSwitch5"
+            android:background="@mipmap/trashcan" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#4D94FF"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Day and Night Temperature"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Day temperature: ? \u00B0C"
+            android:id="@+id/mondayDayTemp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Night temperature: ? \u00B0C"
+            android:id="@+id/mondayNightTemp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Change"
+            android:id="@+id/bMondayChange" />
+    </LinearLayout>
+
+
+</GridLayout>

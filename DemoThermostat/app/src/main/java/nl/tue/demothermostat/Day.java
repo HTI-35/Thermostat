@@ -58,7 +58,30 @@ public class Day extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_monday);
+        switch (day) {
+            case "Monday":
+                setContentView(R.layout.activity_monday);
+                break;
+            case "Tuesday":
+                setContentView(R.layout.activity_tuesday);
+                break;
+            case "Wednesday":
+                setContentView(R.layout.activity_wednesday);
+                break;
+            case "Thursday":
+                setContentView(R.layout.activity_thursday);
+                break;
+            case "Friday":
+                setContentView(R.layout.activity_friday);
+                break;
+            case "Saturday":
+                setContentView(R.layout.activity_saturday);
+                break;
+            case "Sunday":
+                setContentView(R.layout.activity_sunday);
+                break;
+        }
+
         HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
         HeatingSystem.WEEK_PROGRAM_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35/weekprogram";
 

@@ -25,13 +25,15 @@ public class Monday extends Day {
 
     String daySwitchTime;
     String nightSwitchTime;
+    TextView title;
     boolean allowed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         day = "Monday";
         dayNumber = 1;
+        super.onCreate(savedInstanceState);
+
 
         bMondayAdd = (Button)findViewById(R.id.bMondayAdd);
         bMondayRemoveAll = (Button)findViewById(R.id.bMondayRemoveAll);
@@ -40,6 +42,7 @@ public class Monday extends Day {
         mondayNightTempText = (TextView)findViewById(R.id.nightTemp);
         mondayTitle = (TextView)findViewById(R.id.mondayTitle);
 
+        title = (TextView)findViewById(R.id.mondayTitle);
         mondaySwitch1 = (TextView)findViewById(R.id.mondaySwitch1);
         mondaySwitch2 = (TextView)findViewById(R.id.mondaySwitch2);
         mondaySwitch3 = (TextView)findViewById(R.id.mondaySwitch3);
@@ -70,6 +73,8 @@ public class Monday extends Day {
         mondayDaySwitchMins.setSelection(2);
         mondayNightSwitchHrs.setSelection(2);
         mondayNightSwitchMins.setSelection(2);
+
+        title.setText(day + " — Switches");
 
         new Thread(new Runnable() {
             @Override
