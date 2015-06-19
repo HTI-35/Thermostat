@@ -25,9 +25,10 @@ public class ThermostatActivity extends Activity {
 
     double vTemp, cTemp; //target temperature, current temperature
     boolean wkProgramEnabled, checkvacation = true;
-    TextView targetTemp, currentTemp, enabled;
+    TextView targetTemp, currentTemp, enabled, infoText;
     VerticalSeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
+    ImageButton info, close;
     CheckBox vacationMode;
     ImageView flame;
 
@@ -40,10 +41,13 @@ public class ThermostatActivity extends Activity {
         bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
         final Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
         vacationMode = (CheckBox)findViewById(R.id.vacationMode);
+        info = (ImageButton)findViewById(R.id.info);
         flame = (ImageView)findViewById(R.id.flame);
+        close = (ImageButton)findViewById(R.id.close);
 
         HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
         enabled = (TextView)findViewById(R.id.wkProgramEnabled);
+        infoText = (TextView)findViewById(R.id.infoText);
         targetTemp = (TextView)findViewById(R.id.targetTemp);
         currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
@@ -199,6 +203,31 @@ public class ThermostatActivity extends Activity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        infoText.setVisibility(View.VISIBLE);
+                        close.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        infoText.setVisibility(View.INVISIBLE);
+                        close.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         });
 

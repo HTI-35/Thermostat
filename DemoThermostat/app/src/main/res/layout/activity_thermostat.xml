@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:padding="25dp"
+    android:layout_height="match_parent"
+    android:paddingTop="25dp" android:paddingLeft="25dp" android:paddingRight="25dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:paddingBottom="16dp" tools:context=".ThermostatActivity">
+    tools:context=".ThermostatActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:text="21.0 \u2103"
             android:textSize="45sp"
             android:id="@+id/currTemp"
@@ -156,7 +156,8 @@
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginTop="10dp"
-        android:text="Vacation Mode  "
+        android:paddingEnd="15dp"
+        android:text="Vacation Mode"
         android:id="@+id/vacationMode"
         android:layout_below="@+id/bWeekOverview"
         android:layout_centerHorizontal="true" />
@@ -168,5 +169,35 @@
         android:text="Week program is enabled."
         android:id="@+id/wkProgramEnabled"
         android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/info"
+        android:background="@mipmap/info"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@+id/wkProgramEnabled"
+        android:layout_alignEnd="@+id/currentTempText" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoText"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_below="@+id/wkProgramEnabled"
+        android:visibility="invisible"
+        android:background="@drawable/dialog"
+        android:padding="10dp"
+        android:text="When the thermostat is in Vacation Mode, the week program is disabled and the desired temperature will remain the same until Vacation Mode is turned off." />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/close"
+        android:background="@mipmap/close"
+        android:visibility="invisible"
+        android:layout_alignEnd="@+id/infoText"
+        android:layout_alignTop="@+id/infoText"/>
 
 </RelativeLayout>
