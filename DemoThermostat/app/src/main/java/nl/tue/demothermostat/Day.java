@@ -121,10 +121,8 @@ public class Day extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if(day == "Monday") {
                                 mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
                                 mondayNightTemp.setText("Night Temperature: " + nightTemp + " \u2103");
-                            }
                         }
                     });
                 } catch (Exception e) {
