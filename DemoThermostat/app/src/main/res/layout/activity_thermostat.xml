@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="16dp"
+    android:padding="25dp"
     android:orientation="vertical"
     android:gravity="center"
     android:paddingBottom="16dp" tools:context=".ThermostatActivity">
@@ -11,8 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Current temperature"
+        android:textSize="30dp"
+        android:text="Temperatures"
         android:id="@+id/currentTempText"
+        android:paddingBottom="20dp"
+        android:textColor="#4D94FF"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -28,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="10dp"
             android:text="Desired"
             android:id="@+id/desiredText"
             android:layout_centerHorizontal="true"/>
@@ -112,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Indoor"
+            android:text="Current"
             android:id="@+id/indoorText"
             android:layout_centerHorizontal="true"/>
 
@@ -120,11 +123,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="10dp"
             android:text="21.0 \u2103"
-            android:textSize="30sp"
+            android:textSize="45sp"
             android:id="@+id/currTemp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/indoorText"/>
+            android:layout_below="@id/indoorText" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/flame"
+            android:layout_below="@id/currTemp"
+            android:id="@+id/flame"
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
@@ -133,6 +146,7 @@
         android:layout_height="wrap_content"
         android:text="Week Overview"
         android:id="@+id/bWeekOverview"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/desiredLO"
         android:layout_alignParentRight="true" />
 
@@ -141,9 +155,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Vacation Mode"
+        android:layout_marginTop="10dp"
+        android:text="Vacation Mode  "
         android:id="@+id/vacationMode"
         android:layout_below="@+id/bWeekOverview"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vacationMode"
+        android:text="Week program is enabled."
+        android:id="@+id/wkProgramEnabled"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

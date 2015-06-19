@@ -3,6 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
     >
 
     <Button
@@ -10,47 +12,47 @@
         android:layout_height="wrap_content"
         android:text="Monday"
         android:id="@+id/bMonday"
-        android:layout_gravity="center_horizontal" />
+         />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Tuesday"
         android:id="@+id/bTuesday"
-        android:layout_gravity="center_horizontal" />
+         />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Wednesday"
         android:id="@+id/bWednesday"
-        android:layout_gravity="center_horizontal" />
+         />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Thursday"
         android:id="@+id/bThursday"
-        android:layout_gravity="center_horizontal" />
+        />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Friday"
         android:id="@+id/bFriday"
-        android:layout_gravity="center_horizontal" />
+        />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Saturday"
         android:id="@+id/bSaturday"
-        android:layout_gravity="center_horizontal" />
+         />
 
     <Button
         style="@style/button"
         android:layout_height="wrap_content"
         android:text="Sunday"
         android:id="@+id/bSunday"
-        android:layout_gravity="center_horizontal" />
+        />
 </LinearLayout>

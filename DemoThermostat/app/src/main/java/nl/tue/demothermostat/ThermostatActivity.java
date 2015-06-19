@@ -24,11 +24,12 @@ import java.util.TimerTask;
 public class ThermostatActivity extends Activity {
 
     double vTemp, cTemp; //target temperature, current temperature
-    boolean wkProgramEnabled,checkvacation = true;
-    TextView targetTemp, currentTemp;
+    boolean wkProgramEnabled, checkvacation = true;
+    TextView targetTemp, currentTemp, enabled;
     VerticalSeekBar seekBar;
     Button bIncrTemp, bDecrTemp;
     CheckBox vacationMode;
+    ImageView flame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,12 @@ public class ThermostatActivity extends Activity {
 
         bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
         bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
-        Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
+        final Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
         vacationMode = (CheckBox)findViewById(R.id.vacationMode);
+        flame = (ImageView)findViewById(R.id.flame);
 
         HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
+        enabled = (TextView)findViewById(R.id.wkProgramEnabled);
         targetTemp = (TextView)findViewById(R.id.targetTemp);
         currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
@@ -50,16 +53,32 @@ public class ThermostatActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    //target temperatureF
+                    // Update target temperature
                     vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature")); // It's supposed to be getting currentTemperature
-                    System.out.println("tt: " + HeatingSystem.get("targetTemperature"));
-                    System.out.println("tt: ");
                     updateTargetTemp();
+                    // Set the flame visibility
+                    if (Double.parseDouble(HeatingSystem.get("currentTemperature")) < Double.parseDouble(HeatingSystem.get("targetTemperature"))) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                flame.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                flame.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                    }
+                    // Set the checkbox for Vacation Mode
                     if (HeatingSystem.get("weekProgramState").equals("off")) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                vacationMode.setChecked(false);
+                                vacationMode.setChecked(true);
+                                enabled.setText("Week program is disabled.");
                             }
                         });
 
@@ -67,7 +86,8 @@ public class ThermostatActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                vacationMode.setChecked(true);
+                                vacationMode.setChecked(false);
+                                enabled.setText("Week program is enabled.");
                             }
                         });
 
@@ -95,7 +115,7 @@ public class ThermostatActivity extends Activity {
                         Thread.sleep(1000);
                         cTemp = Double.parseDouble(HeatingSystem.get("currentTemperature"));
                         Double targetBuffer =  Double.parseDouble(HeatingSystem.get("targettemperature"));
-                        wkProgramEnabled = HeatingSystem.getVacationMode();
+                        wkProgramEnabled = !(HeatingSystem.getVacationMode());
 
                         if (targetBuffer != vTemp){
                             vTemp = targetBuffer;
@@ -107,19 +127,38 @@ public class ThermostatActivity extends Activity {
                             });
                         }
                         updateTargetTemp();
+                        // Set the flame visibility
+                        if (Double.parseDouble(HeatingSystem.get("currentTemperature")) < Double.parseDouble(HeatingSystem.get("targetTemperature"))) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    flame.setVisibility(View.VISIBLE);
+                                }
+                            });
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    flame.setVisibility(View.INVISIBLE);
+                                }
+                            });
+                        }
+                        // Set the checkbox for Vacation Mode
                         if (checkvacation) {
                             if (HeatingSystem.get("weekProgramState").equals("off")) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        vacationMode.setChecked(false);
+                                        vacationMode.setChecked(true);
+                                        enabled.setText("Week program is disabled.");
                                     }
                                 });
                             } else {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        vacationMode.setChecked(true);
+                                        vacationMode.setChecked(false);
+                                        enabled.setText("Week program is enabled.");
                                     }
                                 });
                             }
@@ -200,9 +239,9 @@ public class ThermostatActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 checkvacation = false;
                 if (isChecked){
-                    enableWeekProgram();
-                } else {
                     disableWeekProgram();
+                } else {
+                    enableWeekProgram();
                 }
             }
         });

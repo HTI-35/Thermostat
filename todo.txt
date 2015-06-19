@@ -1,11 +1,8 @@
 to do:
 
-(M started) transferring interface from other branch to master.
-Vacation Mode: add "(Week Program Enabled)"/"(Week Program Disabled)" to Week Overview button / add "Disables Week Program" explanation to Vacation Mode checkbox.
-Adding switches: fix that a newly added switch cannot overlap with another switch.
-make switch input visible on all devices
-make switch text/trashcan larger
-
+(A started) Adding switches: fix that a newly added switch cannot overlap with another switch
+(Probably done) Make switch input visible on all devices
+(M?) Create vertical seekbars for day & night temperature
 
 once that is done:
 
@@ -35,6 +32,8 @@ already done:
 (M & A)	removing single switches on server (probably by just setting it to OFF state)
 (A) 	adding switches (by taking one that is set to OFF and changing that)
 (J & A)	remove all switches (by setting all to OFF state)
+(M)		create & implement vertical seekbar
+(A)		add flame icon when heating is ON; add text to indicate if week program is disabled
 
 
 to submit:
@@ -43,18 +42,3 @@ brainstorm report (PDF)
 source & binary code for Android
 readme with simple installation instructions
 documentation (instruction manual + help)
-
-WHAT WORKS
-
-ThermostatActivity:
--everything works, no errors
-
-WeekOverview
--same
-
-Monday
--switches are always displayed correctly
--adding switches works
--removing switches works
--removing all switches works
--changing day/night temp works

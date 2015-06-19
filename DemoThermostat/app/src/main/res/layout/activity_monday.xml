@@ -10,11 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Monday"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/mondayTitle"
-        android:layout_row="0"
-        android:layout_column="0" />
+        android:paddingBottom="10dp"
+        android:text="Monday — Switches"
+        android:textColor="#4D94FF"
+        android:id="@+id/mondayTitle" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
@@ -25,10 +24,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignRight="@+id/mondayNight"
             android:text="Day switch (hh:mm): "
             android:id="@+id/mondayDay" />
         <EditText
-            android:layout_width="30dp"
+            android:maxEms="2"
+            android:minEms="2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/mondayDay"
             android:layout_toRightOf="@+id/mondayDay"
@@ -47,7 +49,9 @@
             android:text=":"
             android:id="@+id/mondayDayColon" />
         <EditText
-            android:layout_width="30dp"
+            android:maxEms="2"
+            android:minEms="2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/mondayDay"
             android:layout_toRightOf="@+id/mondayDayColon"
@@ -57,21 +61,20 @@
             android:maxLength="2"
             android:text="00"
             android:id="@+id/mondayDayTimeMins" />
-    </RelativeLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/mondayDay"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="Night switch (hh:mm): "
         android:id="@+id/mondayNight" />
     <EditText
-        android:layout_width="30dp"
+        android:maxEms="2"
+        android:minEms="2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/mondayNight"
         android:layout_toRightOf="@+id/mondayNight"
@@ -90,7 +93,9 @@
         android:text=":"
         android:id="@+id/mondayNightColon" />
     <EditText
-        android:layout_width="30dp"
+        android:maxEms="2"
+        android:minEms="2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/mondayNight"
         android:layout_toRightOf="@+id/mondayNightColon"
@@ -106,10 +111,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
         android:text="Add"
         android:id="@+id/bMondayAdd" />
-
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
@@ -121,14 +124,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="20dp"
+        android:layout_alignBaseline="@+id/bMondayRemoveAll"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Switches (max. 5):"
+        android:text="Active switches (max. 5):"
         android:id="@+id/mondaySwitches" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_alignBaseline="@+id/mondaySwitches"
         android:layout_toRightOf="@+id/mondaySwitches"
         android:text="Remove All"
         android:id="@+id/bMondayRemoveAll" />
@@ -143,7 +146,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/mondaySwitch1"/>
     <ImageButton
@@ -154,12 +158,13 @@
         android:visibility="invisible"
         android:text="Remove"
         android:id="@+id/bMondayRemoveSwitch1"
-        android:background="@mipmap/trash" />
+        android:background="@mipmap/trashcan" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mondaySwitch1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="2dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/mondaySwitch2" />
     <ImageButton
@@ -170,12 +175,13 @@
         android:visibility="invisible"
         android:text="Remove"
         android:id="@+id/bMondayRemoveSwitch2"
-        android:background="@mipmap/trash" />
+        android:background="@mipmap/trashcan" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mondaySwitch2"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="2dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/mondaySwitch3"/>
     <ImageButton
@@ -186,12 +192,13 @@
         android:visibility="invisible"
         android:text="Remove"
         android:id="@+id/bMondayRemoveSwitch3"
-        android:background="@mipmap/trash" />
+        android:background="@mipmap/trashcan" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mondaySwitch3"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="2dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/mondaySwitch4"/>
     <ImageButton
@@ -202,12 +209,13 @@
         android:visibility="invisible"
         android:text="Remove"
         android:id="@+id/bMondayRemoveSwitch4"
-        android:background="@mipmap/trash" />
+        android:background="@mipmap/trashcan" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mondaySwitch4"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="2dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/mondaySwitch5"/>
     <ImageButton
@@ -218,12 +226,19 @@
         android:visibility="invisible"
         android:text="Remove"
         android:id="@+id/bMondayRemoveSwitch5"
-        android:background="@mipmap/trash" />
+        android:background="@mipmap/trashcan" />
 </RelativeLayout>
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#4D94FF"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Day and Night Temperature"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"/>
     <LinearLayout
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal">
     <TextView
@@ -246,6 +261,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
         android:text="Change"
         android:id="@+id/bMondayChange" />
     </LinearLayout>
