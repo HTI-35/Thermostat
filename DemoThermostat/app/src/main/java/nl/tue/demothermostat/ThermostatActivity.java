@@ -269,6 +269,7 @@ public class ThermostatActivity extends Activity {
                 checkvacation = false;
                 if (isChecked){
                     disableWeekProgram();
+
                 } else {
                     enableWeekProgram();
                 }
@@ -307,6 +308,12 @@ public class ThermostatActivity extends Activity {
                 try {
                     HeatingSystem.put("weekProgramState", "off");
                     System.out.println("Vacation: set program to OFF");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            enabled.setText("Week program is disabled.");
+                        }
+                    });
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                     e.printStackTrace();
@@ -323,6 +330,12 @@ public class ThermostatActivity extends Activity {
                 try {
                     HeatingSystem.put("weekProgramState", "on");
                     System.out.println("Vacation: set program to ON");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            enabled.setText("Week program is enabled.");
+                        }
+                    });
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                     e.printStackTrace();
