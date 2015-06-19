@@ -16,33 +16,74 @@
             android:id="@+id/dayTempTitle"
             android:layout_centerHorizontal="true" />
 
-        <Button
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dayTempTitle"
-            android:text="+"
-            android:id="@+id/bIncrDayTemp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_below="@id/dayTempTitle"
+            android:layout_centerHorizontal="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="21 \u00B0C"
-            android:textSize="30sp"
-            android:id="@+id/dayTemp"
-            android:layout_below="@+id/bIncrDayTemp"
-            android:layout_centerHorizontal="true" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempButtonsLO">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            android:id="@+id/bDecrDayTemp"
-            android:layout_below="@+id/dayTemp"
-            android:layout_centerHorizontal="true" />
+                <Button
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:id="@+id/bIncrDayTemp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="21.0 \u2103"
+                    android:textSize="30sp"
+                    android:id="@+id/dayTemp"
+                    android:layout_below="@+id/bIncrDayTemp"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:id="@+id/bDecrDayTemp"
+                    android:layout_below="@+id/dayTemp"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+            <nl.tue.demothermostat.VerticalSeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tempSeekbarDay"
+                android:layout_toRightOf="@id/tempButtonsLO"
+                android:layout_alignTop="@id/tempButtonsLO"
+                android:layout_alignBottom="@id/tempButtonsLO"
+                android:max="250"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="30 \u2103"
+                android:layout_toRightOf="@id/tempSeekbarDay"
+                android:layout_alignTop="@id/tempSeekbarDay"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="5 \u2103"
+                android:layout_toRightOf="@id/tempSeekbarDay"
+                android:layout_alignBottom="@id/tempSeekbarDay"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,31 +98,71 @@
             android:id="@+id/nightTempTitle"
             android:layout_centerHorizontal="true" />
 
-        <Button
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nightTempTitle"
-            android:text="+"
-            android:id="@+id/bIncrNightTemp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_below="@id/nightTempTitle"
+            android:layout_centerHorizontal="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/bIncrNightTemp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="21 \u00B0C"
-            android:textSize="30sp"
-            android:id="@+id/nightTemp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempButtonsNightLO">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/nightTemp"
-            android:text="-"
-            android:id="@+id/bDecrNightTemp" />
+                <Button
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:id="@+id/bIncrNightTemp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="21.0 \u2103"
+                    android:textSize="30sp"
+                    android:id="@+id/nightTemp"
+                    android:layout_below="@+id/bIncrNightTemp"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:id="@+id/bDecrNightTemp"
+                    android:layout_below="@+id/nightTemp"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+            <nl.tue.demothermostat.VerticalSeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tempSeekbarNight"
+                android:layout_toRightOf="@id/tempButtonsNightLO"
+                android:layout_alignTop="@id/tempButtonsNightLO"
+                android:layout_alignBottom="@id/tempButtonsNightLO"
+                android:max="250"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="30 \u2103"
+                android:layout_toRightOf="@id/tempSeekbarNight"
+                android:layout_alignTop="@id/tempSeekbarNight"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="5 \u2103"
+                android:layout_toRightOf="@id/tempSeekbarNight"
+                android:layout_alignBottom="@id/tempSeekbarNight"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

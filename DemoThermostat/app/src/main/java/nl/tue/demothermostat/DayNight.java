@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import org.thermostatapp.util.HeatingSystem;
@@ -23,6 +24,8 @@ public class DayNight extends Activity {
     TextView nightTempText;
     double dayTemp; //day temperature
     double nightTemp; //night temperature
+    VerticalSeekBar seekBarDay;
+    VerticalSeekBar seekBarNight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class DayNight extends Activity {
         bDecrNightTemp = (Button)findViewById(R.id.bDecrNightTemp);
         dayTempText = (TextView)findViewById(R.id.dayTemp);
         nightTempText = (TextView)findViewById(R.id.nightTemp);
+        seekBarDay = (VerticalSeekBar)findViewById(R.id.tempSeekbarDay);
+        seekBarNight = (VerticalSeekBar)findViewById(R.id.tempSeekbarNight);
 
         new Thread(new Runnable() {
             @Override
@@ -43,8 +48,10 @@ public class DayNight extends Activity {
                     //day & night temperature
                     dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
                     dayTempText.setText(dayTemp + " \u2103");
+                    updateSeekBarDay();
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
                     nightTempText.setText(nightTemp + " \u2103");
+                    updateSeekBarNight();
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
@@ -57,6 +64,7 @@ public class DayNight extends Activity {
                 if (dayTemp <= 30) {
                     dayTemp += 0.1;
                     setDayTemp();
+                    updateSeekBarDay();
                     setInputLimits();
                 }
                 putDayTemperature();
@@ -69,11 +77,31 @@ public class DayNight extends Activity {
                 if (dayTemp >= 5) {
                     dayTemp -= 0.1;
                     setDayTemp();
+                    updateSeekBarDay();
                     setInputLimits();
                 }
                 putDayTemperature();
             }
         });
+
+        seekBarDay.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                dayTemp = (progress + 50) / 10.0;
+                setDayTemp();
+                setInputLimits();
+                putDayTemperature();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
 
         bIncrNightTemp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +109,7 @@ public class DayNight extends Activity {
                 if (nightTemp <= 30) {
                     nightTemp += 0.1;
                     setNightTemp();
+                    updateSeekBarNight();
                     setInputLimits();
                 }
                 putNightTemperature();
@@ -93,12 +122,30 @@ public class DayNight extends Activity {
                 if (nightTemp >= 5) {
                     nightTemp -= 0.1;
                     setNightTemp();
+                    updateSeekBarNight();
                     setInputLimits();
                 }
                 putNightTemperature();
             }
         });
 
+        seekBarNight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                nightTemp = (progress + 50) / 10.0;
+                setNightTemp();
+                setInputLimits();
+                putNightTemperature();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     }
 
     public void setDayTemp() {
@@ -137,6 +184,24 @@ public class DayNight extends Activity {
                 }
             }
         }).start();
+    }
+
+    void updateSeekBarDay(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                seekBarDay.setProgress((int) (dayTemp * 10 - 50));
+            }
+        });
+    }
+
+    void updateSeekBarNight(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                seekBarNight.setProgress((int) (nightTemp * 10 - 50));
+            }
+        });
     }
 
     public void setInputLimits(){
