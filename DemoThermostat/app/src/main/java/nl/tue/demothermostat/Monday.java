@@ -170,20 +170,19 @@ public class Monday extends Day {
                                 }
                             });
                         }
-                        // Check if the new night switch is after the new day switch
-                        if (!(newDay < newNight)) {
-                            allowed = false;
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: the night switch must be later than the day switch.", Toast.LENGTH_SHORT);
-                                    night.show();
-                                }
-                            });
-                        }
                     }
                 }
-
+                // Check if the new night switch is after the new day switch
+                if (!(newDay < newNight)) {
+                    allowed = false;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast night = Toast.makeText(getApplicationContext(), "The switch was not added: the night switch must be later than the day switch.", Toast.LENGTH_SHORT);
+                            night.show();
+                        }
+                    });
+                }
                 // Concatenate strings to create a hh:mm format
                 daySwitchTime = times[0] + ":" + times[1];
                 nightSwitchTime = times[2] + ":" + times[3];
@@ -223,23 +222,13 @@ public class Monday extends Day {
                         wkProgram.data.get(day).set(2*i, new Switch("day", false, "23:59"));
                         wkProgram.data.get(day).set(2 * i + 1, new Switch("night", false, "23:59"));
                     }
-                    //Remove all remove icons
-                    for (int i = 0;i<5; i++){
-                        bMondayRemoveSwitches[i].setVisibility(View.INVISIBLE);
-                    }
-                    mondaySwitch1.setText("");
-                    mondaySwitch2.setText("");
-                    mondaySwitch3.setText("");
-                    mondaySwitch4.setText("");
-                    mondaySwitch5.setText("");
+                    displaySwitches();
                     //Remove text for all switches and upload week program to server
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 HeatingSystem.setWeekProgram(wkProgram);
-                                //wkProgram = HeatingSystem.getWeekProgram();
-                                //mondaySwitches = wkProgram.getDay("Monday");
                             } catch (Exception e) {
                                 System.out.println("Error in getdata: " + e);
                             }
