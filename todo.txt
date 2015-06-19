@@ -1,22 +1,15 @@
 to do:
 
-(Probably done) Make switch input visible on all devices
 (M?) Create vertical seekbars for day & night temperature
-
-
-once that is done:
-
-copy Monday activity & code to all other days and modify appropriately
-add Back buttons if we want this?
-tap and hold incr decr button to increase decrease by whole numbers
-make it look pretty
-rename the app
-make it installable on Android
-implement undo buttons (yeah i don't think we have time for that)
+create installation package
 WRITE DOCUMENTATION: 
 	- readme with simple installation instructions
 	- instruction manual, use screenshots
 	- help documentation (not the same as instruction manual)
+if we have time left:
+add Back buttons if we want this?
+tap and hold incr decr button to increase decrease by whole numbers
+implement undo buttons
 
 
 already done:
@@ -35,7 +28,8 @@ already done:
 (M)		create & implement vertical seekbar
 (A)		add flame icon when heating is ON; add text to indicate if week program is disabled
 (A)		input validation for adding switches
-
+(A)		create launcher icon
+(J)		copy Monday activity & code to all other days and modify appropriately
 
 to submit:
 
