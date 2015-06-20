@@ -75,20 +75,12 @@ public class Friday extends Day {
 
         title.setText(day + " — Switches");
 
-        mondaySwitches = null; // removes data of previous day so it won't get accidentally displayed on this day
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     wkProgram = HeatingSystem.getWeekProgram();
                     mondaySwitches = wkProgram.getDay(day);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            displaySwitches();
-                        }
-                    });
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
                 }
