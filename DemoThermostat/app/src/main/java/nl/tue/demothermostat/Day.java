@@ -91,8 +91,13 @@ public class Day extends Activity {
                 try {
                     dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
                     nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
-                    mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                    mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
+                            mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
+                        }
+                    });
                     wkProgram = HeatingSystem.getWeekProgram();
                     mondaySwitches = wkProgram.getDay("Monday");
                     tuesdaySwitches = wkProgram.getDay("Tuesday");
