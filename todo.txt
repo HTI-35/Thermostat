@@ -6,7 +6,9 @@ WRITE DOCUMENTATION:
 	- instruction manual, use screenshots
 	- help documentation (not the same as instruction manual)
 
-if we have time left:
+if we have time left:'
+
+show "loading" message for the 1 second it's loading the switches in a day activity (ONLY on start up NOT on resume when you go back from DayNight, switches are already loaded then)
 add Back buttons if we want this? (Are there Android phones without standard back button?)
 tap and hold incr decr button to increase decrease by whole numbers
 implement undo buttons
@@ -30,7 +32,7 @@ already done:
 (A)		input validation for adding switches
 (A)		create launcher icon
 (J)		copy Monday activity & code to all other days and modify appropriately
-(M) Create vertical seekbars for day & night temperature
+(M) 	create vertical seekbars for day & night temperature
 
 to submit:
 
