@@ -49,6 +49,8 @@ public class ThermostatActivity extends Activity {
         currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
 
+        seekBar.setProgress(160); // set progress to the default of 21.0 degrees centigrade
+
         /* Check if user is online... this doesn't work, I get a fatal exception in AsyncTask and don't know why */
         if(!isOnline()) {
             Toast disconnected = Toast.makeText(getApplicationContext(), "You need to be connected to a WiFi or cellular data network in order to use this application.", Toast.LENGTH_LONG);

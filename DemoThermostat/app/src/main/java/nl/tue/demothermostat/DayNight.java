@@ -41,6 +41,9 @@ public class DayNight extends Activity {
         seekBarDay = (VerticalSeekBar)findViewById(R.id.tempSeekbarDay);
         seekBarNight = (VerticalSeekBar)findViewById(R.id.tempSeekbarNight);
 
+        seekBarDay.setProgress(160); // set progress to the default of 21.0 degrees centigrade
+        seekBarNight.setProgress(160); // set progress to the default of 21.0 degrees centigrade
+
         new Thread(new Runnable() {
             @Override
             public void run() {
