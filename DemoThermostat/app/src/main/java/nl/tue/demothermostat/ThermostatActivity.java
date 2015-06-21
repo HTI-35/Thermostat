@@ -1,9 +1,12 @@
 package nl.tue.demothermostat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +20,7 @@ import java.net.ConnectException;
 
 public class ThermostatActivity extends Activity {
 
-    double vTemp, cTemp; //target temperature, current temperature
+    double vTemp, cTemp; // Target temperature, current temperature
     boolean wkProgramEnabled, checkvacation = true;
     TextView targetTemp, currentTemp, enabled, infoText;
     VerticalSeekBar seekBar;
@@ -45,6 +48,13 @@ public class ThermostatActivity extends Activity {
         targetTemp = (TextView)findViewById(R.id.targetTemp);
         currentTemp = (TextView)findViewById(R.id.currTemp);
         seekBar = (VerticalSeekBar)findViewById(R.id.tempSeekbar);
+
+        /* Check if user is online... this doesn't work, I get a fatal exception in AsyncTask and don't know why */
+        if(!isOnline()) {
+            Toast disconnected = Toast.makeText(getApplicationContext(), "You need to be connected to a WiFi or cellular data network in order to use this application.", Toast.LENGTH_LONG);
+            disconnected.show();
+            System.exit(0);
+        }
 
         new Thread(new Runnable() {
             @Override
@@ -181,8 +191,8 @@ public class ThermostatActivity extends Activity {
             }
         }.start();
 
-
-
+        /* Set listeners for all buttons */
+        // Seekbar listener
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -191,16 +201,14 @@ public class ThermostatActivity extends Activity {
                 setInputLimits();
                 putCurrentTemperature();
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
+        // Info button listener
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +221,7 @@ public class ThermostatActivity extends Activity {
                 });
             }
         });
+        // Close button listener
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,7 +234,7 @@ public class ThermostatActivity extends Activity {
                 });
             }
         });
-
+        // Increase temperature button listener
         bIncrTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//increase temperature via button
@@ -238,6 +247,7 @@ public class ThermostatActivity extends Activity {
                 putCurrentTemperature();
             }
         });
+        // Decrease temperature button listener
         bDecrTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//decrease temperature via button
@@ -250,6 +260,7 @@ public class ThermostatActivity extends Activity {
                 putCurrentTemperature();
             }
         });
+        // Week overview button listener
         bWeekOverview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,8 +268,8 @@ public class ThermostatActivity extends Activity {
                 startActivity(toWeekOverview);
             }
         });
+        // Vacation mode checkbox listener
         vacationMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 checkvacation = false;
@@ -295,6 +306,7 @@ public class ThermostatActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /* Disabling the week program */
     void disableWeekProgram(){
         System.out.println("Vacation: trying to set program to OFF");
         new Thread(new Runnable() {
@@ -317,14 +329,13 @@ public class ThermostatActivity extends Activity {
         }).start();
     }
 
+    /* Enabling the week program */
     void enableWeekProgram(){
-        System.out.println("Vacation: trying to set program to ON");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     HeatingSystem.put("weekProgramState", "on");
-                    System.out.println("Vacation: set program to ON");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -339,6 +350,7 @@ public class ThermostatActivity extends Activity {
         }).start();
     }
 
+    /* Putting the target temperature */
     void putCurrentTemperature(){
         new Thread(new Runnable() {
             @Override
@@ -353,20 +365,21 @@ public class ThermostatActivity extends Activity {
         }).start();
     }
 
+    /* Updating the target temperature */
     void updateTargetTemp(){
         vTemp = Math.round(vTemp*10);
         vTemp = vTemp/10;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("temp in method is: "+vTemp);
                 targetTemp.setText(vTemp + " \u2103");
             }
         });
     }
 
+    /* Graying out buttons and re-enabling them */
     public void setInputLimits(){
-        if (vTemp == 30) { //graying out buttons and re-enabling them
+        if (vTemp == 30) {
             bIncrTemp.setClickable(false);
             bIncrTemp.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.MULTIPLY);
             bDecrTemp.setClickable(true);
@@ -381,5 +394,13 @@ public class ThermostatActivity extends Activity {
             bIncrTemp.setClickable(true);
             bIncrTemp.getBackground().setColorFilter(null);
         }
+    }
+
+    /* Check if user is connected to a network */
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
     }
 }
