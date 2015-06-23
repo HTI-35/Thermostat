@@ -94,8 +94,8 @@ public class Day extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                            mondayNightTemp.setText("Night Temperature: " + nightTemp +  " \u2103");
+                            mondayDayTemp.setText("Day temperature: " + dayTemp + " \u2103");
+                            mondayNightTemp.setText("Night temperature: " + nightTemp +  " \u2103");
                         }
                     });
                     wkProgram = HeatingSystem.getWeekProgram();
@@ -126,8 +126,8 @@ public class Day extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                                mondayDayTemp.setText("Day Temperature: " + dayTemp + " \u2103");
-                                mondayNightTemp.setText("Night Temperature: " + nightTemp + " \u2103");
+                                mondayDayTemp.setText("Day temperature: " + dayTemp + " \u2103");
+                                mondayNightTemp.setText("Night temperature: " + nightTemp + " \u2103");
                         }
                     });
                 } catch (Exception e) {

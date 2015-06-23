@@ -22,12 +22,15 @@ public class ThermostatActivity extends Activity {
 
     double vTemp, cTemp; // Target temperature, current temperature
     boolean wkProgramEnabled, checkvacation = true;
-    TextView targetTemp, currentTemp, enabled, infoText;
+    TextView targetTemp, currentTemp, enabled, infoText, dayTempHome, nightTempHome;
     VerticalSeekBar seekBar;
-    Button bIncrTemp, bDecrTemp;
+    Button bIncrTemp, bDecrTemp, bChangeHome;
     ImageButton info, close;
     CheckBox vacationMode;
     ImageView flame;
+    // Declare day and night temperature
+    double dayTemp;
+    double nightTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class ThermostatActivity extends Activity {
         bIncrTemp = (Button)findViewById(R.id.bIncrTemp);
         bDecrTemp = (Button)findViewById(R.id.bDecrTemp);
         final Button bWeekOverview = (Button)findViewById(R.id.bWeekOverview);
+        dayTempHome = (TextView)findViewById(R.id.dayTempHome);
+        nightTempHome = (TextView)findViewById(R.id.nightTempHome);
+        bChangeHome = (Button)findViewById(R.id.bChangeHome);
         vacationMode = (CheckBox)findViewById(R.id.vacationMode);
         info = (ImageButton)findViewById(R.id.info);
         flame = (ImageView)findViewById(R.id.flame);
@@ -62,9 +68,38 @@ public class ThermostatActivity extends Activity {
             @Override
             public void run() {
                 try {
+                    dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
+                    nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dayTempHome.setText("Day temperature: " + dayTemp + " \u2103");
+                            nightTempHome.setText("Night temperature: " + nightTemp +  " \u2103");
+                        }
+                    });
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
                     // Update target temperature
                     vTemp = Double.parseDouble(HeatingSystem.get("currentTemperature")); // It's supposed to be getting currentTemperature
                     updateTargetTemp();
+                    // Set day and night temperature
+                    dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
+                    nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dayTempHome.setText("Day temperature: " + dayTemp + " \u2103");
+                            nightTempHome.setText("Night temperature: " + nightTemp + " \u2103");
+                        }
+                    });
                     // Set the flame visibility
                     if (Double.parseDouble(HeatingSystem.get("currentTemperature")) < Double.parseDouble(HeatingSystem.get("targetTemperature"))) {
                         runOnUiThread(new Runnable() {
@@ -217,6 +252,9 @@ public class ThermostatActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        dayTempHome.setVisibility(View.INVISIBLE);
+                        nightTempHome.setVisibility(View.INVISIBLE);
+                        bChangeHome.setVisibility(View.INVISIBLE);
                         infoText.setVisibility(View.VISIBLE);
                         close.setVisibility(View.VISIBLE);
                     }
@@ -232,6 +270,9 @@ public class ThermostatActivity extends Activity {
                     public void run() {
                         infoText.setVisibility(View.INVISIBLE);
                         close.setVisibility(View.INVISIBLE);
+                        dayTempHome.setVisibility(View.VISIBLE);
+                        nightTempHome.setVisibility(View.VISIBLE);
+                        bChangeHome.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -281,6 +322,13 @@ public class ThermostatActivity extends Activity {
                 } else {
                     enableWeekProgram();
                 }
+            }
+        });
+        // Change button listener
+        bChangeHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), DayNight.class));
             }
         });
     }
@@ -396,6 +444,29 @@ public class ThermostatActivity extends Activity {
             bIncrTemp.setClickable(true);
             bIncrTemp.getBackground().setColorFilter(null);
         }
+    }
+
+    /* Reload day & night temperature when the day activity is revisited */
+    public void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    dayTemp = Double.parseDouble(HeatingSystem.get("dayTemperature"));
+                    nightTemp = Double.parseDouble(HeatingSystem.get("nightTemperature"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dayTempHome.setText("Day temperature: " + dayTemp + " \u2103");
+                            nightTempHome.setText("Night temperature: " + nightTemp + " \u2103");
+                        }
+                    });
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
     }
 
     /* Check if user is connected to a network */
