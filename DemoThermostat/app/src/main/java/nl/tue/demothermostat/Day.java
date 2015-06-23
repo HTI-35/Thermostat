@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import org.thermostatapp.util.CorruptWeekProgramException;
 import org.thermostatapp.util.HeatingSystem;
@@ -44,6 +46,8 @@ public class Day extends Activity {
     TextView mondayDayTempText, mondayNightTempText, mondayDayTemp, mondayNightTemp;
     EditText mondayDaySwitchHrs, mondayDaySwitchMins, mondayNightSwitchHrs, mondayNightSwitchMins;
     TextView mondayTitle;
+    TimePicker timePicker;
+    TextClock dayTimeClock;
     // Declare day and night temperature
     double dayTemp;
     double nightTemp;
@@ -61,6 +65,17 @@ public class Day extends Activity {
         switch (day) {
             case "Monday":
                 setContentView(R.layout.activity_monday);
+
+                dayTimeClock = (TextClock)findViewById(R.id.mondayDayClock);
+                timePicker = (TimePicker)findViewById(R.id.timePickerMonday);
+
+                dayTimeClock.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        timePicker.setVisibility(View.VISIBLE);
+                    }
+                });
+
                 break;
             case "Tuesday":
                 setContentView(R.layout.activity_tuesday);

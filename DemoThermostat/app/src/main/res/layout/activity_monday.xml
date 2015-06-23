@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,112 +13,72 @@
         android:paddingBottom="10dp"
         android:text="Monday — Switches"
         android:textColor="#4D94FF"
-        android:id="@+id/mondayTitle" />
+        android:id="@+id/mondayTitle"
+        android:layout_marginLeft="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/mondayTitle"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_alignRight="@+id/mondayNight"
-            android:text="Day switch (hh:mm): "
-            android:id="@+id/mondayDay" />
-        <EditText
-            android:maxEms="2"
-            android:minEms="2"
+            android:text="Day switch: "
+            android:id="@+id/mondayDay"
+            android:textSize="18sp"/>
+
+        <TextClock
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/mondayDay"
-            android:layout_toRightOf="@+id/mondayDay"
-            android:nextFocusDown="@+id/mondayDayTimeMins"
-            android:inputType="number"
-            android:ems="10"
-            android:maxLength="2"
-            android:text="00"
-            android:id="@+id/mondayDayTimeHrs" />
+            android:id="@+id/mondayDayClock"
+            android:layout_toEndOf="@+id/mondayDay"
+            android:layout_alignBaseline="@id/mondayDay"
+            android:textSize="18sp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/mondayDay"
-            android:layout_toRightOf="@+id/mondayDayTimeHrs"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=":"
-            android:id="@+id/mondayDayColon" />
-        <EditText
-            android:maxEms="2"
-            android:minEms="2"
+            android:layout_below="@+id/mondayDay"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Night switch: "
+            android:id="@+id/mondayNight"
+            android:textSize="18sp"/>
+
+        <TextClock
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/mondayDay"
-            android:layout_toRightOf="@+id/mondayDayColon"
-            android:nextFocusDown="@+id/mondayNightTimeHrs"
-            android:inputType="number"
-            android:ems="10"
-            android:maxLength="2"
-            android:text="00"
-            android:id="@+id/mondayDayTimeMins" />
+            android:id="@+id/mondayNightClock"
+            android:layout_toEndOf="@+id/mondayNight"
+            android:layout_alignBaseline="@id/mondayNight"
+            android:textSize="18sp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/mondayDay"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Night switch (hh:mm): "
-        android:id="@+id/mondayNight" />
-    <EditText
-        android:maxEms="2"
-        android:minEms="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/mondayNight"
-        android:layout_toRightOf="@+id/mondayNight"
-        android:nextFocusDown="@+id/mondayNightTimeMins"
-        android:inputType="number"
-        android:ems="10"
-        android:maxLength="2"
-        android:text="00"
-        android:id="@+id/mondayNightTimeHrs" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/mondayNight"
-        android:layout_toRightOf="@+id/mondayNightTimeHrs"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=":"
-        android:id="@+id/mondayNightColon" />
-    <EditText
-        android:maxEms="2"
-        android:minEms="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/mondayNight"
-        android:layout_toRightOf="@+id/mondayNightColon"
-        android:inputType="number"
-        android:ems="10"
-        android:maxLength="2"
-        android:text="00"
-        android:id="@+id/mondayNightTimeMins" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/bMondayAdd"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/mondayDayClock"
+            android:layout_marginLeft="5dp"/>
     </RelativeLayout>
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Add"
-        android:id="@+id/bMondayAdd" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout2">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,7 +87,8 @@
         android:layout_alignBaseline="@+id/bMondayRemoveAll"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Active switches (max. 5):"
-        android:id="@+id/mondaySwitches" />
+        android:id="@+id/mondaySwitches"
+        android:layout_centerVertical="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,8 +102,10 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal">
-
+    android:layout_gravity="center_horizontal"
+    android:layout_below="@+id/relativeLayout2"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/relativeLayout3">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -230,17 +193,21 @@
 </RelativeLayout>
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#4D94FF"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Day and Night Temperature"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"/>
+        android:id="@+id/textView"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -266,5 +233,12 @@
         android:id="@+id/bMondayChange" />
     </LinearLayout>
 
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePickerMonday"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 
-</GridLayout>
+</RelativeLayout>
