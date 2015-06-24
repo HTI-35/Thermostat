@@ -18,6 +18,7 @@ import org.thermostatapp.util.CorruptWeekProgramException;
 import org.thermostatapp.util.HeatingSystem;
 import org.thermostatapp.util.Switch;
 import org.thermostatapp.util.WeekProgram;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -47,7 +48,8 @@ public class Day extends Activity {
     TextView mondayDayTempText, mondayNightTempText, mondayDayTemp, mondayNightTemp;
     EditText mondayDaySwitchHrs, mondayDaySwitchMins, mondayNightSwitchHrs, mondayNightSwitchMins;
     TextView mondayTitle;
-    public static TextClock textClockDay;
+    static TextView dayTimeText;
+    static TextView nightTimeText;
     // Declare day and night temperature
     double dayTemp;
     double nightTemp;
@@ -58,6 +60,10 @@ public class Day extends Activity {
     int j;
     int remove1;
     int remove2;
+    // Switch vars
+    static String daySwitchTime;
+    static String nightSwitchTime;
+    static Boolean isDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +72,8 @@ public class Day extends Activity {
             case "Monday":
                 setContentView(R.layout.activity_monday);
 
-                textClockDay = (TextClock)findViewById(R.id.mondayDayClock);
+                dayTimeText = (TextView)findViewById(R.id.mondayDayTimeText);
+                nightTimeText = (TextView)findViewById(R.id.mondayNightTimeText);
 
                 break;
             case "Tuesday":
@@ -147,6 +154,12 @@ public class Day extends Activity {
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
+
+        if(v.getId() == R.id.bDaySwitch){
+            isDay = true;
+        } else {
+            isDay = false;
+        }
     }
 
 }

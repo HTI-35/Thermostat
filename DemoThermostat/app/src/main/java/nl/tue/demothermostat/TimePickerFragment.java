@@ -30,5 +30,30 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
+        String amPm = "AM";
+        String minuteStr = String.valueOf(minute);
+
+        if(Day.isDay){
+            Day.daySwitchTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
+        } else {
+            Day.nightSwitchTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
+        }
+
+        if(hourOfDay >= 13){
+            hourOfDay -= 12;
+            amPm = "PM";
+        } else if(hourOfDay == 12){
+            amPm = "PM";
+        } else if(hourOfDay == 0){
+            hourOfDay = 12;
+        }
+        if(minute == 0){
+            minuteStr = "00";
+        }
+        if(Day.isDay){
+            Day.dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
+        } else {
+            Day.nightTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
+        }
     }
 }

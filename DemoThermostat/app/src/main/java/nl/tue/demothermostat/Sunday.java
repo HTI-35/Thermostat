@@ -23,8 +23,6 @@ import java.util.ArrayList;
  */
 public class Sunday extends Day {
 
-    String daySwitchTime;
-    String nightSwitchTime;
     TextView title;
     boolean allowed = true;
 

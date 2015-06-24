@@ -26,42 +26,75 @@
         android:layout_below="@+id/mondayTitle"
         android:layout_centerHorizontal="true"
         android:id="@+id/relativeLayout">
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignRight="@+id/mondayNight"
-            android:text="Day switch: "
-            android:id="@+id/mondayDay"
-            android:textSize="18sp"/>
+            android:id="@+id/mondayDayLO"
+            android:layout_toLeftOf="@id/bMondayAdd">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Day switch: "
+                android:id="@+id/mondayDay"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"/>
 
-        <TextClock
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/mondayDayClock"
-            android:layout_toEndOf="@+id/mondayDay"
-            android:layout_alignBaseline="@id/mondayDay"
-            android:textSize="18sp"
-            android:onClick="showTimePickerDialog"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mondayDayTimeText"
+                android:layout_toEndOf="@+id/mondayDay"
+                android:layout_alignBaseline="@id/mondayDay"
+                android:textSize="18sp"
+                android:onClick="showTimePickerDialog"
+                android:text="12:00 AM"
+                android:textColor="#000000"
+                android:layout_centerVertical="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_below="@+id/mondayDay"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Night switch: "
-            android:id="@+id/mondayNight"
-            android:textSize="18sp"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/mondayDayTimeText"
+                android:src="@android:drawable/ic_menu_edit"
+                android:onClick="showTimePickerDialog"
+                android:id="@+id/bDaySwitch"/>
+        </RelativeLayout>
 
-        <TextClock
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mondayNightClock"
-            android:layout_toEndOf="@+id/mondayNight"
-            android:layout_alignBaseline="@id/mondayNight"
-            android:textSize="18sp"/>
+            android:layout_below="@id/mondayDayLO"
+            android:id="@+id/mondayNightLO">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Night switch: "
+                android:id="@+id/mondayNight"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mondayNightTimeText"
+                android:layout_toEndOf="@+id/mondayNight"
+                android:layout_alignBaseline="@id/mondayNight"
+                android:textSize="18sp"
+                android:text="12:00 AM"
+                android:textColor="#000000"
+                android:layout_centerVertical="true"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/mondayNightTimeText"
+                android:src="@android:drawable/ic_menu_edit"
+                android:onClick="showTimePickerDialog"/>
+
+        </RelativeLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -69,8 +102,7 @@
             android:text="Add"
             android:id="@+id/bMondayAdd"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/mondayDayClock"
-            android:layout_marginLeft="5dp"/>
+            android:layout_toRightOf="@id/mondayNightLO"/>
     </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
