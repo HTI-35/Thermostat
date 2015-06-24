@@ -3,6 +3,7 @@ to do:
 (M) TimePicker implementation for day-night switch input
 check if there is a server indication for heating and cooling down. Then we should use this to display the flame icon and some cooling down icon
 show "loading" message for the 1 second it's loading the switches in a day activity (ONLY on start up NOT on resume when you go back from DayNight, switches are already loaded then)
+no internet warning
 tap and hold incr decr button to increase decrease by whole numbers
 implement undo buttons
 add back buttons if we want this? (Are there Android phones without a standard back button?)

@@ -48,7 +48,7 @@ public class ThermostatActivity extends Activity {
         flame = (ImageView)findViewById(R.id.flame);
         close = (ImageButton)findViewById(R.id.close);
 
-        HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
+        HeatingSystem.BASE_ADDRESS = "http://pcwin889.win.tue.nl/2id40-ws/35";
         enabled = (TextView)findViewById(R.id.wkProgramEnabled);
         infoText = (TextView)findViewById(R.id.infoText);
         targetTemp = (TextView)findViewById(R.id.targetTemp);

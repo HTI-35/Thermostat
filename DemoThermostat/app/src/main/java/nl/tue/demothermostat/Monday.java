@@ -50,23 +50,6 @@ public class Monday extends Day {
         mondayDayTemp = (TextView)findViewById(R.id.mondayDayTemp);
         mondayNightTemp = (TextView)findViewById(R.id.mondayNightTemp);
 
-        //mondayDaySwitchHrs = (EditText)findViewById(R.id.mondayDayTimeHrs);
-        //mondayDaySwitchMins = (EditText)findViewById(R.id.mondayDayTimeMins);
-        //mondayNightSwitchHrs = (EditText)findViewById(R.id.mondayNightTimeHrs);
-        //mondayNightSwitchMins = (EditText)findViewById(R.id.mondayNightTimeMins);
-
-        //set input filters on switches
-        int maxLength = 2;
-        //mondayDaySwitchHrs.setFilters(new InputFilter[]{new InputFilterMinMax("00", "24"), new InputFilter.LengthFilter(maxLength)});
-        //mondayDaySwitchMins.setFilters(new InputFilter[]{new InputFilterMinMax("00", "59"), new InputFilter.LengthFilter(maxLength)});
-        //mondayNightSwitchHrs.setFilters(new InputFilter[]{new InputFilterMinMax("00", "24"), new InputFilter.LengthFilter(maxLength)});
-        //mondayNightSwitchMins.setFilters(new InputFilter[]{new InputFilterMinMax("00", "59"), new InputFilter.LengthFilter(maxLength)});
-        //put cursor is on right side of input field when user presses 'next' (doesn't work for nightSwitchHrs for some reason)
-        //mondayDaySwitchHrs.setSelection(2);
-        //mondayDaySwitchMins.setSelection(2);
-        //mondayNightSwitchHrs.setSelection(2);
-        //mondayNightSwitchMins.setSelection(2);
-
         title.setText(day + " — Switches");
 
         new Thread(new Runnable() {
@@ -116,7 +99,6 @@ public class Monday extends Day {
         bMondayAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] times = new String[4];
 //                times[0] = //mondayDaySwitchHrs.getText().toString();
 //                times[1] = //mondayDaySwitchMins.getText().toString();
 //                times[2] = //mondayNightSwitchHrs.getText().toString();

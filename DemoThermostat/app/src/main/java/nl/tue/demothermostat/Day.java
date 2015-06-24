@@ -64,10 +64,14 @@ public class Day extends Activity {
     static String daySwitchTime;
     static String nightSwitchTime;
     static Boolean isDay;
+    static String[] times; // 0: day hour, 1: day minute, 2: night hour, 3: night minute
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        times = new String[]{"00", "00", "00", "00"};
+
         switch (day) {
             case "Monday":
                 setContentView(R.layout.activity_monday);
@@ -96,8 +100,8 @@ public class Day extends Activity {
                 break;
         }
 
-        HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
-        HeatingSystem.WEEK_PROGRAM_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35/weekprogram";
+        HeatingSystem.BASE_ADDRESS = "http://pcwin889.win.tue.nl/2id40-ws/35";
+        HeatingSystem.WEEK_PROGRAM_ADDRESS = "http://pcwin889.win.tue.nl/2id40-ws/35/weekprogram";
 
         new Thread(new Runnable() {
             @Override
@@ -161,6 +165,5 @@ public class Day extends Activity {
             isDay = false;
         }
     }
-
 }
 

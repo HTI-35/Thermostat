@@ -33,10 +33,16 @@ public class TimePickerFragment extends DialogFragment
         String amPm = "AM";
         String minuteStr = String.valueOf(minute);
 
+        if(minute == 0){
+            minuteStr = "00";
+        }
+
         if(Day.isDay){
-            Day.daySwitchTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
+            Day.times[0] = String.valueOf(hourOfDay);
+            Day.times[1] = minuteStr;
         } else {
-            Day.nightSwitchTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
+            Day.times[2] = String.valueOf(hourOfDay);
+            Day.times[3] = minuteStr;
         }
 
         if(hourOfDay >= 13){
@@ -47,9 +53,7 @@ public class TimePickerFragment extends DialogFragment
         } else if(hourOfDay == 0){
             hourOfDay = 12;
         }
-        if(minute == 0){
-            minuteStr = "00";
-        }
+
         if(Day.isDay){
             Day.dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
         } else {
