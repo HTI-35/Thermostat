@@ -1,6 +1,7 @@
 package nl.tue.demothermostat;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -46,8 +47,7 @@ public class Day extends Activity {
     TextView mondayDayTempText, mondayNightTempText, mondayDayTemp, mondayNightTemp;
     EditText mondayDaySwitchHrs, mondayDaySwitchMins, mondayNightSwitchHrs, mondayNightSwitchMins;
     TextView mondayTitle;
-    TimePicker timePicker;
-    TextClock dayTimeClock;
+    public static TextClock textClockDay;
     // Declare day and night temperature
     double dayTemp;
     double nightTemp;
@@ -66,15 +66,7 @@ public class Day extends Activity {
             case "Monday":
                 setContentView(R.layout.activity_monday);
 
-                dayTimeClock = (TextClock)findViewById(R.id.mondayDayClock);
-                timePicker = (TimePicker)findViewById(R.id.timePickerMonday);
-
-                dayTimeClock.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        timePicker.setVisibility(View.VISIBLE);
-                    }
-                });
+                textClockDay = (TextClock)findViewById(R.id.mondayDayClock);
 
                 break;
             case "Tuesday":
@@ -150,6 +142,11 @@ public class Day extends Activity {
                 }
             }
         }).start();
+    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
 
 }

@@ -41,7 +41,8 @@
             android:id="@+id/mondayDayClock"
             android:layout_toEndOf="@+id/mondayDay"
             android:layout_alignBaseline="@id/mondayDay"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:onClick="showTimePickerDialog"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -232,13 +233,5 @@
         android:text="Change"
         android:id="@+id/bMondayChange" />
     </LinearLayout>
-
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePickerMonday"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
 
 </RelativeLayout>
