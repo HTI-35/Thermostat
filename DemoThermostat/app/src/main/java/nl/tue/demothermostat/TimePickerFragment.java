@@ -19,9 +19,15 @@ public class TimePickerFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
         // Todo: Set current entered as default
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
+        int hour;
+        int minute;
+        if(Day.isDay){
+            hour = Day.input[0];
+            minute = Day.input[1];
+        } else {
+            hour = Day.input[2];
+            minute = Day.input[3];
+        }
 
         // Create a new instance of TimePickerDialog and return it
         return new TimePickerDialog(getActivity(), this, hour, minute,
@@ -30,34 +36,14 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
-        String amPm = "AM";
-        String minuteStr = String.valueOf(minute);
-
-        if(minute == 0){
-            minuteStr = "00";
-        }
-
         if(Day.isDay){
-            Day.times[0] = String.valueOf(hourOfDay);
-            Day.times[1] = minuteStr;
+            Day.input[0] = hourOfDay;
+            Day.input[1] = minute;
         } else {
-            Day.times[2] = String.valueOf(hourOfDay);
-            Day.times[3] = minuteStr;
+            Day.input[2] = hourOfDay;
+            Day.input[3] = minute;
         }
 
-        if(hourOfDay >= 13){
-            hourOfDay -= 12;
-            amPm = "PM";
-        } else if(hourOfDay == 12){
-            amPm = "PM";
-        } else if(hourOfDay == 0){
-            hourOfDay = 12;
-        }
-
-        if(Day.isDay){
-            Day.dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
-        } else {
-            Day.nightTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
-        }
+        Day.displayInput(hourOfDay, minute);
     }
 }
