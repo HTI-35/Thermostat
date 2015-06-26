@@ -32,27 +32,27 @@ public class Friday extends Day {
         dayNumber = 5;
         super.onCreate(savedInstanceState);
 
-        bMondayAdd = (Button)findViewById(R.id.bMondayAdd);
-        bMondayRemoveAll = (Button)findViewById(R.id.bMondayRemoveAll);
-        bMondayChange = (Button)findViewById(R.id.bMondayChange);
-        mondayDayTempText = (TextView)findViewById(R.id.dayTemp);
-        mondayNightTempText = (TextView)findViewById(R.id.nightTemp);
-        mondayTitle = (TextView)findViewById(R.id.mondayTitle);
+        bMondayAdd = (Button) findViewById(R.id.bMondayAdd);
+        bMondayRemoveAll = (Button) findViewById(R.id.bMondayRemoveAll);
+        bMondayChange = (Button) findViewById(R.id.bMondayChange);
+        mondayDayTempText = (TextView) findViewById(R.id.dayTemp);
+        mondayNightTempText = (TextView) findViewById(R.id.nightTemp);
+        mondayTitle = (TextView) findViewById(R.id.mondayTitle);
 
-        title = (TextView)findViewById(R.id.mondayTitle);
-        mondaySwitch1 = (TextView)findViewById(R.id.mondaySwitch1);
-        mondaySwitch2 = (TextView)findViewById(R.id.mondaySwitch2);
-        mondaySwitch3 = (TextView)findViewById(R.id.mondaySwitch3);
-        mondaySwitch4 = (TextView)findViewById(R.id.mondaySwitch4);
-        mondaySwitch5 = (TextView)findViewById(R.id.mondaySwitch5);
-        bMondayRemoveSwitches[0] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch1);
-        bMondayRemoveSwitches[1] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch2);
-        bMondayRemoveSwitches[2] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch3);
-        bMondayRemoveSwitches[3] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch4);
-        bMondayRemoveSwitches[4] = (ImageButton)findViewById(R.id.bMondayRemoveSwitch5);
+        title = (TextView) findViewById(R.id.mondayTitle);
+        mondaySwitch1 = (TextView) findViewById(R.id.mondaySwitch1);
+        mondaySwitch2 = (TextView) findViewById(R.id.mondaySwitch2);
+        mondaySwitch3 = (TextView) findViewById(R.id.mondaySwitch3);
+        mondaySwitch4 = (TextView) findViewById(R.id.mondaySwitch4);
+        mondaySwitch5 = (TextView) findViewById(R.id.mondaySwitch5);
+        bMondayRemoveSwitches[0] = (ImageButton) findViewById(R.id.bMondayRemoveSwitch1);
+        bMondayRemoveSwitches[1] = (ImageButton) findViewById(R.id.bMondayRemoveSwitch2);
+        bMondayRemoveSwitches[2] = (ImageButton) findViewById(R.id.bMondayRemoveSwitch3);
+        bMondayRemoveSwitches[3] = (ImageButton) findViewById(R.id.bMondayRemoveSwitch4);
+        bMondayRemoveSwitches[4] = (ImageButton) findViewById(R.id.bMondayRemoveSwitch5);
 
-        mondayDayTemp = (TextView)findViewById(R.id.mondayDayTemp);
-        mondayNightTemp = (TextView)findViewById(R.id.mondayNightTemp);
+        mondayDayTemp = (TextView) findViewById(R.id.mondayDayTemp);
+        mondayNightTemp = (TextView) findViewById(R.id.mondayNightTemp);
 
         title.setText(day + " — Switches");
 
@@ -83,7 +83,7 @@ public class Friday extends Day {
                             }
                         });
                     }
-                } catch (InterruptedException e){
+                } catch (InterruptedException e) {
 
                 } catch (Exception e) {
                     System.err.println("Error from getdata " + e);
@@ -188,8 +188,8 @@ public class Friday extends Day {
             public void onClick(View v) {
                 try {
                     //Remove all switches from wkProgram
-                    for (int i = 0; i < 5; i++){
-                        wkProgram.data.get(day).set(2*i, new Switch("day", false, "23:59"));
+                    for (int i = 0; i < 5; i++) {
+                        wkProgram.data.get(day).set(2 * i, new Switch("day", false, "23:59"));
                         wkProgram.data.get(day).set(2 * i + 1, new Switch("night", false, "23:59"));
                     }
                     displaySwitches();
@@ -211,7 +211,7 @@ public class Friday extends Day {
         });
 
         /* Set on click listeners for all remove buttons */
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             bMondayRemoveSwitches[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -234,8 +234,8 @@ public class Friday extends Day {
                             j = 4;
                             break;
                     }
-                    remove1 = 2*j;
-                    remove2 = (2*j)+1;
+                    remove1 = 2 * j;
+                    remove2 = (2 * j) + 1;
                     // Remove displayed text & icon for said switch
                     try {
                         bMondayRemoveSwitches[j].setVisibility(View.INVISIBLE);
@@ -289,14 +289,14 @@ public class Friday extends Day {
                 }
             });
         }
-        for (int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             // Find an OFF pair
-            if (!wkProgram.data.get(day).get(2*i).getState()) {
+            if (!wkProgram.data.get(day).get(2 * i).getState()) {
                 // Set the OFF pair to be the new switch.
-                wkProgram.data.get(day).set(2*i, new Switch("day", true, dayTime));
-                wkProgram.data.get(day).set(2*i + 1, new Switch("night", true, nightTime));
+                wkProgram.data.get(day).set(2 * i, new Switch("day", true, dayTime));
+                wkProgram.data.get(day).set(2 * i + 1, new Switch("night", true, nightTime));
                 // When the last switch has been added, tell the user no more switches can be added.
-                if(i==4) {
+                if (i == 4) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -305,57 +305,8 @@ public class Friday extends Day {
                         }
                     });
                 }
-                i=5;
+                i = 5;
             }
-        }
-    }
-
-
-    /* Display the switches on the screen */
-    public void displaySwitches() {
-        try {
-            if (this.mondaySwitches.get(0).getState()) {
-                mondaySwitch1.setText("1) " + this.mondaySwitches.get(0).getType() + ": " + this.mondaySwitches.get(0).getTime() + ", " + this.mondaySwitches.get(1).getType() + ": "
-                        + this.mondaySwitches.get(1).getTime() + " ");
-                bMondayRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
-            } else {
-                mondaySwitch1.setText("");
-                bMondayRemoveSwitches[0].setVisibility(View.INVISIBLE); // makes button appear
-            }
-            if (this.mondaySwitches.get(2).getState()) {
-                mondaySwitch2.setText("2) " + this.mondaySwitches.get(2).getType() + ": " + this.mondaySwitches.get(2).getTime() + ", " + this.mondaySwitches.get(3).getType() + ": "
-                        + this.mondaySwitches.get(3).getTime() + " ");
-                bMondayRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
-            } else {
-                mondaySwitch2.setText("");
-                bMondayRemoveSwitches[1].setVisibility(View.INVISIBLE); // makes button appear
-            }
-            if (this.mondaySwitches.get(4).getState()) {
-                mondaySwitch3.setText("3) " + this.mondaySwitches.get(4).getType() + ": " + this.mondaySwitches.get(4).getTime() + ", " + this.mondaySwitches.get(5).getType() + ": "
-                        + this.mondaySwitches.get(5).getTime() + " ");
-                bMondayRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
-            } else {
-                mondaySwitch3.setText("");
-                bMondayRemoveSwitches[2].setVisibility(View.INVISIBLE); // makes button appear
-            }
-            if (this.mondaySwitches.get(6).getState()) {
-                mondaySwitch4.setText("4) " + this.mondaySwitches.get(6).getType() + ": " + this.mondaySwitches.get(6).getTime() + ", " + this.mondaySwitches.get(7).getType() + ": "
-                        + this.mondaySwitches.get(7).getTime() + " ");
-                bMondayRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
-            } else {
-                mondaySwitch4.setText("");
-                bMondayRemoveSwitches[3].setVisibility(View.INVISIBLE); // makes button appear
-            }
-            if (this.mondaySwitches.get(8).getState()) {
-                mondaySwitch5.setText("5) " + this.mondaySwitches.get(8).getType() + ": " + this.mondaySwitches.get(8).getTime() + ", " + this.mondaySwitches.get(9).getType() + ": "
-                        + this.mondaySwitches.get(9).getTime() + " ");
-                bMondayRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear
-            } else {
-                mondaySwitch5.setText("");
-                bMondayRemoveSwitches[4].setVisibility(View.INVISIBLE); // makes button appear
-            }
-        } catch (Exception e) {
-            System.out.println("Error in getdata: " + e);
         }
     }
 }

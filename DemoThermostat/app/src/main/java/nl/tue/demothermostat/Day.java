@@ -173,40 +173,23 @@ public class Day extends Activity {
     }
 
     static void displayInput(int hourOfDay, int minute){
-        String amPm = "AM";
-        String minuteStr = String.valueOf(minute);
-
-        if(minute == 0){
-            minuteStr = "0";
-        }
+        String[] hourMinuteAmPm = int24HrsTo12HrsStr(hourOfDay, minute, false);
 
         if(isDay){
-            times[0] = String.valueOf(hourOfDay);
-            times[1] = minuteStr;
+            times[0] = hourMinuteAmPm[0];
+            times[1] = hourMinuteAmPm[1];
         } else {
-            times[2] = String.valueOf(hourOfDay);
-            times[3] = minuteStr;
+            times[2] = hourMinuteAmPm[0];
+            times[3] = hourMinuteAmPm[1];
         }
 
-        if(hourOfDay >= 13){
-            hourOfDay -= 12;
-            amPm = "PM";
-        } else if(hourOfDay == 12){
-            amPm = "PM";
-        } else if(hourOfDay == 0){
-            hourOfDay = 12;
-        }
+        hourMinuteAmPm = int24HrsTo12HrsStr(hourOfDay, minute, true);
 
-        //if(isDay){
-            if ((hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
-                dayTimeText.setText("0"+hourOfDay+":"+"0"+minuteStr+" "+amPm);
-            } else if ((hourOfDay < 10) && !((Integer.parseInt(minuteStr) < 10))) {
-                dayTimeText.setText("0"+hourOfDay+":"+minuteStr+" "+amPm);
-            } else if (!(hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
-                dayTimeText.setText(hourOfDay+":"+"0"+minuteStr+" "+amPm);
-            } else {
-                dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
-            }
+        if(isDay){
+            dayTimeText.setText(hourMinuteAmPm[0]+":"+hourMinuteAmPm[1]+" "+hourMinuteAmPm[2]);
+        } else {
+            nightTimeText.setText(hourMinuteAmPm[0]+":"+hourMinuteAmPm[1]+" "+hourMinuteAmPm[2]);
+        }
 
         /*} else {
             if ((hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
@@ -220,6 +203,121 @@ public class Day extends Activity {
             }
 
         }*/
+    }
+
+    void displaySwitches(){
+        if (mondaySwitches.get(0).getState()) {
+            String hourMinuteDay = mondaySwitches.get(0).getTime();
+            int[] intHourMinuteDay = Hrs24StrToInt(hourMinuteDay);
+            String[] strArrHourMinuteDay = int24HrsTo12HrsStr(intHourMinuteDay[0], intHourMinuteDay[1], true);
+            String hourMinuteNight = mondaySwitches.get(1).getTime();
+            int[] intHourMinuteNight = Hrs24StrToInt(hourMinuteNight);
+            String[] strArrHourMinuteNight = int24HrsTo12HrsStr(intHourMinuteNight[0], intHourMinuteNight[1], true);
+            mondaySwitch1.setText("1) " + mondaySwitches.get(0).getType() + ": " + strArrHourMinuteDay[0]+":"+strArrHourMinuteDay[1]+" "+strArrHourMinuteDay[2] + ", " + mondaySwitches.get(1).getType() + ": "
+                    + strArrHourMinuteNight[0]+":"+strArrHourMinuteNight[1]+" "+strArrHourMinuteNight[2] + " ");
+            bMondayRemoveSwitches[0].setVisibility(View.VISIBLE); // makes button appear
+        } else {
+            mondaySwitch1.setText("");
+            bMondayRemoveSwitches[0].setVisibility(View.INVISIBLE); // makes button appear
+        }
+        if (mondaySwitches.get(2).getState()) {
+            String hourMinuteDay = mondaySwitches.get(2).getTime();
+            int[] intHourMinuteDay = Hrs24StrToInt(hourMinuteDay);
+            String[] strArrHourMinuteDay = int24HrsTo12HrsStr(intHourMinuteDay[0], intHourMinuteDay[1], true);
+            String hourMinuteNight = mondaySwitches.get(3).getTime();
+            int[] intHourMinuteNight = Hrs24StrToInt(hourMinuteNight);
+            String[] strArrHourMinuteNight = int24HrsTo12HrsStr(intHourMinuteNight[0], intHourMinuteNight[1], true);
+            mondaySwitch2.setText("2) " + mondaySwitches.get(2).getType() + ": " + strArrHourMinuteDay[0]+":"+strArrHourMinuteDay[1]+" "+strArrHourMinuteDay[2] + ", " + mondaySwitches.get(3).getType() + ": "
+                    + strArrHourMinuteNight[0]+":"+strArrHourMinuteNight[1]+" "+strArrHourMinuteNight[2] + " ");
+            bMondayRemoveSwitches[1].setVisibility(View.VISIBLE); // makes button appear
+        } else {
+            mondaySwitch2.setText("");
+            bMondayRemoveSwitches[1].setVisibility(View.INVISIBLE); // makes button appear
+        }
+        if (mondaySwitches.get(4).getState()) {
+            String hourMinuteDay = mondaySwitches.get(4).getTime();
+            int[] intHourMinuteDay = Hrs24StrToInt(hourMinuteDay);
+            String[] strArrHourMinuteDay = int24HrsTo12HrsStr(intHourMinuteDay[0], intHourMinuteDay[1], true);
+            String hourMinuteNight = mondaySwitches.get(5).getTime();
+            int[] intHourMinuteNight = Hrs24StrToInt(hourMinuteNight);
+            String[] strArrHourMinuteNight = int24HrsTo12HrsStr(intHourMinuteNight[0], intHourMinuteNight[1], true);
+            mondaySwitch3.setText("3) " + mondaySwitches.get(4).getType() + ": " + strArrHourMinuteDay[0]+":"+strArrHourMinuteDay[1]+" "+strArrHourMinuteDay[2] + ", " + mondaySwitches.get(5).getType() + ": "
+                    + strArrHourMinuteNight[0]+":"+strArrHourMinuteNight[1]+" "+strArrHourMinuteNight[2] + " ");
+            bMondayRemoveSwitches[2].setVisibility(View.VISIBLE); // makes button appear
+        } else {
+            mondaySwitch3.setText("");
+            bMondayRemoveSwitches[2].setVisibility(View.INVISIBLE); // makes button appear
+        }
+        if (mondaySwitches.get(6).getState()) {
+            String hourMinuteDay = mondaySwitches.get(6).getTime();
+            int[] intHourMinuteDay = Hrs24StrToInt(hourMinuteDay);
+            String[] strArrHourMinuteDay = int24HrsTo12HrsStr(intHourMinuteDay[0], intHourMinuteDay[1], true);
+            String hourMinuteNight = mondaySwitches.get(7).getTime();
+            int[] intHourMinuteNight = Hrs24StrToInt(hourMinuteNight);
+            String[] strArrHourMinuteNight = int24HrsTo12HrsStr(intHourMinuteNight[0], intHourMinuteNight[1], true);
+            mondaySwitch4.setText("4) " + mondaySwitches.get(6).getType() + ": " + strArrHourMinuteDay[0]+":"+strArrHourMinuteDay[1]+" "+strArrHourMinuteDay[2] + ", " + mondaySwitches.get(7).getType() + ": "
+                    + strArrHourMinuteNight[0]+":"+strArrHourMinuteNight[1]+" "+strArrHourMinuteNight[2] + " ");
+            bMondayRemoveSwitches[3].setVisibility(View.VISIBLE); // makes button appear
+        } else {
+            mondaySwitch4.setText("");
+            bMondayRemoveSwitches[3].setVisibility(View.INVISIBLE); // makes button appear
+        }
+        if (mondaySwitches.get(8).getState()) {
+            String hourMinuteDay = mondaySwitches.get(8).getTime();
+            int[] intHourMinuteDay = Hrs24StrToInt(hourMinuteDay);
+            String[] strArrHourMinuteDay = int24HrsTo12HrsStr(intHourMinuteDay[0], intHourMinuteDay[1], true);
+            String hourMinuteNight = mondaySwitches.get(9).getTime();
+            int[] intHourMinuteNight = Hrs24StrToInt(hourMinuteNight);
+            String[] strArrHourMinuteNight = int24HrsTo12HrsStr(intHourMinuteNight[0], intHourMinuteNight[1], true);
+            mondaySwitch5.setText("5) " + mondaySwitches.get(8).getType() + ": " + strArrHourMinuteDay[0]+":"+strArrHourMinuteDay[1]+" "+strArrHourMinuteDay[2] + ", " + mondaySwitches.get(9).getType() + ": "
+                    + strArrHourMinuteNight[0]+":"+strArrHourMinuteNight[1]+" "+strArrHourMinuteNight[2] + " ");
+            bMondayRemoveSwitches[4].setVisibility(View.VISIBLE); // makes button appear
+        } else {
+            mondaySwitch5.setText("");
+            bMondayRemoveSwitches[4].setVisibility(View.INVISIBLE); // makes button appear
+        }
+    }
+
+    static String[] int24HrsTo12HrsStr(int hour, int minute, boolean min12) {
+        String amPm = "AM";
+        String minuteStr = String.valueOf(minute);
+
+        if(minute == 0){
+            minuteStr = "00";
+        } else if(minute < 10){
+            minuteStr = "0"+String.valueOf(minute);
+        }
+
+        if(min12){
+            if(hour >= 13){
+                hour -= 12;
+                amPm = "PM";
+            } else if(hour == 12){
+                amPm = "PM";
+            } else if(hour == 0){
+                hour = 12;
+            }
+        }
+
+        String hourStr = String.valueOf(hour);
+
+        if(hour < 10){
+            hourStr = "0"+String.valueOf(hour);
+        }
+
+        String[] hourMinuteAmPm = new String[]{hourStr, minuteStr, amPm};
+        return hourMinuteAmPm;
+    }
+
+    int[] Hrs24StrToInt(String hourMinute) {
+        String hour = hourMinute.substring(0,2);
+        String minute = hourMinute.substring(3,5);
+
+        int intHour = Integer.parseInt(hour);
+        int intMinute = Integer.parseInt(minute);
+
+        int[] hourMin = new int[]{intHour, intMinute};
+        return hourMin;
     }
 }
 
