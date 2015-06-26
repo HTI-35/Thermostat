@@ -99,10 +99,6 @@ public class Monday extends Day {
         bMondayAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                times[0] = //mondayDaySwitchHrs.getText().toString();
-//                times[1] = //mondayDaySwitchMins.getText().toString();
-//                times[2] = //mondayNightSwitchHrs.getText().toString();
-//                times[3] = //mondayNightSwitchMins.getText().toString();
                 // Make sure all input fields have 2 digit format even if user inputs fewer digits
                 for (int i = 0; i < times.length; i++) {
                     if (times[i].length() == 0) {

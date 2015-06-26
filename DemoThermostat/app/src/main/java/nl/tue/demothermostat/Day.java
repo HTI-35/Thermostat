@@ -74,10 +74,6 @@ public class Day extends Activity {
         switch (day) {
             case "Monday":
                 setContentView(R.layout.activity_monday);
-
-                dayTimeText = (TextView)findViewById(R.id.mondayDayTimeText);
-                nightTimeText = (TextView)findViewById(R.id.mondayNightTimeText);
-
                 break;
             case "Tuesday":
                 setContentView(R.layout.activity_tuesday);
@@ -99,6 +95,9 @@ public class Day extends Activity {
                 break;
         }
 
+        dayTimeText = (TextView)findViewById(R.id.mondayDayTimeText);
+        nightTimeText = (TextView)findViewById(R.id.mondayNightTimeText);
+
         times = new String[4];
 
         input = new int[]{0, 0, 0, 0};
@@ -107,8 +106,8 @@ public class Day extends Activity {
         isDay = false;
         displayInput(input[2], input[3]);
 
-        HeatingSystem.BASE_ADDRESS = "http://pcwin889.win.tue.nl/2id40-ws/35";
-        HeatingSystem.WEEK_PROGRAM_ADDRESS = "http://pcwin889.win.tue.nl/2id40-ws/35/weekprogram";
+        HeatingSystem.BASE_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35";
+        HeatingSystem.WEEK_PROGRAM_ADDRESS = "http://wwwis.win.tue.nl/2id40-ws/35/weekprogram";
 
         new Thread(new Runnable() {
             @Override
