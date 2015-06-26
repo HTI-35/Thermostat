@@ -165,7 +165,7 @@ public class Day extends Activity {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
 
-        if(v.getId() == R.id.bDaySwitch){
+        if(v.getId() == R.id.bDaySwitch || v.getId() == R.id.mondayDayTimeText){
             isDay = true;
         } else {
             isDay = false;
