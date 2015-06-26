@@ -177,7 +177,7 @@ public class Day extends Activity {
         String minuteStr = String.valueOf(minute);
 
         if(minute == 0){
-            minuteStr = "00";
+            minuteStr = "0";
         }
 
         if(isDay){
@@ -197,11 +197,29 @@ public class Day extends Activity {
             hourOfDay = 12;
         }
 
-        if(isDay){
-            dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
-        } else {
-            nightTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
-        }
+        //if(isDay){
+            if ((hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
+                dayTimeText.setText("0"+hourOfDay+":"+"0"+minuteStr+" "+amPm);
+            } else if ((hourOfDay < 10) && !((Integer.parseInt(minuteStr) < 10))) {
+                dayTimeText.setText("0"+hourOfDay+":"+minuteStr+" "+amPm);
+            } else if (!(hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
+                dayTimeText.setText(hourOfDay+":"+"0"+minuteStr+" "+amPm);
+            } else {
+                dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
+            }
+
+        /*} else {
+            if ((hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
+                dayTimeText.setText("0"+hourOfDay+":"+"0"+minuteStr+" "+amPm);
+            } else if ((hourOfDay < 10) && !((Integer.parseInt(minuteStr) < 10))) {
+                dayTimeText.setText("0"+hourOfDay+":"+minuteStr+" "+amPm);
+            } else if (!(hourOfDay < 10) && ((Integer.parseInt(minuteStr) < 10))) {
+                dayTimeText.setText(hourOfDay+":"+"0"+minuteStr+" "+amPm);
+            } else {
+                dayTimeText.setText(hourOfDay+":"+minuteStr+" "+amPm);
+            }
+
+        }*/
     }
 }
 
