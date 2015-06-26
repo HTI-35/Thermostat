@@ -1,6 +1,5 @@
 to do:
 
-(M) TimePicker implementation for day-night switch input
 check if there is a server indication for heating and cooling down. Then we should use this to display the flame icon and some cooling down icon
 show "loading" message for the 1 second it's loading the switches in a day activity (ONLY on start up NOT on resume when you go back from DayNight, switches are already loaded then)
 no internet warning
@@ -29,6 +28,7 @@ already done:
 (M) 	create vertical seekbars for day & night temperature
 (A + M)	write instruction manual
 (J)		create installation package & write installation instructions
+(M)		TimePicker implementation for day-night switch input
 
 to submit:
 
