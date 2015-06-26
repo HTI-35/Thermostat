@@ -65,6 +65,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".Spinner"
+            android:label="Thermostat"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
